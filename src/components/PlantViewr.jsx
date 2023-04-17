@@ -30,7 +30,7 @@ function PlantViewr() {
    },[cactus])
   return (
     <div className='flex-1 h-full flex justify-center items-end pb-16'>
-        <div className='relative w-[400px] flex flex-row justify-center items-center'>
+        <div className='relative w-[400px] flex flex-row justify-center items-center drop-shadow-xl'>
             <img draggable={false} className='w-[250px] absolute top-[230px] opacity-60 z-[0]' src={shadow}></img>
             <img draggable={false} className={'h-[300px] absolute duration-150 '+(animation?" scale-95 translate-y-2 ":" scale-100 ")} src={pots[pot]}></img>
             <img draggable={false} className='h-[300px] opacity-0' src={pots[pot]}></img>
