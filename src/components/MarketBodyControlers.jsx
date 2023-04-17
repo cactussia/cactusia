@@ -72,8 +72,8 @@ function MarketBodyControlers() {
           <div className="h-10 relative w-12">
             <img
               draggable={false}
-              src={cactusdemo}
-              className="h-20 object-contain -top-8 absolute"
+              src={cactuses[cactus]}
+              className="h-20 object-contain scale-[2] -top-8 absolute"
             ></img>
           </div>
           <button className="p-4 hover:bg-[#0001]" onClick={handleCactusSwapRight}>
