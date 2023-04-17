@@ -47,6 +47,24 @@ function MarketBodyControlers() {
     <div className="flex-1 h-full flex flex-col gap-4 justify-center items-center">
       <div>
         <div className="border border-green flex bg-dark-white gap-2 mt-4">
+          <button className="p-4 hover:bg-[#0001]" onClick={handleCactusSwapLeft}>
+            <KeyboardArrowLeftIcon className="text-green" />
+          </button>
+          <div className="h-10 relative w-12">
+            <img
+              draggable={false}
+              src={cactuses[cactus]}
+              className="h-20 object-contain scale-[2] -top-8 absolute"
+            ></img>
+          </div>
+          <button className="p-4 hover:bg-[#0001]" onClick={handleCactusSwapRight}>
+            <KeyboardArrowRightIcon className="text-green" />
+          </button>
+        </div>
+        <div className=" w-44 text-dark-green">cactus name here</div>
+      </div>
+      <div>
+        <div className="border border-green flex bg-dark-white gap-2 mt-4">
           <button className="p-4 hover:bg-[#0001]" onClick={handlePotSwapLeft}>
             <KeyboardArrowLeftIcon className="text-green" />
           </button>
@@ -64,24 +82,6 @@ function MarketBodyControlers() {
         <div className=" w-44 text-dark-green">cactus name here</div>
       </div>
 
-      <div>
-        <div className="border border-green flex bg-dark-white gap-2 mt-4">
-          <button className="p-4 hover:bg-[#0001]" onClick={handleCactusSwapLeft}>
-            <KeyboardArrowLeftIcon className="text-green" />
-          </button>
-          <div className="h-10 relative w-12">
-            <img
-              draggable={false}
-              src={cactuses[cactus]}
-              className="h-20 object-contain scale-[2] -top-8 absolute"
-            ></img>
-          </div>
-          <button className="p-4 hover:bg-[#0001]" onClick={handleCactusSwapRight}>
-            <KeyboardArrowRightIcon className="text-green" />
-          </button>
-        </div>
-        <div className=" w-44 text-dark-green">cactus name here</div>
-      </div>
 
       <div className="border border-green flex bg-dark-white gap-2">
         <button className="p-4 hover:bg-[#0001]">
