@@ -3,15 +3,15 @@
  */
 export const NavBarLinks = [{
     label:"Home",
-    delay:300
+    delay:700
   },
   {
     label:"Market",
-    delay:500
+    delay:800
   },
   {
     label:"Contact",
-    delay:700
+    delay:900
   },
   {
     label:"About",
