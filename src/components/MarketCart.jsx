@@ -44,10 +44,10 @@ function MarketCart() {
    }, [currentItem])
    
   return (
-    <div className='h-48 flex justify-center items-start'>
+    <div className='h-48 flex justify-center md:justify-center items-start'>
       <div className=' scroll'>
 
-      <div className=' pt-8 rounded-lg flex gap-2 '>
+      <div className=' pt-10 mx-5 rounded-lg flex gap-2 '>
         {
           cart.map((item,key)=>{
             return(

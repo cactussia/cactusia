@@ -45,13 +45,13 @@ function PlantViewr() {
     }
 
   return (
-    <div className='flex-1 h-full flex justify-center items-center pt-20 '>
-        <div onClick={handleRandom} className={(animation?" opacity-100 ":" opacity-100 ")+' cursor-pointer  duration-50 relative w-[400px] flex flex-row justify-center items-center '}>
-            <img draggable={false} className='w-[250px] absolute top-[230px] opacity-60 z-[0]' src={shadow}></img>
-            <img draggable={false}  className={'h-[300px] absolute duration-150 ease-in '+(animation?" scale-95 translate-y-2 ":" scale-100 ")} src={currentPot}></img>
-            <img draggable={false} className='h-[300px] opacity-0' src={currentPot}></img>
+    <div className='flex-1 h-full flex justify-center items-center pt-16 md:pt-20 '>
+        <div onClick={handleRandom} className={(animation?" opacity-100 ":" opacity-100 ")+' md:cursor-auto cursor-pointer  duration-50 relative w-[400px] flex flex-row justify-center items-center '}>
+            <img draggable={false} className='w-[180px] md:w-[250px]  absolute top-[150px] md:top-[230px] opacity-60 z-[0]' src={shadow}></img>
+            <img draggable={false}  className={'h-[200px] md:h-[300px] absolute duration-150 ease-in '+(animation?" scale-95 translate-y-2 ":" scale-100 ")} src={currentPot}></img>
+            <img draggable={false} className='h-[200px] md:h-[300px] opacity-0' src={currentPot}></img>
                                                                                              {/* animationC?" opacity-100 ":" opacity-0 " */}
-            <div className={(animation?" -translate-y-2 opacity-10 scale-50 ":" scale-100 ")+'  rounded-[140px] ease-in duration-150 w-[300px] absolute top-[-162px] overflow-hidden '}>
+            <div className={(animation?" -translate-y-2 opacity-10 scale-50 ":" scale-100 ")+'  rounded-[140px] ease-in duration-150 w-[180px] md:w-[300px] absolute top-[-95px] md:top-[-162px] overflow-hidden '}>
             <img draggable={false} className={'duration-150 ease-in '+(animation?" translate-y-52 ":" scale-100 ")+(animation?" scale-90 translate-y-5 ":" scale-100 ")} src={currentCactus}></img>
             </div>
         </div>

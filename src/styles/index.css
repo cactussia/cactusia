@@ -29,3 +29,9 @@
   height: 180px;
   overflow-x: auto;
 }
+.noise{
+  background-image: url("../assets/imags/noise.png");
+  background-repeat: repeat;
+  background-size: 4%;
+  background-blend-mode: hue;
+}

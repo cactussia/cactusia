@@ -1,16 +1,16 @@
-import React from 'react'
-import NavBar from '../components/NavBar'
-import MarketBody from '../components/MarketBody'
+import React from "react";
+import NavBar from "../components/NavBar";
+import MarketBody from "../components/MarketBody";
 
 function Market() {
   return (
-    <div className='h-[100vh] w-[100vw] flex  overflow-hidden relative'>
-    <div className='background-market flex flex-col flex-1 '>
-        <NavBar/>
-        <MarketBody/>
+    <div className=" lg:h-[100vh] w-[100vw] flex flex-col overflow-hidden relative ">
+      <div className="background-market flex-1 flex-col flex">
+        <NavBar />
+        <MarketBody />
+      </div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default Market
+export default Market;
