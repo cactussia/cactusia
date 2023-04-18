@@ -13,8 +13,8 @@ export default function NavBarLink({luncher, link, delay}) {
   }, [luncher]);
 
   return (
-    <li className={`relative h-16 w-80 flex items-center overflow-hidden transition-all ${isActivePage(link) ? "text-bleach" : "text-darker-green"} hover:text-bleach delay-[30] hover:ml-2`}>
-        <Link to={`${link.toLowerCase() == "home" ? "/" : "/"+link}`} className={`text-6xl absolute ${ show ? `top-0` : "top-80"} transition-all`}>{link}</Link>
+    <li className={`relative h-24 w-[400px] flex items-center overflow-hidden transition-all ${isActivePage(link) ? "text-bleach" : "text-darker-green"} hover:text-bleach delay-[30] hover:ml-2`}>
+        <Link to={`${link.toLowerCase() == "home" ? "/" : "/"+link}`} className={`text-8xl absolute ${ show ? `top-0` : "top-80"} transition-all`}>{link}</Link>
     </li>
   )
 }
