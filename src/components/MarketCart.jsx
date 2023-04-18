@@ -16,14 +16,16 @@ function MarketCart() {
       setCurrentItem(key)
    }
    const handelAddNew = ()=>{
-        let key = cart.length
-        let newCart = cart
-        newCart.push({pot:0,cactus:0,quantity:1})
-        setCart(newCart)
-        setPot(cart[key].pot)
-        setCactus(cart[key].cactus)
-        setQuantity(cart[key].quantity)
-        setCurrentItem(key)
+        if (cart.length<15) {
+          let key = cart.length
+          let newCart = cart
+          newCart.push({pot:0,cactus:0,quantity:1})
+          setCart(newCart)
+          setPot(cart[key].pot)
+          setCactus(cart[key].cactus)
+          setQuantity(cart[key].quantity)
+          setCurrentItem(key)
+        }
    }
    const handleRemove =(key)=>{
         if(cart.length>1){
@@ -45,11 +47,11 @@ function MarketCart() {
    
   return (
     <div className='h-44 flex justify-center items-start'>
-      <div className=' p-10 rounded-lg flex gap-2'>
+      <div className=' p-10 rounded-lg flex gap-2 '>
         {
           cart.map((item,key)=>{
             return(
-              <div className='flex relative flex-col items-center gap-1 drop-shadow-lg'>
+              <div className='flex relative flex-col items-center gap-1 drop-shadow-lg '>
               <button onClick={()=>handelSelect(key)} key={key} className={' w-20 h-20 bg-dark-white duration-100 rounded-lg  border-green flex justify-center items-center flex-col '+(key==currentItem&&" border-2 ")}>
                 <div className='relative -translate-y-5 w-[50px] flex flex-row justify-center items-center drop-shadow-md'>
                     <img draggable={false} className={'h-[50px] absolute top-[10px] duration-150 '} src={key==currentItem?pots[pot]:pots[item.pot]}></img>
