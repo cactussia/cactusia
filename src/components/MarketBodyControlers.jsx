@@ -12,7 +12,7 @@ import cactuses from "../assets/cactusImages/import";
 import { useParams } from "react-router-dom";
 
 function MarketBodyControlers() {
-    const { pot , setPot , cactus , setCactus }= useContext(ControlersContext);
+    const { pot , setPot , cactus , setCactus , quantity , setQuantity }= useContext(ControlersContext);
     const {potId , cactusId}=useParams()
 
     useEffect(() => {
@@ -96,13 +96,13 @@ function MarketBodyControlers() {
 
 
       <div className="border border-green flex bg-dark-white gap-2">
-        <button className="p-4 hover:bg-[#0001]">
+        <button className="p-4 hover:bg-[#0001]" onClick={()=> {if(quantity>1) setQuantity(p=>p-1)}}>
           <RemoveRoundedIcon className="text-green" />
         </button>
         <div className=" flex justify-center items-center w-12">
-          <p className="text-xl text-dark-green">3</p>
+          <p className="text-xl text-dark-green">{quantity}</p>
         </div>
-        <button className="p-4 hover:bg-[#0001]">
+        <button className="p-4 hover:bg-[#0001]" onClick={()=>setQuantity(p=>p+1)}>
           <AddRoundedIcon className="text-green" />
         </button>
       </div>

@@ -13,6 +13,7 @@
 
     .border-green { @apply border-[#8a9c81]; }
     .bg-dark-white { @apply bg-[#e2e2da]; }
+    .bg-dark-white2 { @apply bg-[#c3c3c1]; }
 
   }
 .background-market{
