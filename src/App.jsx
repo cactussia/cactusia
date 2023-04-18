@@ -15,6 +15,10 @@ const router = createBrowserRouter([
     element: <Home/>,
   },
   {
+    path: "/Market/:potId/:cactusId",
+    element: <Market/>,
+  },
+  {
     path: "/Market",
     element: <Market/>,
   },

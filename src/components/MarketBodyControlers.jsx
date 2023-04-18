@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import cactusdemo from "../assets/imags/cactusdemo.png";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -9,9 +9,21 @@ import { ControlersContext } from "../Context/ControlersContext";
 
 import pots from "../assets/potsImages/import";
 import cactuses from "../assets/cactusImages/import";
+import { useParams } from "react-router-dom";
 
 function MarketBodyControlers() {
     const { pot , setPot , cactus , setCactus }= useContext(ControlersContext);
+    const {potId , cactusId}=useParams()
+
+    useEffect(() => {
+      if (potId!=undefined) {
+        setPot(potId)
+      }
+      if (cactusId!=undefined) {
+        setCactus(cactusId)
+      }
+    }, [potId])
+    
 
     const handlePotSwapLeft = ()=>{
         if(pot<=0){
