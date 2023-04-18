@@ -11,9 +11,17 @@ function OrderNow() {
     });
     return price
   }
+  const getPotNum = ()=>{
+    let potNum = 0;
+    cart.forEach(element => {
+      potNum+=element.quantity 
+    });
+    return potNum
+  }
   return (
     <div className="flex-1 flex justify-center items-center  h-full">
       <div className="w-64">
+        <p className="text-sm text-gray-600 bg-dark-white py-1 px-2 rounded-md my-3 w-fit">{getPotNum()} pot cactus</p>
         <p className="text-base text-gray-600">Total Price </p>
         <h1 className="text-7xl text-green font-bold">{getPrice()} <span className="text-3xl">Dh</span></h1>
         <hr className="bg-red-300 my-3" />
