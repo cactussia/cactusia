@@ -51,7 +51,7 @@ function PlantViewr() {
             <img draggable={false}  className={'h-[300px] absolute duration-150 ease-in '+(animation?" scale-95 translate-y-2 ":" scale-100 ")} src={currentPot}></img>
             <img draggable={false} className='h-[300px] opacity-0' src={currentPot}></img>
                                                                                              {/* animationC?" opacity-100 ":" opacity-0 " */}
-            <div className={(animation?" -translate-y-2 opacity-10 scale-50 ":" scale-100 ")+'  ease-in duration-150 w-[300px] absolute top-[-162px] overflow-hidden '}>
+            <div className={(animation?" -translate-y-2 opacity-10 scale-50 ":" scale-100 ")+'  rounded-[140px] ease-in duration-150 w-[300px] absolute top-[-162px] overflow-hidden '}>
             <img draggable={false} className={'duration-150 ease-in '+(animation?" translate-y-52 ":" scale-100 ")+(animation?" scale-90 translate-y-5 ":" scale-100 ")} src={currentCactus}></img>
             </div>
         </div>
