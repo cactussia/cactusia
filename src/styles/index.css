@@ -35,3 +35,7 @@
   background-size: 4%;
   background-blend-mode: hue;
 }
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}

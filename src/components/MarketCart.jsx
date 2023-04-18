@@ -44,16 +44,16 @@ function MarketCart() {
    }, [currentItem])
    
   return (
-    <div className='h-48 flex justify-center md:justify-center items-start'>
+    <div className='md:h-48 flex justify-center md:justify-center items-start'>
       <div className=' scroll'>
 
       <div className=' pt-10 mx-5 rounded-lg flex gap-2 '>
         {
           cart.map((item,key)=>{
             return(
-              <div className='flex relative flex-col items-center gap-1 drop-shadow-lg '>
+              <div className={'flex relative flex-col items-center gap-1 drop-shadow-lg '}>
               <button onClick={()=>handelSelect(key)} key={key} className={' w-20 h-20 bg-dark-white duration-100 rounded-lg  border-green flex justify-center items-center flex-col '+(key==currentItem&&" border-2 ")}>
-                <div className='relative -translate-y-5 w-[50px] flex flex-row justify-center items-center drop-shadow-md'>
+                <div className={(key==currentItem?"scale-[1.18]":"scale-100")+' duration-150 relative -translate-y-5 w-[50px] flex flex-row justify-center items-center drop-shadow-md'}>
                     <img draggable={false} className={'h-[50px] absolute top-[10px] duration-150 '} src={key==currentItem?pots[pot]:pots[item.pot]}></img>
                     <img draggable={false} className='h-[50px] opacity-0' src={key==currentItem?pots[pot]:pots[item.pot]}></img>
                     <img draggable={false} className={'w-[50px] absolute top-[-18px] duration-150 '} src={key==currentItem? cactuses[cactus]: cactuses[item.cactus]}></img>
