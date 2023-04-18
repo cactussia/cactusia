@@ -15,12 +15,12 @@ function NavBar() {
             </Link>
         </div>
         <div className='flex-1 flex justify-end'>
-            <button onClick={()=>setOpen(p=>!p)} className={(open?" bg-green-dark ":" bg-green ")+'w-16 h-16  rounded-full z-50 hover:bg-green-dark duration-200  hover:scale-105'}>
+            <button onClick={()=>setOpen(p=>!p)} className={(open?" bg-dark-white ":" bg-green ")+'w-16 h-16 hover:text-dark-white  rounded-full z-50 hover:bg-green-dark duration-200  hover:scale-105'}>
               {
                   open?
-                    <CloseRoundedIcon sx={{ color: "#fff", fontSize: 30 }}/>
+                    <CloseRoundedIcon sx={{ color: "#768F6A", fontSize: 35 }}/>
                    : 
-                    <MenuRoundedIcon sx={{ color: "#fff", fontSize: 30 }}/>
+                    <MenuRoundedIcon sx={{ color: "#fff", fontSize: 35 }}/>
               }
             </button>
         </div>

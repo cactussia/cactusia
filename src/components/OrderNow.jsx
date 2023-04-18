@@ -6,7 +6,7 @@ function OrderNow() {
     <div className="flex-1 flex justify-center items-center  h-full">
       <div className="w-64">
         <p className="text-base text-gray-600">Total Price </p>
-        <h1 className="text-6xl text-green font-bold">130 Dh</h1>
+        <h1 className="text-7xl text-green font-bold">130 <span className="text-3xl">Dh</span></h1>
         <hr className="bg-red-300 my-3" />
         <p className="text-sm py-2 text-gray-600 bg-dark-white p-2 rounded-md my-3">
           {" "}
