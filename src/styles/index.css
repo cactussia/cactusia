@@ -25,3 +25,7 @@
 *{
   font-family: 'Barlow', sans-serif;
 }
+.scroll {
+  height: 180px;
+  overflow-x: auto;
+}

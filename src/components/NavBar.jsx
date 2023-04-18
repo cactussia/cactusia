@@ -10,7 +10,7 @@ function NavBar() {
   const [open ,setOpen ]=useState(false)
   return (
     <div className='container h-32 p-8 mx-auto flex justify-between items-start '>
-        <h1 className='text-4xl flex-1 font-semibold text-green-dark '>Market</h1>
+        <h1 className='text-4xl flex-1 font-bold text-green-dark '>MARKET</h1>
         <div className='flex-1 flex justify-center'>
             <Link to={"/"}>
                 <img draggable={false} className='w-20 mix-blend-darken' src={logo}/>

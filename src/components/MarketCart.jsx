@@ -16,7 +16,6 @@ function MarketCart() {
       setCurrentItem(key)
    }
    const handelAddNew = ()=>{
-        if (cart.length<15) {
           let key = cart.length
           let newCart = cart
           newCart.push({pot:0,cactus:0,quantity:1})
@@ -25,7 +24,6 @@ function MarketCart() {
           setCactus(cart[key].cactus)
           setQuantity(cart[key].quantity)
           setCurrentItem(key)
-        }
    }
    const handleRemove =(key)=>{
         if(cart.length>1){
@@ -46,8 +44,10 @@ function MarketCart() {
    }, [currentItem])
    
   return (
-    <div className='h-44 flex justify-center items-start'>
-      <div className=' p-10 rounded-lg flex gap-2 '>
+    <div className='h-48 flex justify-center items-start'>
+      <div className=' scroll'>
+
+      <div className=' pt-8 rounded-lg flex gap-2 '>
         {
           cart.map((item,key)=>{
             return(
@@ -72,9 +72,12 @@ function MarketCart() {
             )
           })
         }
+        <div className='w-20 h-20'>
         <button onClick={handelAddNew} className='drop-shadow-lg w-20 h-20 duration-100 border-dashed hover:bg-dark-white2 bg-dark-white rounded-lg border-2 border-green'>
-          <AddRoundedIcon className="text-green" />
+          <AddRoundedIcon className="text-green w-20 h-20" />
         </button>
+        </div>
+      </div>
       </div>
     </div>
   )
