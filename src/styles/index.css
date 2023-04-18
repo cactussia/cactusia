@@ -6,7 +6,10 @@
 @layer components {
     .text-green-dark { @apply text-[#586d49]; }
     .text-dark-green { @apply text-[#4b5c3f]; }
+    .text-darker-green { @apply text-[#404e36]; }
     .text-green { @apply text-[#768F6A]; }
+    
+    .text-bleach { @apply text-[#CFCFB5]; }
   
     .bg-green-dark { @apply bg-[#586d49]; }
     .bg-green { @apply bg-[#768F6A]; }
