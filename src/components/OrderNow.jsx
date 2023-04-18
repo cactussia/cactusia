@@ -26,7 +26,7 @@ function OrderNow() {
         <h1 className="text-7xl text-green font-bold">{getPrice()} <span className="text-3xl">Dh</span></h1>
         <hr className=" my-3" />
         {
-        <p className={(!(getPotNum()<3) && "h-0 py-0 my-0 ")+" duration-200 overflow-hidden text-sm py-2 text-gray-600 bg-dark-white p-2 rounded-md my-3"}>
+        <p className={(!(getPotNum()<3) ? " h-0 py-0 my-0 opacity-0 " :" py-2 my-3 opacity-100 ")+" duration-200 transition-all overflow-hidden text-sm py-2 text-gray-600 bg-dark-white px-2 rounded-md my-3"}>
           When buying three or more, free delivery is available throughout Morocco !
         </p>
         }

@@ -10,6 +10,7 @@
     .text-green { @apply text-[#768F6A]; }
     
     .text-bleach { @apply text-[#CFCFB5]; }
+    .bg-bleach { @apply bg-[#CFCFB5]; }
   
     .bg-green-dark { @apply bg-[#586d49]; }
     .bg-green { @apply bg-[#768F6A]; }
@@ -38,4 +39,8 @@
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+.bg-green-noise{
+  background-image: url("../assets/imags/greennoise.png");
+  background-size: 20%;
 }

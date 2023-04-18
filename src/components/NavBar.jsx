@@ -10,7 +10,7 @@ function NavBar() {
   const [open ,setOpen ]=useState(false)
   return (
     <div className='container h-32 p-4 md:px-8  md:py-8 mx-auto flex justify-between items-start '>
-        <h1 className='text-4xl flex-1 font-bold text-green-dark hidden lg:block'>MARKET</h1>
+        <h1 className='text-4xl flex-1 font-bold text-green hidden lg:block'>MARKET</h1>
         <div className='flex-1 flex lg:justify-center '>
             <Link to={"/"}>
                 <img draggable={false} className='w-14 lg:w-20 mix-blend-darken' src={logo}/>
@@ -26,8 +26,8 @@ function NavBar() {
               }
             </button>
         </div>
-        <div className={(open?" left-0 ":" left-[100vw] ")+' duration-300 delay-300 ease-out w-[100vw] h-[100vh] fixed bg-green top-0 z-40 flex items-center justify-start'}>
-            <ul className='ml-10 flex flex-col gap-6 justify-center items-start uppercase font-semibold'>
+        <div className={(open?" left-0 ":" left-[100vw] ")+' duration-300 delay-300 ease-out w-[100vw] h-[100vh] fixed bg-green-noise top-0 z-40 flex items-center justify-start'}>
+            <ul className='ml-4 md:ml-10 flex flex-col gap-6 justify-center items-start uppercase font-semibold'>
                 { NavBarLinks.map((link,index)=> <NavBarLink open={open} key={index} luncher={open} link={link.label} delay={link.delay}/>) }
             </ul>
         </div>
