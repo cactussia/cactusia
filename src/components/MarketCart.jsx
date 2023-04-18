@@ -49,8 +49,8 @@ function MarketCart() {
         {
           cart.map((item,key)=>{
             return(
-              <div className='flex relative flex-col items-center gap-1'>
-              <button onClick={()=>handelSelect(key)} key={key} className={'w-20 h-20 bg-dark-white duration-100 rounded-lg  border-green flex justify-center items-center flex-col '+(key==currentItem&&" border-2 ")}>
+              <div className='flex relative flex-col items-center gap-1 drop-shadow-lg'>
+              <button onClick={()=>handelSelect(key)} key={key} className={' w-20 h-20 bg-dark-white duration-100 rounded-lg  border-green flex justify-center items-center flex-col '+(key==currentItem&&" border-2 ")}>
                 <div className='relative -translate-y-5 w-[50px] flex flex-row justify-center items-center drop-shadow-md'>
                     <img draggable={false} className={'h-[50px] absolute top-[10px] duration-150 '} src={key==currentItem?pots[pot]:pots[item.pot]}></img>
                     <img draggable={false} className='h-[50px] opacity-0' src={key==currentItem?pots[pot]:pots[item.pot]}></img>
@@ -70,7 +70,7 @@ function MarketCart() {
             )
           })
         }
-        <button onClick={handelAddNew} className='w-20 h-20 duration-100 border-dashed hover:bg-dark-white rounded-lg border-2 border-green'>
+        <button onClick={handelAddNew} className='drop-shadow-lg w-20 h-20 duration-100 border-dashed hover:bg-dark-white2 bg-dark-white rounded-lg border-2 border-green'>
           <AddRoundedIcon className="text-green" />
         </button>
       </div>

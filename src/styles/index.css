@@ -13,9 +13,12 @@
 
     .border-green { @apply border-[#8a9c81]; }
     .bg-dark-white { @apply bg-[#e2e2da]; }
-    .bg-dark-white2 { @apply bg-[#c3c3c1]; }
+    .bg-dark-white2 { @apply bg-[#d7d7cd]; }
 
   }
 .background-market{
-    background: linear-gradient(180deg, #e7e7e5 38.18%, #EEEEEB 72.56%);
+    background: linear-gradient(180deg, #eaeae3 38.18%, #EEEEEB 72.56%);
+}
+*{
+  font-family: 'Barlow', sans-serif;
 }
