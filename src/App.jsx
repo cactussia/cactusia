@@ -42,6 +42,7 @@ function App() {
     quantity:1
     },
 ])
+  const [upCart,setUpCart]=useState(0)
   const [currentItem,setCurrentItem]=useState(0)
   const updateCart= ()=>{
     let newCart = cart
@@ -52,17 +53,25 @@ function App() {
   }
   useEffect(() => {
     updateCart()
+    setUpCart(p=>p+1)
   }, [pot])
   useEffect(() => {
     updateCart()
+    setUpCart(p=>p+1)
   }, [cactus])
   useEffect(() => {
     updateCart()
+    setUpCart(p=>p+1)
   }, [quantity])
+
+  useEffect(()=>{
+    updateCart()
+  },[upCart])
+
   
 
   return (
-    <CartContext.Provider value={{cart,setCart,currentItem,setCurrentItem}}>
+    <CartContext.Provider value={{cart,setCart,currentItem,setCurrentItem,upCart,setUpCart}}>
       <ControlersContext.Provider value={{pot,setPot,cactus,setCactus,quantity,setQuantity}}>
         <RouterProvider router={router} />
       </ControlersContext.Provider>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext , useEffect } from 'react'
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import cactuses from "../assets/cactusImages/import"
 import pots from "../assets/potsImages/import"
@@ -29,13 +29,20 @@ function MarketCart() {
         if(cart.length>1){
           let newCart = cart.filter((item,i)=>key!==i)
           setCart(newCart)
-          setPot(cart[0].pot)
-          setCactus(cart[0].cactus)
-          setQuantity(cart[0].quantity)
-          setCart(newCart)
           setCurrentItem(0)
         }
    }
+   useEffect(() => {
+        setPot(cart[currentItem].pot)
+        setCactus(cart[currentItem].cactus)
+        setQuantity(cart[currentItem].quantity)
+   }, [cart])
+   useEffect(() => {
+        setPot(cart[currentItem].pot)
+        setCactus(cart[currentItem].cactus)
+        setQuantity(cart[currentItem].quantity)
+   }, [currentItem])
+   
   return (
     <div className='h-44 flex justify-center items-start'>
       <div className=' p-10 rounded-lg flex gap-2'>
