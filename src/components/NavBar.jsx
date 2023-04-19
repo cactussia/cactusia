@@ -54,11 +54,9 @@ function NavBar() {
             />
           ))}
         </ul>
-
-          <img className="2xl:w-[450px] xl:w-[420px] lg:w-[400px] md:w-[300px] w-[250px] drop-shadow-xl absolute -bottom-20 -right-20 animate-spining opacity-80" src={handmade} alt="" />
-
-
-
+        <div className="absolute -bottom-20 -right-20">
+          <HandMade/>
+        </div>
       </motion.div>
     </div>
   );
