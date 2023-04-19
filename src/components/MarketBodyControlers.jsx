@@ -71,7 +71,7 @@ function MarketBodyControlers() {
             <img
               draggable={false}
               src={cactuses[cactus]}
-              className="h-20 object-contain scale-[2] -top-8 absolute"
+              className="h-20 object-contain scale-[2] -top-8 absolute drop-shadow-lg"
             ></img>
           </div>
           <button className="rounded-md  p-2 md:p-4 hover:bg-[#0001]" onClick={handleCactusSwapRight}>
@@ -93,7 +93,7 @@ function MarketBodyControlers() {
             <img
               draggable={false}
               src={pots[pot]}
-              className="h-20 object-contain -top-8 absolute"
+              className="h-20 object-contain -top-8 absolute drop-shadow-lg"
             ></img>
           </div>
           <button className=" rounded-md p-2 md:p-4 hover:bg-[#0001]" onClick={handlePotSwapRight}>

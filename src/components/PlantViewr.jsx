@@ -52,8 +52,8 @@ function PlantViewr() {
     }
 
   return (
-    <motion.div initial={{ y:300 }} animate={{ y:0 }} className='flex-1 h-full flex justify-center items-center pt-16 md:pt-20 '>
-        <div onClick={handleRandom} className={(animation?" opacity-100 ":" opacity-100 ")+' md:cursor-auto cursor-pointer  duration-50 relative w-[400px] flex flex-row justify-center items-center '}>
+    <motion.div initial={{ y:300 }} animate={{ y:0 }} className='flex-1 h-full flex flex-col justify-center items-center pt-16 md:pt-20 '>
+        <div onClick={handleRandom} className={(animation?" opacity-100 ":" opacity-100 ")+'  cursor-pointer  duration-50 relative w-[400px] flex flex-row justify-center items-center '}>
             <img draggable={false} className='w-[180px] md:w-[250px]  absolute top-[150px] md:top-[230px] opacity-60 z-[0]' src={shadow}></img>
             <img draggable={false}  className={'h-[200px] md:h-[300px] absolute duration-150 ease-in '+(animation?" scale-95 translate-y-2 ":" scale-100 ")} src={currentPot}></img>
             <img draggable={false} className='h-[200px] md:h-[300px] opacity-0' src={currentPot}></img>
