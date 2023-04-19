@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { CartContext } from "../Context/CartContext";
+import {motion} from "framer-motion"
 
 function OrderNow() {
   const {cart}=useContext(CartContext)
@@ -19,7 +20,7 @@ function OrderNow() {
     return potNum
   }
   return (
-    <div className="flex-1 w-full flex justify-center items-center  h-full">
+    <motion.div initial={{x:200}} animate={{x:0}} className="flex-1 w-full flex justify-center items-center  h-full">
       <div className="lg:w-64 px-4 mb-5 w-full">
         
         <p className="text-base text-gray-600">Total Price <span className="text-sm mx-2 text-gray-600 bg-dark-white2 border py-1 px-2 rounded-md my-3 w-fit">{getPotNum()} pot cactus</span></p>
@@ -35,7 +36,7 @@ function OrderNow() {
           <EastRoundedIcon/>
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

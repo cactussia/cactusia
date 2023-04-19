@@ -7,6 +7,8 @@ import Market from './pages/Market';
 import Home from './pages/Home';
 import { ControlersContext } from './Context/ControlersContext';
 import { CartContext } from './Context/CartContext';
+import Contact from './pages/Contact';
+import About from './pages/About';
 
 
 
@@ -16,12 +18,16 @@ const router = createBrowserRouter([
     element: <Home/>,
   },
   {
-    path: "/Market/:potId/:cactusId",
+    path: "/market",
     element: <Market/>,
   },
   {
-    path: "/Market",
-    element: <Market/>,
+    path: "/contact",
+    element: <Contact/>,
+  },
+  {
+    path: "/about",
+    element: <About/>,
   },
 ]);
 

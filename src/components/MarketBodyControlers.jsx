@@ -11,6 +11,8 @@ import pots from "../assets/potsImages/import";
 import cactuses from "../assets/cactusImages/import";
 import { useParams } from "react-router-dom";
 
+import {motion} from "framer-motion"
+
 function MarketBodyControlers() {
     const { pot , setPot , cactus , setCactus , quantity , setQuantity }= useContext(ControlersContext);
     const {potId , cactusId}=useParams()
@@ -56,7 +58,7 @@ function MarketBodyControlers() {
     }
 
   return (
-    <div className="flex-1 h-full flex flex-col md:gap-2 justify-center items-center lg:items-center px-3 md:px-0">
+    <motion.div initial={{x:-200}} animate={{x:0}} className="flex-1 h-full flex flex-col md:gap-2 justify-center items-center lg:items-center px-3 md:px-0">
 
     <div className="flex flex-row lg:flex-col gap-2 justify-around w-full md:w-fit mt-5 lg:mt-0">
 
@@ -123,7 +125,7 @@ function MarketBodyControlers() {
       </div>
       </div>
 
-    </div>
+    </motion.div>
   );
 }
 
