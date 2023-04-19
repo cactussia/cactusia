@@ -9,7 +9,6 @@ function Market() {
         <NavBar />
         <MarketBody />
       </div>
-      <Footer/>
     </section>
   );
 }
