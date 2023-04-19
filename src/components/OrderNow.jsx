@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { CartContext } from "../Context/CartContext";
 import {motion} from "framer-motion"

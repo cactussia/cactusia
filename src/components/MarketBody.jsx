@@ -1,4 +1,3 @@
-import React from 'react'
 import MarketBodyControlers from './MarketBodyControlers'
 import PlantViewr from './PlantViewr'
 import OrderNow from './OrderNow'

@@ -1,4 +1,4 @@
-import React, { useContext , useEffect } from 'react'
+import { useContext , useEffect } from 'react'
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import cactuses from "../assets/cactusImages/import"
 import pots from "../assets/potsImages/import"

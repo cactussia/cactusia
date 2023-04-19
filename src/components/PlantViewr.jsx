@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import shadow from "../assets/imags/shadow.png"
 
 import cactuses from "../assets/cactusImages/import"
