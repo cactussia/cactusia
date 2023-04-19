@@ -62,8 +62,8 @@ function MarketBodyControlers() {
 
     <div className="flex flex-row lg:flex-col gap-2 justify-around w-full md:w-fit mt-5 lg:mt-0">
 
-      <div className=" flex flex-col justify-center items-start">
-        <div className=" w-fit p-1 rounded-lg drop-shadow-md border-2 border-[#0001]  flex bg-dark-white gap-2 mt-4">
+      <div className=" flex flex-col justify-center items-start  ">
+        <div className=" w-fit p-1 rounded-lg border-2 border-[#0001]  relative drop-shadow-md flex bg-dark-white gap-2 mt-4">
           <button className="rounded-md p-2 md:p-4 hover:bg-[#0001]" onClick={handleCactusSwapLeft}>
             <KeyboardArrowLeftIcon className="text-green" />
           </button>
@@ -77,8 +77,9 @@ function MarketBodyControlers() {
           <button className="rounded-md  p-2 md:p-4 hover:bg-[#0001]" onClick={handleCactusSwapRight}>
             <KeyboardArrowRightIcon className="text-green" />
           </button>
+          <div className="absolute -bottom-3 left-[50%] translate-x-[-50%] px-2 bg-dark-white border rounded-md drop-shadow-md">{cactus+1  } / {cactuses.length}</div>
         </div>
-        <div className="  text-dark-green w-fit md:w-full">cactus name here</div>
+        <div className="  text-dark-green w-fit md:w-full pt-3">cactus name here</div>
       </div>
 
       
