@@ -8,6 +8,7 @@ import NavBarLink from "./NavBarLink";
 
 import handmade from "../assets/imags/handmade.png"
 import {motion} from "framer-motion"
+import HandMade from "./HandMade";
 
 function NavBar() {
   const [open, setOpen] = useState(false);
