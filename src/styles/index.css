@@ -44,3 +44,18 @@
   background-image: url("../assets/imags/greennoise.png");
   background-size: 20%;
 }
+
+
+.animate-spining{
+  animation: spin 20s linear infinite;
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}

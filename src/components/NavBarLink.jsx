@@ -17,9 +17,10 @@ export default function NavBarLink({luncher, link, delay,open}) {
   },[open])
 
   return (
-    <li className={`relative h-12 sm:h-14 md:h-16 lg:h-32 w-[100vw] flex items-center overflow-hidden transition-all ${isActivePage(link) ? "text-bleach" : "text-darker-green"} hover:text-bleach delay-200 hover:ml-2`}>
+    <li className={`relative h-12 sm:h-14 md:h-16 lg:h-32 w-fit flex items-center overflow-hidden transition-all ${isActivePage(link) ? "text-bleach" : "text-darker-green"} hover:text-bleach delay-200 hover:ml-2`}>
         <div className={'md:w-6 md:h-6 w-4 h-4 rounded-full '+(isActivePage(link)?' bg-bleach ':"")}></div>
         <Link to={`${link.toLowerCase() == "home" ? "/" : "/"+link}`} className={`text-5xl sm:text-6xl md:text-7xl lg:text-9xl left-10 font-extrabold absolute ${ show ? `top-0` : "top-80"} transition-all`}>{link}</Link>
+        <Link to={`${link.toLowerCase() == "home" ? "/" : "/"+link}`} className={`text-5xl sm:text-6xl md:text-7xl lg:text-9xl left-10 font-extrabold opacity-0 mr-8 ${ show ? `top-0` : "top-80"} transition-all`}>{link}</Link>
     </li>
   )
 }
