@@ -6,7 +6,6 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { NavBarLinks } from "../utils";
 import NavBarLink from "./NavBarLink";
 
-import handmade from "../assets/imags/handmade.png"
 import {motion} from "framer-motion"
 import HandMade from "./HandMade";
 
