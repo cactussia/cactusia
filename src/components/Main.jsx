@@ -37,8 +37,8 @@ export default function Main() {
           </div>
 
         </div>
-        <div className=' bg-dark-white2 border w-full'>
-          <marquee className='text-2xl lg:text-3xl xl:text-4xl font-bold text-green-dark uppercase' >give them care they give you love &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;give them care they give you love &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;give them care they give you love &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;give them care they give you love &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </marquee>
+        <div className='py-4 bg-dark-white2 border w-full'>
+          <marquee className='text-xl font-bold text-green-dark uppercase' >give them care they give you love </marquee>
         </div>
     </main>
   );
