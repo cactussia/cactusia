@@ -17,8 +17,8 @@ export default function Main() {
           welcome <br></br> to our jarden
           </h1>
         </div>
-        <div className='flex-1 sm:flex-[2] md:flex-[3] lg:flex-[4]  bg-green w-full flex'>
-        <Link to={"/market"} className='z-10 md:z-0 bg-green h-full w-full flex md:items-center hover:ml-10 duration-200'>
+        <div className='flex-1 sm:flex-[2] md:flex-[3] lg:flex-[4]  bg-[#728b67] w-full flex'>
+        <Link to={"/market"} className='z-10 md:z-0 bg-green  hover:my-1 w-full flex md:items-center hover:ml-10 duration-200'>
           <div className='container px-4 mx-auto text-4xl sm:text-6xl lg:text-7xl  flex-1 md:h-full items-center uppercase font-bold text-dark-white flex gap-4 hover:gap-6 duration-200'>
               go to market
               <EastOutlinedIcon sx={{fontSize:matches?80:30}}/>
@@ -37,8 +37,8 @@ export default function Main() {
           </div>
 
         </div>
-        <div className='py-4 bg-dark-white2 border w-full'>
-          <marquee className='text-xl font-bold text-green-dark uppercase' >give them care they give you love </marquee>
+        <div className=' bg-dark-white2 border w-full'>
+          <marquee className='text-2xl lg:text-3xl xl:text-4xl font-bold text-green-dark uppercase' >give them care they give you love &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;give them care they give you love &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;give them care they give you love &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;give them care they give you love &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </marquee>
         </div>
     </main>
   );

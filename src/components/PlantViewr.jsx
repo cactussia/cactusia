@@ -23,33 +23,37 @@ function PlantViewr({clickable=true}) {
     const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 1050px)'})
 
 
-    const homePotCactus={
+    const [homePotCactus,setHomePotCactus]=useState({})
+    useEffect(()=>{
+        setHomePotCactus(
+            {
         pot : Math.floor(Math.random()*pots.length) ,
         cactus : Math.floor(Math.random()*cactuses.length) 
-    }
-
+            }
+        )
+    },[])
 
    useEffect(()=>{
         setAnimation(true);
         const a =()=>{
             setAnimation(false)
             setCurrentPot(pots[pot])
-            setLeftRight(p=>!p)
         }
         setTimeout(a, 200);
         return ()=>{clearTimeout(a);}
    },[pot])
-
-   useEffect(()=>{
+   
+   useEffect(() => {
         setAnimation(true);
         const a =()=>{
             setAnimation(false)
             setCurrentCactus(cactuses[cactus])
-            setLeftRight(p=>!p)
         }
         setTimeout(a, 200);
         return ()=>{clearTimeout(a);}
-   },[cactus])
+   }, [cactus])
+   
+
    
     const handleRandom = ()=>{
         if(isDesktopOrLaptop && clickable){
