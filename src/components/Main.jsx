@@ -19,7 +19,7 @@ export default function Main() {
         </div>
         <div className='flex-1 sm:flex-[2] md:flex-[3] lg:flex-[4]  bg-[#728b67] w-full flex'>
         <Link to={"/market"} className='z-10 md:z-0 bg-green  hover:my-1 w-full flex md:items-center hover:ml-10 duration-200'>
-          <div className='container px-4 mx-auto text-4xl sm:text-6xl lg:text-7xl  flex-1 md:h-full items-center uppercase font-bold text-dark-white flex gap-4 hover:gap-6 duration-200'>
+          <div className='updown container px-4 mx-auto text-3xl sm:text-6xl lg:text-7xl  flex-1 md:h-full items-center uppercase font-bold text-dark-white flex gap-4 hover:gap-6 duration-200'>
               go to market
               <EastOutlinedIcon sx={{fontSize:matches?80:30}}/>
           </div>
@@ -30,15 +30,15 @@ export default function Main() {
             <HandMade dark={true} />
           </div>
           <div className='md:z-[10] lg:absolute relative h-full  lg:-top-64  lg:right-16 w-fit max-w-[100vw] mx-auto md:w-fit flex justify-center items-center md:mx-auto md:scale-110 xl:scale-150 scale-125 '>
-            <PlantViewr clickable={false}/>
-            <div className='absolute flex lg:hidden right-0 bottom-5  scale-[.5] '>
+            <div className='absolute flex lg:hidden -right-5 bottom-0  scale-[.5] '>
               <HandMade dark={true} />
             </div>
+            <PlantViewr clickable={false}/>
           </div>
 
         </div>
-        <div className='py-4 bg-dark-white2 border w-full'>
-          <marquee className='text-xl font-bold text-green-dark uppercase' >give them care they give you love </marquee>
+        <div className='pt-2 bg-dark-white2 border w-full'>
+          <marquee className='text-2xl lg:text-3xl xl-text-4xl font-bold text-green-dark uppercase' >give them care they give you love </marquee>
         </div>
     </main>
   );

@@ -54,9 +54,11 @@
 
 
 .animate-spining{
-  animation: spin 20s linear infinite;
+  animation: spin 30s linear infinite;
 }
-
+.updown{
+  animation: updown 2s ease-in-out infinite;
+}
 
 @keyframes spin {
   from {
@@ -64,5 +66,16 @@
   }
   to {
     transform: rotate(-360deg);
+  }
+}
+@keyframes updown {
+  0% {
+    transform: translateX(3px);
+  }
+  50% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(3px);
   }
 }
