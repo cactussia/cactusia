@@ -28,9 +28,10 @@ function OrderNow() {
     <motion.div initial={{x:200}} animate={{x:0}} className="flex-1 w-full flex justify-center items-center  h-full">
       <div className="lg:w-64 px-4 mb-5 w-full">
         
-        <p className="text-base text-gray-600 mb-2">Total Price <span className="text-sm mx-2 text-gray-600 bg-dark-white2 border py-1 px-2 rounded-md my-3 w-fit">{getPotNum()} pot cactus</span></p>
+        <p className="text-sm mb-2 text-gray-600 bg-dark-white2 border py-1 px-2 rounded-md w-fit">{getPotNum()} pot cactus</p>
         <p className="text-base text-gray-600">Delivery Price </p>
         <h1 className="text-2xl text-green font-semibold ">{getPriceDelivery()} Dh</h1>
+        <p className="text-base text-gray-600 ">Total Price </p>
         <h1 className="text-7xl text-green font-bold">{getPrice()} <span className="text-3xl">Dh</span></h1>
         <hr className=" my-3" />
         {
