@@ -11,8 +11,12 @@
     .text-darker-green { @apply text-[#404e36]; }
     .text-green { @apply text-[#768F6A]; }
     
+    
     .text-bleach { @apply text-[#CFCFB5]; }
+    .text-bleach-dark { @apply text-[#9e9e86]; }
+    .text-bleach-darker { @apply text-[#616152]; }
     .bg-bleach { @apply bg-[#CFCFB5]; }
+    .bg-bleach-fade { @apply bg-[#f0f0e5]; }
   
     .bg-green-dark { @apply bg-[#586d49]; }
     .bg-green { @apply bg-[#768F6A]; }
