@@ -7,21 +7,26 @@ import { ControlersContext } from '../Context/ControlersContext'
 import { useMediaQuery } from 'react-responsive'
 
 import { motion } from "framer-motion";
+import { useNavigate } from 'react-router-dom'
+import { CartContext } from '../Context/CartContext'
 
 function PlantViewr({clickable=true}) {
     const { pot , setPot , cactus , setCactus }= useContext(ControlersContext);
+    const { cart,setCart ,setCurrentItem }= useContext(CartContext);
    const [animation , setAnimation ]=useState(true);
    const [animationC , setAnimationC ]=useState(true);
    const [currentCactus,setCurrentCactus]=useState(0);
    const [currentPot,setCurrentPot]=useState(0);
    const [leftRight ,setLeftRight ]=useState(false)
+   const navigate = useNavigate('/market') 
+            
     const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 1050px)'})
 
 
-    const [homePotCactus,setHomePotCactus] =useState({
+    const homePotCactus={
         pot : Math.floor(Math.random()*pots.length) ,
         cactus : Math.floor(Math.random()*cactuses.length) 
-    })
+    }
 
 
    useEffect(()=>{
@@ -48,14 +53,22 @@ function PlantViewr({clickable=true}) {
    
     const handleRandom = ()=>{
         if(isDesktopOrLaptop && clickable){
-        let a=Math.floor(Math.random()*(pots.length))
-        let b=Math.floor(Math.random()*(cactuses.length))
-        if(pot==a||cactus==b){
-            handleRandom()
-        }else{
-            setPot(a)
-            setCactus(b)
-        }
+            let a=Math.floor(Math.random()*(pots.length))
+            let b=Math.floor(Math.random()*(cactuses.length))
+            if(pot==a||cactus==b){
+                handleRandom()
+            }else{
+                setPot(a)
+                setCactus(b)
+            }
+        }else {
+            if(cart.length==1){
+                setCart(p=>p.map((item)=>{return {...item , pot:homePotCactus.pot,cactus:homePotCactus.cactus} }))
+            }else{
+                setCart(p=>[...p,{pot:homePotCactus.pot,cactus:homePotCactus.cactus,quantity:1}])
+                setCurrentItem(cart.length) 
+            }
+            navigate("/market")
         }
     }
 
