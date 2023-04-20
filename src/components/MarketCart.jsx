@@ -1,4 +1,4 @@
-import React, { useContext , useEffect } from 'react'
+import { useContext , useEffect } from 'react'
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import cactuses from "../assets/cactusImages/import"
 import pots from "../assets/potsImages/import"
@@ -47,12 +47,12 @@ function MarketCart() {
     <motion.div initial={{x:-200}} animate={{x:0}}  className='md:h-48 mb-2 flex justify-center md:justify-center items-start'>
       <div className=' scroll'>
 
-      <div className=' pt-10  mx-5 rounded-lg flex gap-2 '>
+      <div className='xl:pt-12 md:pt-8 pt-10  mx-5 rounded-lg flex gap-2 '>
         {
           cart.map((item,key)=>{
             return(
               <div key={key}  className={'flex relative flex-col items-center gap-1 drop-shadow-lg '}>
-              <button onClick={()=>handelSelect(key)} className={' w-20 h-20 bg-dark-white duration-100 rounded-lg  border-green flex justify-center items-center flex-col '+(key==currentItem&&" border-2 ")}>
+              <button onClick={()=>handelSelect(key)} className={' w-20 h-20 bg-dark-white duration-100 rounded-lg   flex justify-center items-center flex-col border-2  '+(key==currentItem?" border-green " :"border-[#0001] ")}>
                 <div className={(key==currentItem?"scale-[1.18]":"scale-100")+' duration-150 relative -translate-y-5 w-[50px] flex flex-row justify-center items-center drop-shadow-md'}>
                     <img draggable={false} className={'h-[50px] absolute top-[10px] duration-150 '} src={key==currentItem?pots[pot]:pots[item.pot]}></img>
                     <img draggable={false} className='h-[50px] opacity-0' src={key==currentItem?pots[pot]:pots[item.pot]}></img>
@@ -73,7 +73,7 @@ function MarketCart() {
           })
         }
         <div className='w-20 h-20'>
-        <button onClick={handelAddNew} className='drop-shadow-lg w-20 h-20 duration-100 border-dashed hover:bg-dark-white2 bg-dark-white rounded-lg border-2 border-green'>
+        <button onClick={handelAddNew} className='drop-shadow-lg w-20 h-20 duration-100 border-2 border-[#0001]  hover:bg-dark-white2 bg-dark-white rounded-lg  '>
           <AddRoundedIcon className="text-green w-20 h-20" />
         </button>
         </div>

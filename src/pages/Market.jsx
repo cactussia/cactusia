@@ -1,6 +1,6 @@
-import React from "react";
 import NavBar from "../components/NavBar";
 import MarketBody from "../components/MarketBody";
+import Footer from "../components/Footer";
 
 function Market() {
   return (

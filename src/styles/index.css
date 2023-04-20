@@ -23,11 +23,12 @@
 
     .border-green { @apply border-[#8a9c81]; }
     .bg-dark-white { @apply bg-[#e2e2da]; }
+    .text-dark-white { @apply text-[#e2e2da]; }
     .bg-dark-white2 { @apply bg-[#d7d7cd]; }
 
   }
 .background-market{
-    background: linear-gradient(180deg, #e3e3da 40%, #EEEEEB 55%);
+    background: linear-gradient(180deg, #e3e3da 40%, #f2f2ef 55%);
 }
 *{
   font-family: 'Barlow', sans-serif;
