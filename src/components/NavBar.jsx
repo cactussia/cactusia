@@ -39,9 +39,9 @@ function NavBar() {
       </div>
       <motion.div
         className={
-          " w-[100vw] h-[100vh] fixed bg-green-noise top-0 z-40 flex items-center justify-start"
+          " w-[100vw] h-[100vh] ease-in duration-300 fixed bg-green-noise top-0 z-40 flex items-center justify-start "
+          +(open?"left-0":"left-[100vw]")
         }
-        animate={{left:open? 0 :"100vw"}}
       >
         <ul className="ml-4 md:ml-10 flex flex-col gap-6 justify-center items-start uppercase font-semibold">
           {NavBarLinks.map((link, index) => (

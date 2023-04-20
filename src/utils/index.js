@@ -47,3 +47,25 @@ export const SocialMediaLinks = [{
 export function isActivePage(link){
   return window.location.pathname.toLowerCase() === "/"+link.toLowerCase();
 }
+
+
+
+
+
+
+
+
+export function getPriceByQte (qte){
+        switch (qte) {
+          case 1:  
+            return 65;
+          case 2:
+            return 129;
+          case 3:
+            return 195;
+          case 4:
+            return 249;
+          default:
+            return ((qte-4)*50)+249;
+        }
+}

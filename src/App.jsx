@@ -60,15 +60,8 @@ function App() {
   useEffect(() => {
     updateCart()
     setUpCart(p=>p+1)
-  }, [pot])
-  useEffect(() => {
-    updateCart()
-    setUpCart(p=>p+1)
-  }, [cactus])
-  useEffect(() => {
-    updateCart()
-    setUpCart(p=>p+1)
-  }, [quantity])
+  }, [pot,cactus,quantity])
+  
 
   useEffect(()=>{
     updateCart()
