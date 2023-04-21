@@ -23,19 +23,23 @@ function PlantViewr({ clickable = true }) {
   const isDesktopOrLaptop = useMediaQuery({ query: "(min-width: 1050px)" });
 
   const [homePotCactus, setHomePotCactus] = useState({
-        pot: Math.floor(Math.random() * pots.length),
-        cactus: Math.floor(Math.random() * cactuses.length),
+    pot: Math.floor(Math.random() * pots.length),
+    cactus: Math.floor(Math.random() * cactuses.length),
   });
   useEffect(() => {
-    if(!clickable){
-    const timer = setInterval(() => {
-      setHomePotCactus({
-        pot: Math.floor(Math.random() * pots.length),
-        cactus: Math.floor(Math.random() * cactuses.length),
-      });
-    }, 8000);
-    // clearing interval
-    return () => clearInterval(timer);
+    if (!clickable) {
+      const timer = setInterval(() => {
+        setAnimation(true);
+        setTimeout(() => {
+          setAnimation(false);
+          setHomePotCactus({
+            pot: Math.floor(Math.random() * pots.length),
+            cactus: Math.floor(Math.random() * cactuses.length),
+          });
+        }, 200);
+      }, 8000);
+      // clearing interval
+      return () => clearInterval(timer);
     }
   });
 
@@ -50,16 +54,6 @@ function PlantViewr({ clickable = true }) {
       clearTimeout(a);
     };
   }, [pot]);
-  useEffect(() => {
-    setAnimation(true);
-    const a = () => {
-      setAnimation(false);
-    };
-    setTimeout(a, 200);
-    return () => {
-      clearTimeout(a);
-    };
-  }, [homePotCactus]);
 
   useEffect(() => {
     setAnimation(true);
@@ -74,34 +68,40 @@ function PlantViewr({ clickable = true }) {
   }, [cactus]);
 
   const handleRandom = () => {
-    if (isDesktopOrLaptop && clickable) {
-      let a = Math.floor(Math.random() * pots.length);
-      let b = Math.floor(Math.random() * cactuses.length);
-      if (pot == a || cactus == b) {
-        handleRandom();
+    if (isDesktopOrLaptop) {
+      if (clickable) {
+        let a = Math.floor(Math.random() * pots.length);
+        let b = Math.floor(Math.random() * cactuses.length);
+        if (pot == a || cactus == b) {
+          handleRandom();
+        } else {
+          setPot(a);
+          setCactus(b);
+        }
       } else {
-        setPot(a);
-        setCactus(b);
-      }
-    } else {
-      if (cart.length == 1) {
-        setCart((p) =>
-          p.map((item) => {
-            return {
-              ...item,
+        if (cart.length == 1) {
+          setCart((p) =>
+            p.map((item) => {
+              return {
+                ...item,
+                pot: homePotCactus.pot,
+                cactus: homePotCactus.cactus,
+              };
+            })
+          );
+        } else {
+          setCart((p) => [
+            ...p,
+            {
               pot: homePotCactus.pot,
               cactus: homePotCactus.cactus,
-            };
-          })
-        );
-      } else {
-        setCart((p) => [
-          ...p,
-          { pot: homePotCactus.pot, cactus: homePotCactus.cactus, quantity: 1 },
-        ]);
-        setCurrentItem(cart.length);
+              quantity: 1,
+            },
+          ]);
+          setCurrentItem(cart.length);
+        }
+        navigate("/market");
       }
-      navigate("/market");
     }
   };
 
