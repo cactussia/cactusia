@@ -44,7 +44,7 @@ function MarketCart() {
    }, [currentItem])
    
   return (
-    <motion.div initial={{x:-200}} animate={{x:0}}  className='md:h-48 mb-2 flex justify-center md:justify-center items-start'>
+    <motion.div initial={{x:-200}} animate={{x:0}}  className='md:h-48 mb-2 flex flex-col items-center justify-center md:justify-center '>
       <div className=' scroll'>
 
       <div className='xl:pt-12 md:pt-8 pt-10  mx-5 rounded-lg flex gap-2 '>
@@ -53,7 +53,7 @@ function MarketCart() {
             return(
               <div key={key}  className={'flex relative flex-col items-center gap-1 drop-shadow-lg '}>
               <button onClick={()=>handelSelect(key)} className={' w-20 h-20 bg-dark-white duration-100 rounded-lg   flex justify-center items-center flex-col border-2  '+(key==currentItem?" border-green " :"border-[#0001] ")}>
-                <div className={(key==currentItem?"scale-[1.18]":"scale-100")+' duration-150 relative -translate-y-5 w-[50px] flex flex-row justify-center items-center drop-shadow-md'}>
+                <div className={(key==currentItem?"scale-[1.25]":"scale-[1.20]")+' duration-150 relative -translate-y-5 w-[50px] flex flex-row justify-center items-center drop-shadow-md'}>
                     <img draggable={false} className={'h-[50px] absolute top-[10px] duration-150 '} src={key==currentItem?pots[pot]:pots[item.pot]}></img>
                     <img draggable={false} className='h-[50px] opacity-0' src={key==currentItem?pots[pot]:pots[item.pot]}></img>
                     <img draggable={false} className={'w-[50px] absolute top-[-18px] duration-150 '} src={key==currentItem? cactuses[cactus]: cactuses[item.cactus]}></img>
