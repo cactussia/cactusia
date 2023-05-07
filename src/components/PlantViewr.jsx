@@ -160,8 +160,8 @@ function PlantViewr({ clickable = true }) {
             draggable={false}
             className={
               "duration-150 ease-in " +
-              (animation ? " translate-y-52 " : " scale-[1.0] ") +
-              (animation ? " scale-90 translate-y-5 " : " scale-[1.0] ")
+              (animation ? " translate-y-52 " : " scale-[1.1] -translate-y-2") +
+              (animation ? " scale-90 translate-y-5 " : " scale-[1.1] ")
             }
             src={clickable ? currentCactus : cactuses.at(homePotCactus.cactus)}
           ></img>
