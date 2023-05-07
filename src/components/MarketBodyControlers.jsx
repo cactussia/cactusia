@@ -124,6 +124,7 @@ function MarketBodyControlers() {
           <AddRoundedIcon className="text-green" />
         </button>
       </div>
+        <div className="  text-dark-green w-fit md:w-full pt-1">quantity</div>
       </div>
 
     </motion.div>

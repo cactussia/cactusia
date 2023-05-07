@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import shadow from "../assets/imags/shadow.png";
+import sticker from "../assets/imags/cactusSticker.png";
 
 import cactuses from "../assets/cactusImages/import";
 import pots from "../assets/potsImages/import";
@@ -123,9 +124,10 @@ function PlantViewr({ clickable = true }) {
       >
         <img
           draggable={false}
-          className="w-[180px] md:w-[250px]  absolute top-[150px] md:top-[230px] opacity-60 z-[0]"
+          className="w-[180px] md:w-[250px]  absolute top-[150px] md:top-[230px]  opacity-60 z-[0]"
           src={shadow}
         ></img>
+
         <img
           draggable={false}
           className={
@@ -134,9 +136,15 @@ function PlantViewr({ clickable = true }) {
           }
           src={clickable ? currentPot : pots.at(homePotCactus.pot)}
         ></img>
+        <img 
+        className={
+          "duration-150 absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] scale-[.2] sm:scale-[.3]" 
+          +(animation ? " scale-[.10] sm:scale-[.20] opacity-80 " : " scale-[.15] sm:scale-[.25] opacity-100")
+        }
+        src={sticker}></img>
         <img
           draggable={false}
-          className="h-[200px] md:h-[300px] opacity-0"
+          className="h-[200px] md:h-[300px] opacity-0 "
           src={clickable ? currentPot : pots.at(homePotCactus.pot)}
         ></img>
         {/* animationC?" opacity-100 ":" opacity-0 " */}
@@ -152,8 +160,8 @@ function PlantViewr({ clickable = true }) {
             draggable={false}
             className={
               "duration-150 ease-in " +
-              (animation ? " translate-y-52 " : " scale-100 ") +
-              (animation ? " scale-90 translate-y-5 " : " scale-100 ")
+              (animation ? " translate-y-52 " : " scale-[1.0] ") +
+              (animation ? " scale-90 translate-y-5 " : " scale-[1.0] ")
             }
             src={clickable ? currentCactus : cactuses.at(homePotCactus.cactus)}
           ></img>
