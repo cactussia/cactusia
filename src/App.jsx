@@ -9,6 +9,7 @@ import { ControlersContext } from './Context/ControlersContext';
 import { CartContext } from './Context/CartContext';
 import Contact from './pages/Contact';
 import About from './pages/About';
+import ComplateOrder from './pages/ComplateOrder';
 
 
 
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home/>,
   },
+  {
+    path: "/complete-order",
+    element: <ComplateOrder/>,
+  },
+
   {
     path: "/market",
     element: <Market/>,

@@ -22,7 +22,12 @@ export const NavBarLinks = [{
 /**
  * `SocialMediaLinks` is an array of objects that contains the links to be displayed in the footer
  */
-export const SocialMediaLinks = [{
+export const SocialMediaLinks = [
+  {
+    label:"Phone Number",
+    link:"tel:0000000000",
+  },
+  {
     label:"Facebook",
     link:"https://www.facebook.com/",
   },
@@ -33,9 +38,6 @@ export const SocialMediaLinks = [{
   {
     label:"whatsapp",
     link:"https://wa.me/0000000000",
-  },{
-    label:"Phone Number",
-    link:"tel:0000000000",
   }
 ]
 

@@ -3,9 +3,11 @@ import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { CartContext } from "../Context/CartContext";
 import {motion} from "framer-motion"
 import { getPriceByQte } from '../utils';
+import { useNavigate } from 'react-router-dom';
 
 function OrderNow() {
   const {cart}=useContext(CartContext)
+  const navigate = useNavigate()
 
   // const getPrice = ()=>{
   //   let price = 0;
@@ -39,7 +41,7 @@ function OrderNow() {
           When buying three or more, free delivery is available throughout Morocco !
         </p>
         }
-        <button className="rounded-lg w-full lg:w-fit hover:bg-green-dark duration-200 hover:scale-105 px-6 py-3 bg-green flex justify-center items-center gap-2 text-white font-normal text-lg">
+        <button onClick={()=>navigate("/complete-order")} className="rounded-lg w-full lg:w-fit hover:bg-green-dark duration-200 hover:scale-105 px-6 py-3 bg-green flex justify-center items-center gap-2 text-white font-normal text-lg">
           Order now
           <EastRoundedIcon/>
         </button>
