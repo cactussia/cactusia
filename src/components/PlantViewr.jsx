@@ -151,7 +151,7 @@ function PlantViewr({ clickable = true }) {
         <div
           className={
             (animation
-              ? " -translate-y-2 opacity-10 scale-50 "
+              ? " -translate-y-8 opacity-10 scale-50 "
               : " scale-100 ") +
             "  rounded-[140px] ease-in duration-150 w-[180px] md:w-[300px] absolute top-[-95px] md:top-[-162px] overflow-hidden "
           }
@@ -160,8 +160,8 @@ function PlantViewr({ clickable = true }) {
             draggable={false}
             className={
               "duration-150 ease-in " +
-              (animation ? " translate-y-52 " : " scale-[1.1] -translate-y-2") +
-              (animation ? " scale-90 translate-y-5 " : " scale-[1.1] ")
+              (animation ? " translate-y-52 " : " scale-[1.0] translate-y-0") +
+              (animation ? " scale-90 translate-y-5 " : " scale-[1.0] ")
             }
             src={clickable ? currentCactus : cactuses.at(homePotCactus.cactus)}
           ></img>
