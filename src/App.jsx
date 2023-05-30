@@ -10,6 +10,7 @@ import { CartContext } from './Context/CartContext';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import ComplateOrder from './pages/ComplateOrder';
+import Admin from './pages/Admin';
 
 
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/about",
     element: <About/>,
+  },
+  {
+    path: "/admin",
+    element: <Admin/>,
   },
 ]);
 

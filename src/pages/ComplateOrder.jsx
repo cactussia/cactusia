@@ -1,10 +1,37 @@
 import { ArrowBack } from '@mui/icons-material'
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import {useContext, useState}  from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 import {motion} from "framer-motion"
+import { addDoc, serverTimestamp } from 'firebase/firestore'
+import { colRef } from '../firebase'
+import { CartContext } from '../Context/CartContext'
 
 function ComplateOrder() {
     const navigate= useNavigate()
+    const [fullName,setFullName]=useState("");
+    const [number,setNumber]=useState("");
+    const [city,setCity]=useState("");
+    const [address,setAddress]=useState("");
+    const {cart}=useContext(CartContext)
+
+    const orderNow=()=>{
+      let date=new Date();
+      addDoc(colRef,{
+        name:fullName,
+        number,
+        city,
+        address,
+        state:"new",
+        createdAt:serverTimestamp(),
+        date:date.getMonth()+"/"+date.getDay(),
+        items:cart,
+        price:130,
+      }).then(()=>{
+        navigate("/")
+      })
+    }
+
+
   return (
     <motion.div 
       initial={{ y: -300 }}
@@ -17,10 +44,11 @@ function ComplateOrder() {
         <h1 className='text-4xl font-bold text-[#728b67] py-8'>Could you help us with some infos :)</h1>
         <p className='font-semibold text-[#728b67aa] '>those info will just help us to get u , u can send those info in whatsapp if u want</p>
         <div className='flex flex-col mt-10 gap-4'>
-            <input placeholder='your name' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
-            <input placeholder='your phone' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
-            <input placeholder='your address' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
-            <input type="button" value="complete" className='shadow-xl cursor-pointer p-2 px-8 rounded-xl md:w-fit w-full font-semibold text-white bg-[#728b67] text-lg  outline-[#728b67]'/>
+            <input value={fullName} onInput={(e)=>setFullName(e.target.value)}  placeholder='full name' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
+            <input value={number} onInput={(e)=>setNumber(e.target.value)} placeholder='phone/whatsapp' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
+            <input value={city} onInput={(e)=>setCity(e.target.value)}  placeholder='city' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
+            <input value={address} onInput={(e)=>setAddress(e.target.value)}  placeholder='full address' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
+            <input onClick={orderNow} type="button" value="complete" className='shadow-xl cursor-pointer p-2 px-8 rounded-xl md:w-fit w-full font-semibold text-white bg-[#728b67] text-lg  outline-[#728b67]'/>
         </div>
     </motion.div>
   )
