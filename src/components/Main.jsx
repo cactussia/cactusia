@@ -29,7 +29,7 @@ export default function Main() {
           <div className='md:absolute hidden lg:flex md:right-32 md:-top-36  scale-[.5] '>
             <HandMade dark={true} />
           </div>
-          <div className='md:z-[10] lg:absolute relative h-full  lg:-top-64  lg:right-0 w-fit max-w-[100vw] mx-auto md:w-fit flex justify-center items-center md:mx-auto  2xl:scale-[1.2]  scale-100 '>
+          <div className='md:z-[10] lg:absolute relative h-full  lg:-top-44  lg:right-0 w-fit max-w-[100vw] mx-auto md:w-fit flex justify-center items-center md:mx-auto  2xl:scale-[1.2]  scale-100 '>
             <div className='absolute flex lg:hidden -right-5 bottom-0  scale-[.5] '>
               <HandMade dark={true} />
             </div>
