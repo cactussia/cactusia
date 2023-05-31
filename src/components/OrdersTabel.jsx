@@ -20,6 +20,11 @@ import StateBtn from './StateBtn.jsx';
 
 
 
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import { utils, writeFileXLSX, writeXLSX } from 'xlsx';
+
+
 
 
 
@@ -61,7 +66,7 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
         onSnapshot(q,(snapshot)=>{
             let ordersList =[];
             snapshot.docs.forEach(doc=>{
-                ordersList.push({...doc.data(),id:doc.id})
+                ordersList.push({...doc.data(),id:doc.id,checked:false})
             })
             setRows(ordersList)
             console.log(ordersList)
@@ -70,15 +75,30 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
     },[cat,update])
 
 
-
+    const exportExcel = ()=>{
+        var wb = utils.book_new(),
+        ws = utils.json_to_sheet(rows.filter(o=>o.checked).map(o=>{return({name:o.name,Lastname:o.lastName,address:o.address,city:o.city,number:o.number,price:o.price,comment:"thanks....",size:"small"})}));
+        utils.book_append_sheet(wb,ws,"myfile")
+        writeFileXLSX(wb,"myfileName.xlsx")
+    }
 
   return (
     <>
+    {
+        rows.some(m=>m.checked) && 
+        <button onClick={exportExcel} className='bg-black rounded-full px-8 py-2 text-white my-2'>Export Excel</button>
+    }
     <TableContainer component={Paper} sx={{width: "100%" }}>
       <Table sx={{ width: "100%" }} aria-label="customized table">
         <TableHead>
           <TableRow>
+            <StyledTableCell>
+                <button onClick={()=>{setRows(p=>p.map(o=>({...o,checked:!o.checked})))}}>
+                    Select
+                </button>
+            </StyledTableCell>
             <StyledTableCell>Name</StyledTableCell>
+            <StyledTableCell>Last Name</StyledTableCell>
             <StyledTableCell >Number</StyledTableCell>
             <StyledTableCell >city</StyledTableCell>
             <StyledTableCell >Address</StyledTableCell>
@@ -97,9 +117,11 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
           r.address.toLowerCase().includes(search.toLowerCase()) 
           ).map((row) => (
             <StyledTableRow className='cursor-pointer ' key={row.id}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
+
+            
+              <StyledTableCell ><button className='p-2  flex justify-center items-center w-6 h-6' onClick={()=>setRows(p=>p.map(o=>o.id==row.id? {...o,checked:!o.checked}:o))}>{row.checked?<CheckBoxIcon/>:<CheckBoxOutlineBlankIcon/>}</button></StyledTableCell>
+              <StyledTableCell component="th" scope="row">{row.name}</StyledTableCell>
+              <StyledTableCell >{row.lastName}</StyledTableCell>
               <StyledTableCell >{row.number}</StyledTableCell>
               <StyledTableCell >{row.city}</StyledTableCell>
               <StyledTableCell >{row.address}</StyledTableCell>

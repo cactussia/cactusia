@@ -76,11 +76,13 @@ function Admin() {
       <div className="p-8 bg-white w-[400px] flex flex-col gap-2 items-start">
         <button onClick={()=>setOrder("")} className="p-2 px-6 bg-black text-white rounded-full my-4">Go back</button>
         <h1 className="text-xl font-semibold">information's</h1>
-        <h1>full name: {order?.name}</h1>
+        <h1>state: {order?.state}</h1>
+        <br></br>
+        <h1>name: {order?.name}</h1>
+        <h1>last name: {order?.lastName}</h1>
         <h1>phone number: {order?.number}</h1>
         <h1>city: {order?.city}</h1>
         <h1>full address: {order?.address}</h1>
-        <h1>state: {order?.state}</h1>
         <h1>price: {order?.price} Dh</h1>
       </div>
         <div className="flex-1 p-8">

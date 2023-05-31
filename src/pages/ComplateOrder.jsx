@@ -9,18 +9,20 @@ import { getPriceByQte } from '../utils'
 
 function ComplateOrder() {
     const navigate= useNavigate()
-    const [fullName,setFullName]=useState("");
+    const [firstName,setFirstName]=useState("");
+    const [lastName,setLastName]=useState("");
     const [number,setNumber]=useState("");
     const [city,setCity]=useState("");
     const [address,setAddress]=useState("");
-    const {cart}=useContext(CartContext)
+    const {cart,setCart}=useContext(CartContext)
     const [err,setErr]=useState(false)
 
     const orderNow=()=>{
       let date=new Date();
-      if(fullName&&number&&city&&address){
+      if(firstName&&lastName&&number&&city&&address){
         addDoc(colRef,{
-          name:fullName,
+          name:firstName,
+          lastName:lastName,
           number,
           city,
           address,
@@ -31,6 +33,7 @@ function ComplateOrder() {
           price:getPriceByQte(cart.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)),
         }).then(()=>{
           navigate("/")
+          setCart([])
         })
       }else{
         setErr(true)
@@ -50,7 +53,8 @@ function ComplateOrder() {
         <h1 className='text-4xl font-bold text-[#728b67] py-8'>Could you help us with some infos :)</h1>
         <p className='font-semibold text-[#728b67aa] '>those info will just help us to get u , u can send those info in whatsapp if u want</p>
         <div className='flex flex-col mt-10 gap-4'>
-            <input value={fullName} onInput={(e)=>setFullName(e.target.value)}  placeholder='full name' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
+            <input value={firstName} onInput={(e)=>setFirstName(e.target.value)}  placeholder='first name' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
+            <input value={lastName} onInput={(e)=>setLastName(e.target.value)}  placeholder='last name' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
             <input value={number} onInput={(e)=>setNumber(e.target.value)} placeholder='phone' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
             <input value={city} onInput={(e)=>setCity(e.target.value)}  placeholder='city' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
             <input value={address} onInput={(e)=>setAddress(e.target.value)}  placeholder='full address' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
