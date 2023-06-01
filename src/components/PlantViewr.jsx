@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { CartContext } from "../Context/CartContext";
 
 function PlantViewr({ clickable = true }) {
-  const { pot, setPot, cactus, setCactus } = useContext(ControlersContext);
+  const { pot, setPot, cactus, setCactus,finalPots,finalCactus } = useContext(ControlersContext);
   const { cart, setCart, setCurrentItem } = useContext(CartContext);
   const [animation, setAnimation] = useState(true);
   const [animationC, setAnimationC] = useState(true);
@@ -20,12 +20,23 @@ function PlantViewr({ clickable = true }) {
   const [currentPot, setCurrentPot] = useState(0);
   const [leftRight, setLeftRight] = useState(false);
   const navigate = useNavigate("/market");
+  
+
+
+
+  useEffect(()=>{
+    setCurrentCactus(finalCactus[0]?.img)
+  },[finalCactus])
+
+  useEffect(()=>{
+    setCurrentPot(finalPots[0]?.img)
+  },[finalPots])
 
   const isDesktopOrLaptop = useMediaQuery({ query: "(min-width: 1050px)" });
 
   const [homePotCactus, setHomePotCactus] = useState({
-    pot: Math.floor(Math.random() * pots.length),
-    cactus: Math.floor(Math.random() * cactuses.length),
+    pot: Math.floor(Math.random() * finalPots.length),
+    cactus: Math.floor(Math.random() * finalCactus.length),
   });
   useEffect(() => {
     if (!clickable) {
@@ -34,8 +45,8 @@ function PlantViewr({ clickable = true }) {
         setTimeout(() => {
           setAnimation(false);
           setHomePotCactus({
-            pot: Math.floor(Math.random() * pots.length),
-            cactus: Math.floor(Math.random() * cactuses.length),
+            pot: Math.floor(Math.random() * finalPots.length),
+            cactus: Math.floor(Math.random() * finalCactus.length),
           });
         }, 200);
       }, 8000);
@@ -48,7 +59,7 @@ function PlantViewr({ clickable = true }) {
     setAnimation(true);
     const a = () => {
       setAnimation(false);
-      setCurrentPot(pots[pot]);
+      setCurrentPot(finalPots[pot]?.img);
     };
     setTimeout(a, 200);
     return () => {
@@ -60,7 +71,7 @@ function PlantViewr({ clickable = true }) {
     setAnimation(true);
     const a = () => {
       setAnimation(false);
-      setCurrentCactus(cactuses[cactus]);
+      setCurrentCactus(finalCactus[cactus]?.img);
     };
     setTimeout(a, 200);
     return () => {
@@ -71,8 +82,8 @@ function PlantViewr({ clickable = true }) {
   const handleRandom = () => {
     if (isDesktopOrLaptop) {
       if (clickable) {
-        let a = Math.floor(Math.random() * pots.length);
-        let b = Math.floor(Math.random() * cactuses.length);
+        let a = Math.floor(Math.random() * finalPots.length);
+        let b = Math.floor(Math.random() * finalCactus.length);
         if (pot == a || cactus == b) {
           handleRandom();
         } else {
@@ -134,7 +145,7 @@ function PlantViewr({ clickable = true }) {
             "h-[200px] md:h-[300px] absolute duration-150 ease-in " +
             (animation ? " scale-95 translate-y-2 " : " scale-100 ")
           }
-          src={clickable ? currentPot : pots.at(homePotCactus.pot)}
+          src={clickable ? currentPot : finalPots.at(homePotCactus.pot)?.img}
         ></img>
         <img 
         className={
@@ -145,7 +156,7 @@ function PlantViewr({ clickable = true }) {
         <img
           draggable={false}
           className="h-[200px] md:h-[300px] opacity-0 "
-          src={clickable ? currentPot : pots.at(homePotCactus.pot)}
+          src={clickable ? currentPot : finalCactus.at(homePotCactus.pot)?.img}
         ></img>
         {/* animationC?" opacity-100 ":" opacity-0 " */}
         <div
@@ -163,7 +174,7 @@ function PlantViewr({ clickable = true }) {
               (animation ? " translate-y-52 " : " scale-[1.0] translate-y-0") +
               (animation ? " scale-90 translate-y-5 " : " scale-[1.0] ")
             }
-            src={clickable ? currentCactus : cactuses.at(homePotCactus.cactus)}
+            src={clickable ? currentCactus : finalCactus.at(homePotCactus.cactus)?.img}
           ></img>
         </div>
       </div>

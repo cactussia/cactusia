@@ -53,7 +53,7 @@ export default function StateBtn({state,id,cats,setUpdate}) {
             cats.map((c,key)=>{
                 if(key!=0){
                     return(
-                        <MenuItem onClick={()=>{handleClose();changeStateTo(key)}}>{c}</MenuItem>
+                        <MenuItem key={key} onClick={()=>{handleClose();changeStateTo(key)}}>{c}</MenuItem>
                     )
                 }
             })

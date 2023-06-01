@@ -6,6 +6,7 @@ import { addDoc, serverTimestamp } from 'firebase/firestore'
 import { colRef } from '../firebase'
 import { CartContext } from '../Context/CartContext'
 import { getPriceByQte } from '../utils'
+import { ControlersContext } from '../Context/ControlersContext'
 
 function ComplateOrder() {
     const navigate= useNavigate()
@@ -15,6 +16,7 @@ function ComplateOrder() {
     const [city,setCity]=useState("");
     const [address,setAddress]=useState("");
     const {cart,setCart}=useContext(CartContext)
+    const {finalPots,finalCactus,setPot,setCactus,setQuantity}=useContext(ControlersContext)
     const [err,setErr]=useState(false)
 
     const orderNow=()=>{
@@ -29,11 +31,14 @@ function ComplateOrder() {
           state:"new",
           createdAt:serverTimestamp(),
           date:date.getMonth()+"/"+date.getDate(),
-          items:cart,
+          items:cart.map(m=>({...m,pot:finalPots[m.pot].number,cactus:finalCactus[m.cactus].number})),
           price:getPriceByQte(cart.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)),
         }).then(()=>{
           navigate("/")
-          setCart([])
+          setCart([{pot:0,cactus:0,quantity:1}])
+          setPot(0)
+          setCactus(0)
+          setQuantity(1)
         })
       }else{
         setErr(true)

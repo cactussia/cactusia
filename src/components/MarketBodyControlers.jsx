@@ -3,18 +3,19 @@ import cactusdemo from "../assets/imags/cactusdemo.png";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
+import cactuses from "../assets/cactusImages/import";
+import pots from "../assets/potsImages/import";
+
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import { ControlersContext } from "../Context/ControlersContext";
 
-import pots from "../assets/potsImages/import";
-import cactuses from "../assets/cactusImages/import";
 import { useParams } from "react-router-dom";
 
 import {motion} from "framer-motion"
 
 function MarketBodyControlers() {
-    const { pot , setPot , cactus , setCactus , quantity , setQuantity }= useContext(ControlersContext);
+    const { pot , setPot , cactus , setCactus , quantity , setQuantity,finalCactus,finalPots }= useContext(ControlersContext);
     const {potId , cactusId}=useParams()
 
     useEffect(() => {
@@ -29,13 +30,13 @@ function MarketBodyControlers() {
 
     const handlePotSwapLeft = ()=>{
         if(pot<=0){
-            setPot(pots.length-1)
+            setPot(finalPots.length-1)
         }else{
             setPot(p=>p-1)
         }
     }
     const handlePotSwapRight = ()=>{
-        if(pot>=pots.length-1){
+        if(pot>=finalPots.length-1){
             setPot(0)
         }else{
             setPot(p=>p+1)
@@ -44,13 +45,13 @@ function MarketBodyControlers() {
 
     const handleCactusSwapLeft = ()=>{
         if(cactus<=0){
-            setCactus(cactuses.length-1)
+            setCactus(finalCactus.length-1)
         }else{
             setCactus(p=>p-1)
         }
     }
     const handleCactusSwapRight = ()=>{
-        if(cactus>=cactuses.length-1){
+        if(cactus>=finalCactus.length-1){
             setCactus(0)
         }else{
             setCactus(p=>p+1)
@@ -70,14 +71,14 @@ function MarketBodyControlers() {
           <div className="h-10 relative w-10 md:w-12 ">
             <img
               draggable={false}
-              src={cactuses[cactus]}
+              src={finalCactus[cactus]?.img}
               className="h-20 object-contain scale-[2] -top-8 absolute drop-shadow-lg"
             ></img>
           </div>
           <button className="rounded-md  p-2 md:p-4 hover:bg-[#0001]" onClick={handleCactusSwapRight}>
             <KeyboardArrowRightIcon className="text-green" />
           </button>
-          <div className="absolute -bottom-3 left-[50%] translate-x-[-50%] px-2 bg-dark-white border rounded-md drop-shadow-md">{cactus+1  } / {cactuses.length}</div>
+          <div className="absolute -bottom-3 left-[50%] translate-x-[-50%] px-2 bg-dark-white border rounded-md drop-shadow-md">{cactus+1  } / {finalCactus?.length}</div>
         </div>
         <div className="  text-dark-green w-fit md:w-full pt-3">cactus name here</div>
       </div>
@@ -94,14 +95,14 @@ function MarketBodyControlers() {
           <div className="h-10 relative w-10 md:w-12 ">
             <img
               draggable={false}
-              src={pots[pot]}
+              src={finalPots[pot]?.img}
               className="h-20 object-contain -top-8 absolute drop-shadow-lg"
             ></img>
           </div>
           <button className="rounded-md  p-2 md:p-4 hover:bg-[#0001]" onClick={handlePotSwapRight}>
             <KeyboardArrowRightIcon className="text-green" />
           </button>
-          <div className="absolute -bottom-3 left-[50%] translate-x-[-50%] px-2 bg-dark-white border rounded-md drop-shadow-md">{pot+1  } / {pots.length}</div>
+          <div className="absolute -bottom-3 left-[50%] translate-x-[-50%] px-2 bg-dark-white border rounded-md drop-shadow-md">{pot+1  } / {finalPots?.length}</div>
         </div>
         <div className="  text-dark-green w-fit md:w-full pt-3">cactus name here</div>
       </div>

@@ -11,6 +11,13 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import ComplateOrder from './pages/ComplateOrder';
 import Admin from './pages/Admin';
+import { colRefCactus, colRefPots } from './firebase';
+import { onSnapshot, query, where } from 'firebase/firestore';
+
+
+
+import pots from "./assets/potsImages/import";
+import cactuses from "./assets/cactusImages/import";
 
 
 
@@ -51,6 +58,59 @@ function App() {
   const [quantity , setQuantity ]=useState(1);
 
 
+
+
+
+
+
+
+
+
+    const [finalPots,setFinalPots]=useState([])
+    const [finalCactus,setFinalCactus]=useState([])
+
+    useEffect(()=>{
+
+        let q = query(colRefCactus,where("dispo","==",true))
+        onSnapshot(q,(snapshot)=>{
+            let cactusList =[];
+            snapshot.docs.forEach(doc=>{
+                cactusList.push({...doc.data(),id:doc.id,img:cactuses[doc.data().number]})
+            })
+            setFinalCactus(cactusList)
+            console.log(cactusList)
+        })
+
+        q = query(colRefPots,where("dispo","==",true))
+        onSnapshot(q,(snapshot)=>{
+            let potsList =[];
+            snapshot.docs.forEach(doc=>{
+                potsList.push({...doc.data(),id:doc.id,img:pots[doc.data().number]})
+            })
+            setFinalPots(potsList)
+        })
+        
+        
+    },[])
+
+
+
+
+
+    useEffect(()=>{
+      console.log(finalCactus)
+    },[finalPots])
+
+
+
+
+
+
+
+
+
+
+
   // for cart Context
   const [cart , setCart ]= useState([
     {
@@ -82,7 +142,7 @@ function App() {
 
   return (
     <CartContext.Provider value={{cart,setCart,currentItem,setCurrentItem,upCart,setUpCart}}>
-      <ControlersContext.Provider value={{pot,setPot,cactus,setCactus,quantity,setQuantity}}>
+      <ControlersContext.Provider value={{pot,setPot,cactus,setCactus,quantity,setQuantity,finalCactus,finalPots}}>
         <RouterProvider router={router} />
       </ControlersContext.Provider>
     </CartContext.Provider>
