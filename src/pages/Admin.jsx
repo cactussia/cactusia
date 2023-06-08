@@ -6,11 +6,13 @@ import { ControlersContext } from "../Context/ControlersContext";
 
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import GrassIcon from '@mui/icons-material/Grass';
+import TranslateIcon from '@mui/icons-material/Translate';
 
 
 
 import OrdersAdmin from "../components/OrdersAdmin";
 import Products from "../components/Products";
+import Language from "../components/Language";
 
 const cats = ["All","New","Confirmed","Delivered"]
 
@@ -19,6 +21,7 @@ const cats = ["All","New","Confirmed","Delivered"]
 const Pages = [
     {name:"Orders",Icon:<Inventory2Icon/>},
     {name:"Products",Icon:<GrassIcon/>},
+    {name:"Lang",Icon:<TranslateIcon/>},
 ]
 
 
@@ -71,7 +74,9 @@ function Admin() {
 {
     page==1&&<Products/>
 }
-
+{
+    page==2&&<Language/>
+}
 
     </div>
 
