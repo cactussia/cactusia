@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import CustomizedTables from "../components/OrdersTabel";
-import logo from "../assets/imags/logo.png";
+import logo from "../assets/imags/logo.jpeg";
 import StateBtn from "../components/StateBtn";
 import { ControlersContext } from "../Context/ControlersContext";
 

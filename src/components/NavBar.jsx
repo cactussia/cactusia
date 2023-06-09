@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from "../assets/imags/logo.png";
+import logo from "../assets/imags/logo.jpeg";
 import { Link } from "react-router-dom";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
