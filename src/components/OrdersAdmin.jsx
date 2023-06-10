@@ -58,7 +58,7 @@ function OrdersAdmin({ order ,cat ,search,cats,setCat ,setOrder}) {
       />
     </div>
   ) : (
-    <div className="flex w-full">
+    <div className="flex">
       <div className="p-8 bg-white w-[400px] flex flex-col gap-2 items-start">
         <button
           onClick={() => setOrder("")}
@@ -76,11 +76,11 @@ function OrdersAdmin({ order ,cat ,search,cats,setCat ,setOrder}) {
         <h1>full address: {order?.address}</h1>
         <h1>price: {order?.price} Dh</h1>
       </div>
-      <div className="flex-1 p-8 flex flex-col ">
+      <div className="flex-1 p-8">
         <h1 className="text-3xl text-gray-700 font-semibold py-8">
           Order Items
         </h1>
-        <div className="grid grid-cols-4 w-full  gap-4">
+        <div className="grid grid-cols-4  gap-4">
           {order?.items.map((item, key) => (
             <div
               key={key}
@@ -90,7 +90,7 @@ function OrdersAdmin({ order ,cat ,search,cats,setCat ,setOrder}) {
             >
               <button
                 className={
-                  "w-full  h-40 bg-dark-white duration-100  pb-4 rounded-lg bg-white  flex justify-center items-center flex-col "
+                  " w-32 h-40 bg-dark-white duration-100  pb-4 rounded-lg bg-white  flex justify-center items-center flex-col "
                 }
               >
                 <div

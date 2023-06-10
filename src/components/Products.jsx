@@ -37,14 +37,10 @@ function Products() {
 
 
     const toggleProduct = (id,state)=>{
-
-      let a = prompt("please enter the password")
-      if(a=="cactusia@06"){
         const docRef = doc(db,product==0?"Pots":"Cactus",id);
         updateDoc(docRef,{
             dispo:!state
         })
-      }
     }
 
   return (
