@@ -32,7 +32,7 @@ function OrderNow() {
         
         <p className="text-sm mb-2 text-gray-600 bg-dark-white2 border py-1 px-2 rounded-md w-fit">{getPotNum()} pot cactus</p>
         <p className="text-base text-gray-600">Delivery Price </p>
-        <h1 className="text-2xl text-green font-semibold ">{getPriceDelivery()} Dh</h1>
+        <h2 className="text-2xl text-green font-semibold ">{getPriceDelivery()} Dh</h2>
         <p className="text-base text-gray-600 ">Total Price </p>
         <h1 className="text-7xl text-green font-bold">{getPrice()} <span className="text-3xl">Dh</span></h1>
         <hr className=" my-3" />

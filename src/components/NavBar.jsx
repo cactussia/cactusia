@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from "../assets/imags/logo.jpeg";
+import logo from "../assets/imags/logo.png";
 import { Link } from "react-router-dom";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -19,6 +19,8 @@ function NavBar() {
             draggable={false}
             className="w-14 lg:w-20 mix-blend-darken"
             src={logo}
+            alt="Cactusia Logo"
+            title="Cactusia"
           />
         </Link>
       </div>
