@@ -25,11 +25,11 @@ export const NavBarLinks = [{
 export const SocialMediaLinks = [
   {
     label:"Phone Number",
-    link:"tel:0000000000",
+    link:"tel:212669231618",
   },
   {
     label:"Facebook",
-    link:"https://www.facebook.com/",
+    link:"https://www.facebook.com/cactusia.ma",
   },
   {
     label:"Instagram",
@@ -37,7 +37,7 @@ export const SocialMediaLinks = [
   },
   {
     label:"whatsapp",
-    link:"https://wa.me/0000000000",
+    link:"https://wa.me/212669231618",
   }
 ]
 
