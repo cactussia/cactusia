@@ -137,7 +137,7 @@ function PlantViewr({ clickable = true }) {
           draggable={false}
           className="w-[180px] md:w-[250px]  absolute top-[150px] md:top-[230px]  opacity-60 z-[0]"
           src={shadow}
-        ></img>
+        />
 
         <img
           draggable={false}
@@ -146,18 +146,18 @@ function PlantViewr({ clickable = true }) {
             (animation ? " scale-95 translate-y-2 " : " scale-100 ")
           }
           src={clickable ? currentPot : finalPots.at(homePotCactus.pot)?.img}
-        ></img>
+        />
         <img 
         className={
           "duration-150 absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] scale-[.2] sm:scale-[.3]" 
           +(animation ? " scale-[.10] sm:scale-[.20] opacity-80 " : " scale-[.15] sm:scale-[.25] opacity-100")
         }
-        src={sticker}></img>
+        src={sticker}/>
         <img
           draggable={false}
           className="h-[200px] md:h-[300px] opacity-0 "
           src={clickable ? currentPot : finalCactus.at(homePotCactus.pot)?.img}
-        ></img>
+        />
         {/* animationC?" opacity-100 ":" opacity-0 " */}
         <div
           className={
@@ -175,7 +175,7 @@ function PlantViewr({ clickable = true }) {
               (animation ? " scale-90 translate-y-5 " : " scale-[1.0] ")
             }
             src={clickable ? currentCactus : finalCactus.at(homePotCactus.cactus)?.img}
-          ></img>
+          />
         </div>
       </div>
     </motion.div>
