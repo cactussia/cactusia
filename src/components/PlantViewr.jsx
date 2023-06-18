@@ -49,7 +49,7 @@ function PlantViewr({ clickable = true }) {
             cactus: Math.floor(Math.random() * finalCactus.length),
           });
         }, 200);
-      }, 8000);
+      }, 1000);
       // clearing interval
       return () => clearInterval(timer);
     }
