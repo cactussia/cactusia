@@ -6,6 +6,9 @@ import { ControlersContext } from '../Context/ControlersContext';
 import { CartContext } from '../Context/CartContext';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import {motion} from "framer-motion"
+import { CardTravel, Shop } from '@mui/icons-material';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
 function MarketCart() {
    const {pot,setPot,cactus,setCactus ,quantity,setQuantity,finalCactus,finalPots}=useContext(ControlersContext);
    const {cart ,currentItem ,setCurrentItem ,setCart}= useContext(CartContext);
@@ -74,7 +77,7 @@ function MarketCart() {
         }
         <div className='w-20 h-20'>
         <button onClick={handelAddNew} className='drop-shadow-lg w-20 h-20 duration-100 border-2 border-[#0001]  hover:bg-dark-white2 bg-dark-white rounded-lg  '>
-          <AddRoundedIcon className="text-green w-20 h-20" />
+          <AddShoppingCartIcon className="text-green w-32 h-32 scale-[200%]" />
         </button>
         </div>
       </div>
