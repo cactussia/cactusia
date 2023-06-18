@@ -149,8 +149,8 @@ function PlantViewr({ clickable = true }) {
         />
         <img 
         className={
-          "duration-150 absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] scale-[.2] sm:scale-[.3]" 
-          +(animation ? " scale-[.10] sm:scale-[.20] opacity-80 " : " scale-[.15] sm:scale-[.25] opacity-100")
+          "duration-150 absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] scale-[.12] sm:scale-[.3]" 
+          +(animation ? " scale-[.10] sm:scale-[.19] opacity-80 " : " scale-[.15] sm:scale-[.2] opacity-100")
         }
         src={sticker}/>
         <img
