@@ -66,7 +66,7 @@ function MarketBodyControlers() {
       <div className=" flex flex-col justify-center items-start  ">
         <div className=" w-fit p-1 rounded-lg border-2 border-[#0001]  relative drop-shadow-md flex bg-dark-white gap-2 mt-4">
           <button className="rounded-md p-2 md:p-4 hover:bg-[#0001]" onClick={handleCactusSwapLeft}>
-            <KeyboardArrowLeftIcon className="text-green" />
+            <KeyboardArrowLeftIcon className="text-green scale-150" />
           </button>
           <div className="h-10 relative w-10 md:w-12 ">
             <img
@@ -76,7 +76,7 @@ function MarketBodyControlers() {
             ></img>
           </div>
           <button className="rounded-md  p-2 md:p-4 hover:bg-[#0001]" onClick={handleCactusSwapRight}>
-            <KeyboardArrowRightIcon className="text-green" />
+            <KeyboardArrowRightIcon className="text-green scale-150" />
           </button>
           <div className="absolute -bottom-3 left-[50%] translate-x-[-50%] px-2 bg-dark-white border rounded-md drop-shadow-md">{cactus+1  } / {finalCactus?.length}</div>
         </div>
@@ -90,7 +90,7 @@ function MarketBodyControlers() {
       <div className=" flex flex-col justify-center items-start  ">
         <div className=" w-fit p-1 rounded-lg border-2 border-[#0001]  relative drop-shadow-md flex bg-dark-white gap-2 mt-4">
           <button className="rounded-md p-2 md:p-4 hover:bg-[#0001]" onClick={handlePotSwapLeft}>
-            <KeyboardArrowLeftIcon className="text-green" />
+            <KeyboardArrowLeftIcon className="text-green scale-150" />
           </button>
           <div className="h-10 relative w-10 md:w-12 ">
             <img
@@ -100,7 +100,7 @@ function MarketBodyControlers() {
             ></img>
           </div>
           <button className="rounded-md  p-2 md:p-4 hover:bg-[#0001]" onClick={handlePotSwapRight}>
-            <KeyboardArrowRightIcon className="text-green" />
+            <KeyboardArrowRightIcon className="text-green scale-150" />
           </button>
           <div className="absolute -bottom-3 left-[50%] translate-x-[-50%] px-2 bg-dark-white border rounded-md drop-shadow-md">{pot+1  } / {finalPots?.length}</div>
         </div>
@@ -116,13 +116,13 @@ function MarketBodyControlers() {
 
         <div className=" w-fit p-1 rounded-lg drop-shadow-md border-2 border-[#0001] flex bg-dark-white gap-2 mt-4">
         <button className="p-2 rounded-md md:p-4 hover:bg-[#0001]" onClick={()=> {if(quantity>1) setQuantity(p=>p-1)}}>
-          <RemoveRoundedIcon className="text-green" />
+          <RemoveRoundedIcon className="text-green scale-150" />
         </button>
         <div className=" flex justify-center items-center w-10 md:w-12">
           <p className="text-xl text-dark-green">{quantity}</p>
         </div>
         <button className="p-2 md:p-4 rounded-md hover:bg-[#0001]" onClick={()=>setQuantity(p=>p+1)}>
-          <AddRoundedIcon className="text-green" />
+          <AddRoundedIcon className="text-green scale-150" />
         </button>
       </div>
         <div className="  text-dark-green w-fit md:w-full pt-1">quantity</div>
