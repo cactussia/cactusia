@@ -1,4 +1,4 @@
-import { useState , useEffect } from 'react'
+import { useState , useEffect, useMemo } from 'react'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -11,13 +11,14 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import ComplateOrder from './pages/ComplateOrder';
 import Admin from './pages/Admin';
-import { colRefCactus, colRefPots } from './firebase';
-import { onSnapshot, query, where } from 'firebase/firestore';
+import { colRefCactus, colRefLangs, colRefPots } from './firebase';
+import { getDocs, onSnapshot, query, where } from 'firebase/firestore';
 
 
 
 import pots from "./assets/potsImages/import";
 import cactuses from "./assets/cactusImages/import";
+import useLang from './store/useLang';
 
 
 
@@ -59,6 +60,17 @@ function App() {
 
 
 
+  const {lang,setLang,langSelected}=useLang()
+  useMemo(()=>{
+    getDocs(colRefLangs).then((snapshot)=>{
+        let s = [];
+        snapshot.docs.forEach((doc)=>{
+          s.push({...doc.data(),id:doc.id})
+        })
+        setLang(s)
+        console.log(s)
+    })
+  },[])
 
 
 
@@ -78,7 +90,6 @@ function App() {
                 cactusList.push({...doc.data(),id:doc.id,img:cactuses[doc.data().number]})
             })
             setFinalCactus(cactusList)
-            console.log(cactusList)
         })
 
         q = query(colRefPots,where("dispo","==",true))
@@ -141,6 +152,7 @@ function App() {
   
 
   return (
+    lang.length>0 && 
     <CartContext.Provider value={{cart,setCart,currentItem,setCurrentItem,upCart,setUpCart}}>
       <ControlersContext.Provider value={{pot,setPot,cactus,setCactus,quantity,setQuantity,finalCactus,finalPots}}>
         <RouterProvider router={router} />
