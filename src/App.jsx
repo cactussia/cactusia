@@ -11,7 +11,7 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import ComplateOrder from './pages/ComplateOrder';
 import Admin from './pages/Admin';
-import { colRefCactus, colRefLangs, colRefPots } from './firebase';
+import { colRefCactus, colRefLang, colRefPots } from './firebase';
 import { getDocs, onSnapshot, query, where } from 'firebase/firestore';
 
 
@@ -19,6 +19,7 @@ import { getDocs, onSnapshot, query, where } from 'firebase/firestore';
 import pots from "./assets/potsImages/import";
 import cactuses from "./assets/cactusImages/import";
 import useLang from './store/useLang';
+import Thank from './pages/Thank';
 
 
 
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
     element: <About/>,
   },
   {
+    path: "/thank",
+    element: <Thank/>,
+  },
+  {
     path: "/admin",
     element: <Admin/>,
   },
@@ -62,7 +67,7 @@ function App() {
 
   const {lang,setLang,langSelected}=useLang()
   useMemo(()=>{
-    getDocs(colRefLangs).then((snapshot)=>{
+    getDocs(colRefLang).then((snapshot)=>{
         let s = [];
         snapshot.docs.forEach((doc)=>{
           s.push({...doc.data(),id:doc.id})
@@ -81,7 +86,7 @@ function App() {
     const [finalPots,setFinalPots]=useState([])
     const [finalCactus,setFinalCactus]=useState([])
 
-    useEffect(()=>{
+    useMemo(()=>{
 
         let q = query(colRefCactus,where("dispo","==",true))
         onSnapshot(q,(snapshot)=>{

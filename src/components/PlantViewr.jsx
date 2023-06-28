@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import shadow from "../assets/imags/shadow.png";
 import sticker from "../assets/imags/cactusSticker.png";
 
@@ -49,19 +49,19 @@ function PlantViewr({ clickable = true }) {
             cactus: Math.floor(Math.random() * finalCactus.length),
           });
         }, 200);
-      }, 1000);
+      }, 4000);
       // clearing interval
       return () => clearInterval(timer);
     }
   });
 
-  useEffect(() => {
+  useMemo(() => {
     setAnimation(true);
     const a = () => {
       setAnimation(false);
       setCurrentPot(finalPots[pot]?.img);
     };
-    setTimeout(a, 200);
+    setTimeout(a, 0);
     return () => {
       clearTimeout(a);
     };
@@ -73,7 +73,7 @@ function PlantViewr({ clickable = true }) {
       setAnimation(false);
       setCurrentCactus(finalCactus[cactus]?.img);
     };
-    setTimeout(a, 200);
+    setTimeout(a, 0);
     return () => {
       clearTimeout(a);
     };

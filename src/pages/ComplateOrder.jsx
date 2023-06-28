@@ -34,7 +34,7 @@ function ComplateOrder() {
           items:cart.map(m=>({...m,pot:finalPots[m.pot].number,cactus:finalCactus[m.cactus].number})),
           price:getPriceByQte(cart.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)),
         }).then(()=>{
-          navigate("/")
+          navigate("/thank")
           setCart([{pot:0,cactus:0,quantity:1}])
           setPot(0)
           setCactus(0)

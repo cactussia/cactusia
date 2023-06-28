@@ -2,19 +2,23 @@
  * `NavBarLinks` is an array of objects that contains the links to be displayed in the navbar
  */
 export const NavBarLinks = [{
-    label:"Home",
+    id:"16",
+    label:"home",
     delay:600
   },
   {
-    label:"Market",
+    id:"14",
+    label:"market",
     delay:700
   },
   {
-    label:"Contact",
+    id:"15",
+    label:"contact",
     delay:800
   },
   {
-    label:"About",
+    id:"12",
+    label:"about",
     delay:1000
   },   
 ]

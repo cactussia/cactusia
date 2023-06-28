@@ -38,7 +38,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-export default function CustomizedTables() {
+export default function Language() {
 
   const [rows,setRows]=React.useState([])
 

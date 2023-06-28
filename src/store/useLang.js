@@ -1,9 +1,11 @@
 import create from 'zustand';
 
+const langs=["en","fr"]
 const useLang = create((set) => ({
     lang:[],
-    langSelected:"en",
-    setLangSelected:(lang)=>set(()=>({langSelected:lang})),
+    langs:langs,
+    langSelected:0,
+    setLangSelected:(lang)=>set((state)=>({langSelected:state.langSelected==1?0:state.langSelected+1})),
     setLang: (data)=>set(()=>({lang:data}))
 }));
 

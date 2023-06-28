@@ -23,4 +23,5 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app)
 export const colRef = collection(db,"Orders")
 export const colRefPots = collection(db,"Pots")
+export const colRefLang = collection(db,"Lang")
 export const colRefCactus = collection(db,"Cactus")

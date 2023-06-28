@@ -77,7 +77,7 @@ function MarketCart() {
         }
         <div className='w-20 h-20'>
         <button onClick={handelAddNew} className='drop-shadow-lg w-20 h-20 duration-100 border-2 border-[#0001]  hover:bg-dark-white2 bg-dark-white rounded-lg  '>
-          <AddShoppingCartIcon className="text-green w-32 h-32 scale-[200%]" />
+          <AddShoppingCartIcon className="text-green scale-[150%]" />
         </button>
         </div>
       </div>

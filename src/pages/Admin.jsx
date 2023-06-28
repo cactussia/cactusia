@@ -11,6 +11,9 @@ import GrassIcon from '@mui/icons-material/Grass';
 
 import OrdersAdmin from "../components/OrdersAdmin";
 import Products from "../components/Products";
+import { Language as Lng } from "@mui/icons-material";
+import LangEdit from "../components/LangEdit";
+import Language from "../components/Language";
 
 const cats = ["All","New","Confirmed","Delivered"]
 
@@ -19,6 +22,7 @@ const cats = ["All","New","Confirmed","Delivered"]
 const Pages = [
     {name:"Orders",Icon:<Inventory2Icon/>},
     {name:"Products",Icon:<GrassIcon/>},
+    {name:"Language",Icon:<Lng/>},
 ]
 
 
@@ -70,6 +74,9 @@ function Admin() {
 }
 {
     page==1&&<Products/>
+}
+{
+    page==2&&<Language/>
 }
 
 
