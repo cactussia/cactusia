@@ -10,7 +10,7 @@ import useLang from '../store/useLang';
 export default function Main() {
   const [left , setLeft ] = useState(0)
   const matches = useMediaQuery('(min-width:630px)');
-  const {langs,lang,langSelected}=useLang(
+  const {langs,lang,langSelected}=useLang();
 
   return (
     <main  className="flex flex-col flex-1 overflow-hidden ">

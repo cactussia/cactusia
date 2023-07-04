@@ -7,7 +7,7 @@ import useLang from "../store/useLang";
 export default function Footer() {
   const tailwindSharedStyle = "relative font-semibold text-bleach-dark capitalize transition-all duration-150 group hover:text-green hover:scale-[1.02]";
   const iconStyle = "absolute transition-all duration-150 left-4 opacity-0 group-hover:-left-5 group-hover:opacity-100 text-green"
-  const {lang , langs , langSelected }=useLang)
+  const {lang , langs , langSelected }=useLang()
   return (
     <footer className="container mx-auto pt-6 pb-2 mt-8 w-full flex justify-center items-center flex-col gap-6 ">
       <div className="flex  flex-col md:flex-row gap-6 lg:w-[500px]">
