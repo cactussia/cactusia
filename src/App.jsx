@@ -103,7 +103,17 @@ function App() {
             snapshot.docs.forEach(doc=>{
                 potsList.push({...doc.data(),id:doc.id,img:pots[doc.data().number]})
             })
-            setFinalPots(potsList)
+            setFinalPots(
+              potsList.sort((a,b)=>{
+              if(a.number<b.number){
+                return -1
+              }
+              if(a.number>b.number){
+                return 1
+              }
+              return 0
+              })
+            )
         })
         
         
