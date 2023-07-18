@@ -147,12 +147,12 @@ function PlantViewr({ clickable = true }) {
           }
           src={clickable ? currentPot : finalPots.at(homePotCactus.pot)?.img}
         />
-        <img 
+        {/* <img 
         className={
           "duration-150 absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] scale-[.12] sm:scale-[.3]" 
           +(animation ? " scale-[.10] sm:scale-[.19] opacity-80 " : " scale-[.15] sm:scale-[.2] opacity-100")
         }
-        src={sticker}/>
+        src={sticker}/> */}
         <img
           draggable={false}
           className="h-[200px] md:h-[300px] opacity-0 "

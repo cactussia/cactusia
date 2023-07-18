@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/imags/logo.png";
+import logo from "../assets/imags/logo.jpeg";
 import { ArrowRight } from '@mui/icons-material';
 import { NavBarLinks, SocialMediaLinks, dynamicCopyright } from "../utils"
 import useLang from "../store/useLang";
