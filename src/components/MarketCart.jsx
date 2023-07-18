@@ -48,7 +48,7 @@ function MarketCart() {
    
   return (
     <motion.div initial={{x:-200}} animate={{x:0}}  className='md:h-48 mb-2 flex flex-col items-center justify-center md:justify-center '>
-      <div className='xl:pt-12  border overflow-auto px-4 border-red-500 max-w-full md:pt-8 pt-10  rounded-lg flex gap-2 '>
+      <div className='xl:pt-12   overflow-auto px-4  max-w-full md:pt-8 pt-10  rounded-lg flex gap-2 '>
         {
           cart.map((item,key)=>{
             return(
