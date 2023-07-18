@@ -5,6 +5,8 @@ import { addDoc, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 
 import cactuses from "../assets/cactusImages/import"
 import pots from "../assets/potsImages/import"
+import { IconButton } from '@mui/material';
+import { Circle } from '@mui/icons-material';
 
 const products = ["Pots","Cactus"];
 function Products() {
@@ -42,6 +44,12 @@ function Products() {
             dispo:!state
         })
     }
+    const changeProductName = (e,id)=>{
+        const docRef = doc(db,product==0?"Pots":"Cactus",id)
+        updateDoc(docRef,{
+          name:e.target.value
+        })
+    }
 
   return (
     <div className="p-8 px-10 flex-1">
@@ -77,13 +85,20 @@ function Products() {
                 {
                     (product==1?listCactus:listPots).map(c=>{
                         return(
-                            <button onClick={()=>toggleProduct(c.id,c.dispo)} className='p-4 relative bg-white rounded-xl shadow-lg justify-center items-center m-2 flex flex-col'>
+                            <div key={c.id} className='p-4 relative bg-white rounded-xl shadow-lg justify-center items-center m-2 flex flex-col'>
                                 <img style={{opacity:!c.dispo?.4:1}} className='h-32' src={(product==1?cactuses:pots)[c.number]}></img>
+                                    <div className='absolute top-0 left-0'>
+                                      <IconButton  onClick={()=>toggleProduct(c.id,c.dispo)} >
                                 {
-                                    c.dispo &&
-                                    <CheckCircleIcon className='absolute top-4 left-4 '/>
+                                    c.dispo ?
+                                        <CheckCircleIcon  />
+                                        :
+                                        <Circle/>
                                 }
-                            </button>
+                                      </IconButton>
+                                    </div>
+                                  <input value={c?.name} onInput={e=>changeProductName(e,c.id)} placeholder='product name' className='mt-4 border rounded-md p-2'></input>
+                            </div>
                         )
                     })
                 }
