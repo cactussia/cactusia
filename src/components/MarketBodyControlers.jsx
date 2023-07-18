@@ -80,7 +80,7 @@ function MarketBodyControlers() {
           </button>
           <div className="absolute -bottom-3 left-[50%] translate-x-[-50%] px-2 bg-dark-white border rounded-md drop-shadow-md">{cactus+1  } / {finalCactus?.length}</div>
         </div>
-        <div className="  text-dark-green w-fit md:w-full pt-3">cactus name here</div>
+        <div className="  text-dark-green w-fit md:w-full pt-3">{finalCactus[cactus]?.name}</div>
       </div>
 
       
@@ -104,7 +104,7 @@ function MarketBodyControlers() {
           </button>
           <div className="absolute -bottom-3 left-[50%] translate-x-[-50%] px-2 bg-dark-white border rounded-md drop-shadow-md">{pot+1  } / {finalPots?.length}</div>
         </div>
-        <div className="  text-dark-green w-fit md:w-full pt-3">cactus name here</div>
+        <div className="  text-dark-green w-fit md:w-full pt-3">{finalPots[pot]?.name}</div>
       </div>
 
 
