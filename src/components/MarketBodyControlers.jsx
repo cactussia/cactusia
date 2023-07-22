@@ -70,9 +70,10 @@ function MarketBodyControlers() {
           </button>
           <div className="h-10 relative w-10 md:w-12 ">
             <img
+              onContextMenu={e => e.preventDefault()}
               draggable={false}
               src={finalCactus[cactus]?.img}
-              className="h-20 object-contain scale-[2] -top-8 absolute drop-shadow-lg"
+              className="h-20 object-contain scale-[2] -top-8 absolute drop-shadow-lg pointer-events-none select-none"
             ></img>
           </div>
           <button className="rounded-md  p-2 md:p-4 hover:bg-[#0001]" onClick={handleCactusSwapRight}>
@@ -94,9 +95,10 @@ function MarketBodyControlers() {
           </button>
           <div className="h-10 relative w-10 md:w-12 ">
             <img
+              onContextMenu={e => e.preventDefault()}
               draggable={false}
               src={finalPots[pot]?.img}
-              className="h-20 object-contain -top-8 absolute drop-shadow-lg"
+              className="h-20 object-contain -top-8 absolute drop-shadow-lg pointer-events-none select-none"
             ></img>
           </div>
           <button className="rounded-md  p-2 md:p-4 hover:bg-[#0001]" onClick={handlePotSwapRight}>

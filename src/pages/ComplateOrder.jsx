@@ -1,5 +1,5 @@
 import { ArrowBack } from '@mui/icons-material'
-import {useContext, useState}  from 'react'
+import {useContext, useEffect, useState}  from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import {motion} from "framer-motion"
 import { addDoc, serverTimestamp } from 'firebase/firestore'
@@ -7,6 +7,7 @@ import { colRef } from '../firebase'
 import { CartContext } from '../Context/CartContext'
 import { getPriceByQte } from '../utils'
 import { ControlersContext } from '../Context/ControlersContext'
+import Thank from './Thank'
 
 function ComplateOrder() {
     const navigate= useNavigate()
@@ -18,6 +19,9 @@ function ComplateOrder() {
     const {cart,setCart}=useContext(CartContext)
     const {finalPots,finalCactus,setPot,setCactus,setQuantity}=useContext(ControlersContext)
     const [err,setErr]=useState(false)
+    
+    // thank page state tracker
+    const [showThankPage, setShowThankPage] = useState(false);
 
     const orderNow=()=>{
       let date=new Date();
@@ -34,16 +38,33 @@ function ComplateOrder() {
           items:cart.map(m=>({...m,pot:finalPots[m.pot].number,cactus:finalCactus[m.cactus].number})),
           price:getPriceByQte(cart.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)),
         }).then(()=>{
-          navigate("/thank")
+          // navigate("/thank")
           setCart([{pot:0,cactus:0,quantity:1}])
           setPot(0)
           setCactus(0)
           setQuantity(1)
+          setShowThankPage(true);
         })
       }else{
         setErr(true)
       }
     }
+
+
+    // set a timeout of 18s to return to the market after the Thank page was displayed
+    useEffect(()=>{
+      if (!showThankPage) return;
+      
+      const timeout = setTimeout(()=>{
+        setShowThankPage(false);
+        navigate("/market");
+      }, 18000)
+
+      return () => clearTimeout(timeout)
+    }, [showThankPage])
+
+  
+  if (showThankPage) return <Thank name={firstName + lastName} onReturn={()=>navigate("/market")}/>;
 
 
   return (
@@ -70,4 +91,4 @@ function ComplateOrder() {
   )
 }
 
-export default ComplateOrder
+export default ComplateOrder;

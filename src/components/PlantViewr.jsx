@@ -134,15 +134,17 @@ function PlantViewr({ clickable = true }) {
         }
       >
         <img
+          onContextMenu={e => e.preventDefault()}
           draggable={false}
-          className="w-[180px] md:w-[250px]  absolute top-[150px] md:top-[230px]  opacity-60 z-[0]"
+          className="w-[180px] md:w-[250px]  absolute top-[150px] md:top-[230px]  opacity-60 z-[0] pointer-events-none select-none"
           src={shadow}
         />
 
         <img
+          onContextMenu={e => e.preventDefault()}
           draggable={false}
           className={
-            "h-[200px] md:h-[300px] absolute duration-150 ease-in " +
+            "h-[200px] md:h-[300px] absolute duration-150 ease-in  pointer-events-none select-none" +
             (animation ? " scale-95 translate-y-2 " : " scale-100 ")
           }
           src={clickable ? currentPot : finalPots.at(homePotCactus.pot)?.img}
@@ -154,8 +156,9 @@ function PlantViewr({ clickable = true }) {
         }
         src={sticker}/> */}
         <img
+          onContextMenu={e => e.preventDefault()}
           draggable={false}
-          className="h-[200px] md:h-[300px] opacity-0 "
+          className="h-[200px] md:h-[300px] opacity-0  pointer-events-none select-none"
           src={clickable ? currentPot : finalCactus.at(homePotCactus.pot)?.img}
         />
         {/* animationC?" opacity-100 ":" opacity-0 " */}
@@ -168,9 +171,10 @@ function PlantViewr({ clickable = true }) {
           }
         >
           <img
+            onContextMenu={e => e.preventDefault()}
             draggable={false}
             className={
-              "duration-150 ease-in " +
+              "duration-150 ease-in  pointer-events-none select-none" +
               (animation ? " translate-y-52 " : " scale-[1.0] translate-y-0") +
               (animation ? " scale-90 translate-y-5 " : " scale-[1.0] ")
             }

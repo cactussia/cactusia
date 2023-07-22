@@ -15,11 +15,9 @@ import { colRefCactus, colRefLang, colRefPots } from './firebase';
 import { getDocs, onSnapshot, query, where } from 'firebase/firestore';
 
 
-
 import pots from "./assets/potsImages/import";
 import cactuses from "./assets/cactusImages/import";
 import useLang from './store/useLang';
-import Thank from './pages/Thank';
 
 
 
@@ -44,10 +42,6 @@ const router = createBrowserRouter([
   {
     path: "/about",
     element: <About/>,
-  },
-  {
-    path: "/thank",
-    element: <Thank/>,
   },
   {
     path: "/admin",
@@ -76,10 +70,6 @@ function App() {
         console.log(s)
     })
   },[])
-
-
-
-
 
 
 
