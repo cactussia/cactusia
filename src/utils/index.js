@@ -37,12 +37,56 @@ export const SocialMediaLinks = [
   },
   {
     label:"Instagram",
-    link:"https://www.instagram.com/",
+    link:"https://www.instagram.com/cactusia.ma",
   },
   {
     label:"whatsapp",
     link:"https://wa.me/212669231618",
   }
+]
+
+export const OrderFields = [
+  {
+    type: "text",
+    name: "firstname",
+    label: "First Name",
+    regex: /^[a-zA-Z]{3,16}$/,
+    empty: "First Name is required",
+    error: "First Name must be between 3 and 16 characters long and must contain only letters",
+  },
+  {
+    type: "text",
+    name: "lastname",
+    label: "Last Name",
+    regex: /^[a-zA-Z]{3,16}$/,
+    empty: "Last Name is required",
+    error: "Last Name must be between 3 and 16 characters long and must contain only letters",
+  },
+  {
+    type: "tel",
+    name: "phonenumber",
+    label: "Phone Number",
+    // regex format : (+212669231618 or 0669231618) morrocan phone number no spaces between numbers
+    regex: /^(\+212|0)([ \-_/]*)(\d[ \-_/]*){9}$/,
+    empty: "Phone Number is required",
+    error: "Phone Number must be a valid morrocan phone number",
+  },
+  {
+    type: "text",
+    name: "city",
+    label: "City",
+    regex: /^[a-zA-Z]{3,16}$/,
+    empty: "City is required",
+    error: "City must be between 3 and 16 characters long and must contain only letters",
+  },
+  {
+    type: "textarea",
+    name: "address",
+    label: "Full Address",
+    regex: /^[a-zA-Z0-9\s,'-]{10,}$/, // regex format : (street, city, country)
+    empty: "Full Address is required",
+    error: "Full Address must be at least 10 characters long and contain your street, city",
+  },
 ]
 
 /**
