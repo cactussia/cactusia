@@ -5,6 +5,7 @@ import {motion} from "framer-motion"
 import { getPriceByQte } from '../utils';
 import { useNavigate } from 'react-router-dom';
 import useLang from '../store/useLang';
+import ArrowIcon from './svg/ArrowIcon';
 
 function OrderNow() {
 
@@ -52,9 +53,10 @@ function OrderNow() {
             {lang?.length>0 && lang.filter(f=>f.id_phrase=="3offer")[0][langs[langSelected]]}
         </p>
         }
-        <button onClick={()=>navigate("/complete-order")} className="rounded-lg w-full lg:w-fit hover:bg-green-dark duration-200 hover:scale-105 px-6 py-3 bg-green flex justify-center items-center gap-2 text-white font-normal text-lg">
+        <button onClick={()=>navigate("/complete-order")} className="rounded-lg w-full lg:w-fit hover:bg-green-dark duration-200 hover:scale-105 px-6 py-3 bg-green flex justify-center items-center gap-2 text-white font-semibold text-lg uppercase tracking-wider">
             {lang?.length>0 && lang.filter(f=>f.id_phrase=="ordernow")[0][langs[langSelected]]}
-          <EastRoundedIcon/>
+          {/* <EastRoundedIcon/> */}
+          <ArrowIcon width={30} height={30} target={"button"}/>
         </button>
       </div>
     </motion.div>
