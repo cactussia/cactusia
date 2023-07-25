@@ -1,54 +1,83 @@
 import { ArrowBack } from '@mui/icons-material'
 import {useContext, useEffect, useState}  from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {motion} from "framer-motion"
 import { addDoc, serverTimestamp } from 'firebase/firestore'
 import { colRef } from '../firebase'
 import { CartContext } from '../Context/CartContext'
-import { getPriceByQte } from '../utils'
+import { OrderFields, getPriceByQte } from '../utils'
 import { ControlersContext } from '../Context/ControlersContext'
 import Thank from './Thank'
+import ArrowIcon from '../components/svg/ArrowIcon'
 
 function ComplateOrder() {
-    const navigate= useNavigate()
-    const [firstName,setFirstName]=useState("");
-    const [lastName,setLastName]=useState("");
-    const [number,setNumber]=useState("");
-    const [city,setCity]=useState("");
-    const [address,setAddress]=useState("");
+    const navigate = useNavigate();
+    const[isFormSubmitted, setIsFormSubmitted] = useState(false)
+    // order state tracker
+    const [order, setOrder] = useState({firstName:"",lastName:"",phonenumber:"",city:"",address:""});
+    // track form fields errors
+    const [errors, setErrors] = useState({});
+
     const {cart,setCart}=useContext(CartContext)
     const {finalPots,finalCactus,setPot,setCactus,setQuantity}=useContext(ControlersContext)
-    const [err,setErr]=useState(false)
-    
+
     // thank page state tracker
     const [showThankPage, setShowThankPage] = useState(false);
 
-    const orderNow=()=>{
-      let date=new Date();
-      if(firstName&&lastName&&number&&city&&address){
-        addDoc(colRef,{
-          name:firstName,
-          lastName:lastName,
-          number,
-          city,
-          address,
-          state:"new",
-          createdAt:serverTimestamp(),
-          date:date.getMonth()+"/"+date.getDate(),
-          items:cart.map(m=>({...m,pot:finalPots[m.pot].number,cactus:finalCactus[m.cactus].number})),
-          price:getPriceByQte(cart.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)),
-        }).then(()=>{
-          // navigate("/thank")
-          setCart([{pot:0,cactus:0,quantity:1}])
-          setPot(0)
-          setCactus(0)
-          setQuantity(1)
-          setShowThankPage(true);
-        })
-      }else{
-        setErr(true)
+
+    // store the order form fields in the state while tracking the errors
+    const storeOrder = (field, e) => {
+      const { name, value } = e.target;
+      const regex = new RegExp(field.regex);
+
+      setOrder({ ...order, [name]: value });
+      value ? setErrors({...errors, [name]: regex.test(value) ? "" : field.error}) : setErrors({...errors, [name]: field.empty});
+    };
+
+    const orderNow = e =>{
+      e.preventDefault();
+      setIsFormSubmitted(true);
+
+      const {firstName, lastName, phonenumber, city, address} = order;
+
+      if (!firstName || !lastName || !phonenumber || !city || !address) {
+        setErrors({...errors,  empty: "Please Complete your order"});
+        return;
       }
+
+      // let date=new Date(); don't use the user local time to avoid non-accurate time
+      addDoc(colRef,{
+        name:firstName,
+        lastName:lastName,
+        number:phonenumber,
+        city,
+        address,
+        state:"new",
+        createdAt:serverTimestamp(),
+        date: serverTimestamp(),
+        items:cart.map(m=>({...m,pot:finalPots[m.pot].number,cactus:finalCactus[m.cactus].number})),
+        price:getPriceByQte(cart.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)),
+      })
+      .then(()=>{
+        setCart([{pot:0,cactus:0,quantity:1}])
+        setPot(0)
+        setCactus(0)
+        setQuantity(1)
+        setShowThankPage(true);
+      })
+      .catch(err=>{
+        console.error(err)
+        setErrors({...errors, error: "Something went wrong, please try again later 👷🏻‍♂️"});
+      });
     }
+
+    // set a timeout of 5s to clear the errors
+    useEffect(()=>{
+      // if (Object.values(errors).length === 0) return;
+      const timeout = setTimeout(()=>setErrors({...errors, error: "", empty: ""}), 5000);
+      return () => clearTimeout(timeout)
+    }, [errors]);
+
 
 
     // set a timeout of 18s to return to the market after the Thank page was displayed
@@ -64,29 +93,59 @@ function ComplateOrder() {
     }, [showThankPage])
 
   
-  if (showThankPage) return <Thank name={firstName + lastName} onReturn={()=>navigate("/market")}/>;
+  if (showThankPage) return <Thank name={order.firstName + " " + order.lastName} onReturn={()=>navigate("/market")}/>;
 
 
   return (
     <motion.div 
       initial={{ y: -300 }}
       animate={{ y: 0 }}
-     className='min-h-screen md:px-8 px-4 py-6 container mx-auto'>
-        <button onClick={()=>navigate("/market")} className='text-dark-white bg-green px-4 py-2 rounded-xl'>
-            <ArrowBack ></ArrowBack>
-            Go back
-        </button>
-        <div className='flex flex-col mt-10 gap-4'>
-            <input value={firstName} onInput={(e)=>setFirstName(e.target.value)}  placeholder='first name' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
-            <input value={lastName} onInput={(e)=>setLastName(e.target.value)}  placeholder='last name' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
-            <input value={number} onInput={(e)=>setNumber(e.target.value)} placeholder='phone' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
-            <input value={city} onInput={(e)=>setCity(e.target.value)}  placeholder='city' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
-            <input value={address} onInput={(e)=>setAddress(e.target.value)}  placeholder='full address' className='shadow-lg p-4 rounded-xl md:w-[400px] w-full font-semibold text-[#728b67] text-base border outline-[#728b67]'/>
-            {
-            err && <p className='text-red-600 font-semibold'>something didn't fill !</p>
-            }
-            <input onClick={orderNow} type="button" value="complete" className='shadow-xl cursor-pointer p-2 px-8 rounded-xl md:w-fit w-full font-semibold text-white bg-[#728b67] text-lg  outline-[#728b67]'/>
-        </div>
+     className='min-h-screen md:px-8 px-4 w-screen flex justify-center items-center flex-col bg-green-light'>
+        <form onSubmit={orderNow} className='container flex justify-center items-center flex-col gap-4 bg-green-light'>
+          <div className='md:w-[400px] w-full flex items-center'>
+            <button id="goback" type='reset' onClick={()=>navigate("/market")} className='flex items-center justify-center text-center gap-2 shadow-xl p-2 px-6 rounded-md w-fit font-semibold text-md uppercase active:scale-90 tracking-wider text-white bg-[#728b67] outline-[#728b67] transition-all'>
+                <div className='rotate-180 flex justify-center items-center'>
+                  <ArrowIcon width={30} height={30} target={"button#goback"}/>
+                </div>
+                Go back
+            </button>
+          </div>
+          {
+            (errors.empty || errors.error) && <p className='py-4 md:w-[400px] w-full flex items-center justify-center bg-yellow-200 bg-opacity-40 text-yellow-600 font-semibold rounded-md uppercase transition-all animate-pulse'><span className='text-2xl px-2'>⚠</span> {errors.empty || errors.error} <span className='text-2xl px-2'>⚠</span></p>
+          }
+          {
+            OrderFields.map((field,i)=>(
+              <div className='md:w-[400px] w-full flex items-start justify-center gap-1 flex-col'>
+                {
+                  field.type === "textarea" ?
+                  <textarea
+                  key={i}
+                  onChange={(e)=>storeOrder(field, e)}
+                  className={`shadow-lg p-4 rounded-xl w-full font-semibold text-base border ${(errors[field.name]) ? 'text-red-700 outline-red-700 placeholder:text-[#d67f7f]' : 'text-[#728b67] outline-[#728b67]'} resize-y`}
+                  name={field.name}
+                  placeholder={field.label}
+                  // the textarea expand when the user type new lines
+                  rows={order[field.name].split("\n").length}
+                  ></textarea>
+                  :
+                  <input
+                  key={i}
+                  onChange={(e)=>storeOrder(field, e)}
+                  className={`shadow-lg p-4 rounded-xl w-full font-semibold text-base border ${(errors[field.name]) ? 'text-red-700 outline-red-700 placeholder:text-[#d67f7f]' : 'text-[#728b67] outline-[#728b67]'} `}
+                  type={field.type}
+                  name={field.name} 
+                  placeholder={field.label}
+                  />
+                }
+                {
+                  (errors[field.name] || (isFormSubmitted && !order[field.name])) && <p className='py-1 px-2 bg-red-200 bg-opacity-50 text-red-600 rounded-md text-xs sm:text-sm font-medium transition-all'>{errors[field.name] || field.empty}</p>
+                }
+              </div>
+            ))
+          }
+
+          <button type='submit' className='shadow-xl rounded-lg md:w-[400px] w-full hover:bg-green-dark duration-200 active:scale-90 px-6 py-3 bg-green flex justify-center items-center text-white font-semibold text-lg uppercase tracking-wider outline-[#728b67]'>complete</button>
+        </form>
     </motion.div>
   )
 }
