@@ -20,6 +20,7 @@
   
     .bg-green-dark { @apply bg-[#586d49]; }
     .bg-green { @apply bg-[#768F6A]; }
+    .bg-green-light { @apply bg-[#c1ccbb]; }
 
     .border-green { @apply border-[#8a9c81]; }
     .bg-dark-white { @apply bg-[#e2e2da]; }
