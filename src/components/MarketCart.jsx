@@ -23,7 +23,7 @@ function MarketCart() {
           let key = cart.length
           let newCart = cart
           newCart.push({pot:0,cactus:0,quantity:1})
-          setCart(newCart)
+          setCart(newCart.reverse())
           setPot(cart[key].pot)
           setCactus(cart[key].cactus)
           setQuantity(cart[key].quantity)
@@ -48,8 +48,12 @@ function MarketCart() {
    }, [currentItem])
    
   return (
-    <motion.div initial={{x:-200}} animate={{x:0}}  className={`mb-2 py-8 flex flex-col items-center justify-center gap-4`}>
-      <div className={`xl:pt-12 pl-4 md:pt-10 pt-8 max-w-full rounded-lg flex gap-2 overflow-auto`}>
+    <motion.div initial={{x:-200}} animate={{x:0}}  className={`mb-2 py-8 flex flex-col items-center justify-center gap-4 overflow-y-visible`}>
+      <div 
+      // alwayes show the last item
+      className={`xl:pt-12 pl-4 md:pt-10 pt-8 max-w-full rounded-lg flex gap-2 overflow-x-auto overflow-y-visible transform transition-all ${cart.length>1?"translate-x-0":"scr"}`}
+      // className={`xl:pt-12 pl-4 md:pt-10 pt-8 max-w-full rounded-lg flex gap-2 overflow-x-auto overflow-y-visible`}
+      >
         {
           cart.map((item,key)=>{
             return(
