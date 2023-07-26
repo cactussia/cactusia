@@ -39,10 +39,12 @@ function Products() {
 
 
     const toggleProduct = (id,state)=>{
+      if(confirm("are u sure about that")){
         const docRef = doc(db,product==0?"Pots":"Cactus",id);
         updateDoc(docRef,{
             dispo:!state
         })
+      }
     }
     const changeProductName = (e,id)=>{
         const docRef = doc(db,product==0?"Pots":"Cactus",id)

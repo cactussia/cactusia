@@ -11,9 +11,9 @@ import Paper from '@mui/material/Paper';
 import ArrowBackIcon from '@mui/icons-material/ArrowForward';
 
 import {
-	getDocs, onSnapshot, orderBy, query, where 
+	doc,deleteDoc, onSnapshot, orderBy, query, where 
 } from "firebase/firestore"
-import { colRef } from '../firebase.js';
+import { colRef, db } from '../firebase.js';
 import StateBtn from './StateBtn.jsx';
 
 
@@ -80,11 +80,23 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
         writeFileXLSX(wb,"myfileName.xlsx")
     }
 
+    const deleteOrders = ()=>{
+      if(confirm("are u sure about that ")){
+        rows.filter(o=>o.checked).map(o=>{
+          const docRR = doc(db,"Orders",o.id)
+          deleteDoc(docRR)
+        })
+      }
+    }
+    
   return (
     <>
     {
         rows.some(m=>m.checked) && 
-        <button onClick={exportExcel} className='bg-black rounded-full px-8 py-2 text-white my-2'>Export Excel</button>
+        <div className='flex gap-2'>
+          <button onClick={exportExcel} className='bg-black rounded-full px-8 py-2 text-white my-2'>Export Excel</button>
+          <button onClick={deleteOrders} className='bg-black rounded-full px-8 py-2 text-white my-2'>Delete</button>
+        </div>
     }
     <TableContainer component={Paper} sx={{width: "100%" }}>
       <Table sx={{ width: "100%" }} aria-label="customized table">
