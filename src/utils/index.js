@@ -115,6 +115,14 @@ export function getPriceByQte(qte){
   }
 }
 
+
+/**
+ * Formate date from firestore timestamp to a readable date like: 12 Jan 2021, 12:00:00
+ */
+export function dateFormater(date){
+  return new Date(date?.seconds * 1000).toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })
+}
+
 /**
  * `Dynamic Copyright` function to display the current year and the current hostname
  */
