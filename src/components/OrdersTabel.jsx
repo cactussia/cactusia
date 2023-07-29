@@ -127,8 +127,6 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
           r.address.toLowerCase().includes(search.toLowerCase()) 
           ).map((row) => (
             <StyledTableRow className='cursor-pointer ' key={row.id}>
-
-            
               <StyledTableCell ><button className='p-2  flex justify-center items-center w-6 h-6' onClick={()=>setRows(p=>p.map(o=>o.id==row.id? {...o,checked:!o.checked}:o))}>{row.checked?<CheckBoxIcon/>:<CheckBoxOutlineBlankIcon/>}</button></StyledTableCell>
               <StyledTableCell component="th" scope="row">{row.name}</StyledTableCell>
               <StyledTableCell >{row.lastName}</StyledTableCell>
@@ -137,7 +135,7 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
               <StyledTableCell >{row.address}</StyledTableCell>
               <StyledTableCell >{row.items?.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)} pots</StyledTableCell>
               <StyledTableCell >{row.price} Dh</StyledTableCell>
-              <StyledTableCell >{row.date} </StyledTableCell>
+              <StyledTableCell >{"hta t9ad hadi assat"}</StyledTableCell>
               <StyledTableCell ><StateBtn setUpdate={setUpdate} state={row.state} id={row.id} cats={cats}/></StyledTableCell>
               <StyledTableCell ><button onClick={()=>setOrder(row)} className='p-1 px-4 bg-gray-300 rounded-full'><ArrowBackIcon/></button></StyledTableCell>
             </StyledTableRow>

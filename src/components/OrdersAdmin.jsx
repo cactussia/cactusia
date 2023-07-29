@@ -6,7 +6,7 @@ import pots from "../assets/potsImages/import"
 
 function OrdersAdmin({ order ,cat ,search,cats,setCat ,setOrder}) {
 
-  return !order ? (
+   return !order ? (
     <div className="p-8 px-10 flex-1">
       <div className="flex justify-between items-center">
         <div className="flex-1">
