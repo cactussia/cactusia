@@ -123,7 +123,7 @@ export function dateFormater(date){
   // return new Date(date?.seconds * 1000).toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const localdate = new Date(date?.seconds * 1000);
-  return localdate.toLocaleDateString("en-US",options) + ", " + localdate.toLocaleTimeString("en-US",{hour12: false});
+  return localdate.toLocaleDateString("fr",options) + ", " + localdate.toLocaleTimeString("en-US",{hour12: false});
 }
 
 /**

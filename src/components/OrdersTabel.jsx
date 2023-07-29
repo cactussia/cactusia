@@ -23,6 +23,7 @@ import StateBtn from './StateBtn.jsx';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import { utils, writeFileXLSX, writeXLSX } from 'xlsx';
+import { dateFormater } from '../utils/index.js';
 
 
 
@@ -69,9 +70,9 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
                 ordersList.push({...doc.data(),id:doc.id,checked:false})
             })
             setRows(ordersList)
+            console.log(ordersList)
         })
     },[cat,update])
-
 
     const exportExcel = ()=>{
         var wb = utils.book_new(),
@@ -130,12 +131,12 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
               <StyledTableCell ><button className='p-2  flex justify-center items-center w-6 h-6' onClick={()=>setRows(p=>p.map(o=>o.id==row.id? {...o,checked:!o.checked}:o))}>{row.checked?<CheckBoxIcon/>:<CheckBoxOutlineBlankIcon/>}</button></StyledTableCell>
               <StyledTableCell component="th" scope="row">{row.name}</StyledTableCell>
               <StyledTableCell >{row.lastName}</StyledTableCell>
-              <StyledTableCell >{row.number}</StyledTableCell>
+              <StyledTableCell ><a href={`http://wa.me/${row.number.slice(1).padStart(12,"212")}`} target="_blank" rel="noopener noreferrer">{row.number}</a></StyledTableCell>
               <StyledTableCell >{row.city}</StyledTableCell>
               <StyledTableCell >{row.address}</StyledTableCell>
               <StyledTableCell >{row.items?.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)} pots</StyledTableCell>
               <StyledTableCell >{row.price} Dh</StyledTableCell>
-              <StyledTableCell >{"hta t9ad hadi assat"}</StyledTableCell>
+              <StyledTableCell >{dateFormater(row.date)}</StyledTableCell>
               <StyledTableCell ><StateBtn setUpdate={setUpdate} state={row.state} id={row.id} cats={cats}/></StyledTableCell>
               <StyledTableCell ><button onClick={()=>setOrder(row)} className='p-1 px-4 bg-gray-300 rounded-full'><ArrowBackIcon/></button></StyledTableCell>
             </StyledTableRow>

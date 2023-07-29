@@ -31,7 +31,7 @@ function ComplateOrder() {
       const regex = new RegExp(field.regex);
 
       setOrder({ ...order, [name]: value });
-      value ? setErrors({...errors, [name]: regex.test(value) ? "" : field.error}) : setErrors({...errors, [name]: field.empty});
+      value ? setErrors({...errors, [name]: regex.test(value.trim()) ? "" : field.error}) : setErrors({...errors, [name]: field.empty});
     };
 
     const orderNow = e =>{
@@ -47,11 +47,13 @@ function ComplateOrder() {
         return;
       }
 
+      if (Object.values(errors).every(error => error)) alert("there is still errors")
+
 
       // let date=new Date(); don't use the user local time to avoid non-accurate time
       addDoc(colRef,{
-        name:firstname,
-        lastName:lastname,
+        name:firstname.trim(),
+        lastName:lastname.trim(),
         number:phonenumber,
         city,
         address,
@@ -124,6 +126,7 @@ function ComplateOrder() {
                   <textarea
                   key={i}
                   onChange={(e)=>storeOrder(field, e)}
+                  value={order[field.name]}
                   className={`shadow-lg p-4 rounded-xl w-full font-semibold text-base border ${(errors[field.name]) ? 'text-red-700 outline-red-700 placeholder:text-[#d67f7f]' : 'text-[#728b67] outline-[#728b67]'} resize-y`}
                   name={field.name}
                   placeholder={field.label}
@@ -134,6 +137,7 @@ function ComplateOrder() {
                   <input
                   key={i}
                   onChange={(e)=>storeOrder(field, e)}
+                  value={order[field.name]}
                   className={`shadow-lg p-4 rounded-xl w-full font-semibold text-base border ${(errors[field.name]) ? 'text-red-700 outline-red-700 placeholder:text-[#d67f7f]' : 'text-[#728b67] outline-[#728b67]'} `}
                   type={field.type}
                   name={field.name} 

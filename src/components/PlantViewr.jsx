@@ -177,7 +177,10 @@ function PlantViewr({ clickable = true }) {
        
        sat ha 3ar lah maba9ich tkbr lcactus rah fih bzaaaaf tlmachakil mli kaykbr  
        
-       
+       samadi
+       =>
+
+       yoo bro there is an old say goes like this: BIG ASS BIG CACTUS
        */}
           <img
             onContextMenu={e => e.preventDefault()}
