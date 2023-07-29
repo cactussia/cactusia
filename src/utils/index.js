@@ -58,7 +58,8 @@ export const OrderFields = [
     type: "text",
     name: "lastname",
     label: "Last Name",
-    regex: /^[a-zA-Z]{3,16}$/,
+    // last name regex format : only letters and 1 space between name,name ex: (John Doe) or (alex the great) min 3 max 16 characters, and the name max 3 words
+    regex: /^[a-zA-Z]{3,16}(?: [a-zA-Z]{3,16}){0,2}$/, 
     empty: "Last Name is required",
     error: "Last Name must be between 3 and 16 characters long and must contain only letters",
   },
@@ -66,10 +67,10 @@ export const OrderFields = [
     type: "tel",
     name: "phonenumber",
     label: "Phone Number",
-    // regex format : (+212669231618 or 0669231618) morrocan phone number no spaces between numbers
-    regex: /^(\+212|0)([ \-_/]*)(\d[ \-_/]*){9}$/,
+    // regex format : always start with 0 the 2nd digit is 5 or 6 or 7 and the rest is 8 digits
+    regex: /^0[5-7][0-9]{8}$/,
     empty: "Phone Number is required",
-    error: "Phone Number must be a valid morrocan phone number",
+    error: "Phone Number must be a valid morrocan phone number, start with 05,06 or 07 and must be 10 digits long",
   },
   {
     type: "text",
