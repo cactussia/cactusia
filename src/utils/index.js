@@ -61,7 +61,7 @@ export const OrderFields = [
     // last name regex format : only letters and 1 space between name,name ex: (John Doe) or (alex the great) min 3 max 16 characters, and the name max 3 words
     regex: /^[a-zA-Z]{3,16}(?: [a-zA-Z]{3,16}){0,2}$/, 
     empty: "Last Name is required",
-    error: "Last Name must be between 3 and 16 characters long and must contain only letters",
+    error: "Last Name must be between 3 and 16 characters long and must contain only letters, max 3 words",
   },
   {
     type: "tel",
