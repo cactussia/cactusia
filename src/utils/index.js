@@ -117,10 +117,11 @@ export function getPriceByQte(qte){
 
 
 /**
- * Formate date from firestore timestamp to a readable date like: 12 Jan 2021, 12:00:00
+ * Formate date from firestore timestamp to a readable date like: 12 Jan 2021, 12:00:00 (24 hours format)
  */
 export function dateFormater(date){
-  return new Date(date?.seconds * 1000).toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' })
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toDate().toLocaleDateString("en-US",options) + ", " + date.toDate().toLocaleTimeString("en-US",{hour12: false});
 }
 
 /**
