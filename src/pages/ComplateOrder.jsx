@@ -14,7 +14,7 @@ function ComplateOrder() {
     const navigate = useNavigate();
     const[isFormSubmitted, setIsFormSubmitted] = useState(false)
     // order state tracker
-    const [order, setOrder] = useState({firstName:"",lastName:"",phonenumber:"",city:"",address:""});
+    const [order, setOrder] = useState({firstname:"",lastname:"",phonenumber:"",city:"",address:""});
     // track form fields errors
     const [errors, setErrors] = useState({});
 
@@ -35,20 +35,23 @@ function ComplateOrder() {
     };
 
     const orderNow = e =>{
+      console.log("Order Errors", errors)
+      console.log({order});
       e.preventDefault();
       setIsFormSubmitted(true);
+      
+      const {firstname, lastname, phonenumber, city, address} = order;
 
-      const {firstName, lastName, phonenumber, city, address} = order;
-
-      if (!firstName || !lastName || !phonenumber || !city || !address) {
+      if (!firstname || !lastname || !phonenumber || !city || !address) {
         setErrors({...errors,  empty: "Please Complete your order"});
         return;
       }
 
+
       // let date=new Date(); don't use the user local time to avoid non-accurate time
       addDoc(colRef,{
-        name:firstName,
-        lastName:lastName,
+        name:firstname,
+        lastName:lastname,
         number:phonenumber,
         city,
         address,
@@ -93,7 +96,7 @@ function ComplateOrder() {
     }, [showThankPage])
 
   
-  if (showThankPage) return <Thank name={order.firstName + " " + order.lastName} onReturn={()=>navigate("/market")}/>;
+  if (showThankPage) return <Thank name={order.firstname + " " + order.lastname} onReturn={()=>navigate("/market")}/>;
 
 
   return (
