@@ -23,4 +23,6 @@ import pot22 from "./22.png"
 import pot23 from "./23.png"
 import pot24 from "./24.png"
 import pot25 from "./25.png"
-export default  [pot4,pot2,pot3,pot1,pot5,pot6,pot7,pot8,pot9,pot10,pot11,pot12,pot13,pot14,pot15,pot16,pot17,pot18,pot19,pot20,pot21,pot22,pot23,pot24,pot25]
+import pot26 from "./26.png"
+import pot27 from "./27.png"
+export default  [pot4,pot2,pot3,pot1,pot5,pot6,pot7,pot8,pot9,pot10,pot11,pot12,pot13,pot14,pot15,pot16,pot17,pot18,pot19,pot20,pot21,pot22,pot23,pot24,pot25,pot26,pot27]

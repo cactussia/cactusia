@@ -170,12 +170,21 @@ function PlantViewr({ clickable = true }) {
             "  rounded-[140px] ease-in duration-150 w-[180px] md:w-[300px] absolute top-[-95px] md:top-[-162px] overflow-hidden "
           }
         >
+       {/*
+
+       yassin 
+       => 
+       
+       sat ha 3ar lah maba9ich tkbr lcactus rah fih bzaaaaf tlmachakil mli kaykbr  
+       
+       
+       */}
           <img
             onContextMenu={e => e.preventDefault()}
             draggable={false}
             className={
               "duration-150 ease-in  pointer-events-none select-none" +
-              (animation ? " translate-y-52 " : " scale-[1.0] translate-y-0") +
+              (animation ? " translate-y-52 " : " scale-[0.9] translate-y-2") +
               (animation ? " scale-90 translate-y-5 " : " scale-[1.0] ")
             }
             src={clickable ? currentCactus : finalCactus.at(homePotCactus.cactus)?.img}
