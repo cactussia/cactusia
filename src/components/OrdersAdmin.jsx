@@ -3,6 +3,8 @@ import CustomizedTables from "./OrdersTabel";
 
 import cactuses from "../assets/cactusImages/import"
 import pots from "../assets/potsImages/import"
+import { WhatsappMessageConfirmation, dateFormater, phoneFormater } from "../utils";
+import { WhatsApp } from "@mui/icons-material";
 
 function OrdersAdmin({ order ,cat ,search,cats,setCat ,setOrder}) {
 
@@ -67,14 +69,20 @@ function OrdersAdmin({ order ,cat ,search,cats,setCat ,setOrder}) {
           Go back
         </button>
         <h1 className="text-xl font-semibold">information's</h1>
-        <h1>state: {order?.state}</h1>
+        <h1 className="uppercase font-semibold">state: {order?.state}</h1>
         <br></br>
-        <h1>name: {order?.name}</h1>
-        <h1>last name: {order?.lastName}</h1>
-        <h1>phone number: {order?.number}</h1>
-        <h1>city: {order?.city}</h1>
-        <h1>full address: {order?.address}</h1>
-        <h1>price: {order?.price} Dh</h1>
+        <h1><span className="uppercase font-semibold">First Name:</span> {order?.name}</h1>
+        <h1><span className="uppercase font-semibold">Last Name:</span> {order?.lastName}</h1>
+        <h1><span className="uppercase font-semibold">Phone Number:</span> <a href={`tel:${order?.number}`} target="_blank" rel="noopener noreferrer">{order?.number}</a></h1>
+        <h1><span className="uppercase font-semibold">City:</span> {order?.city}</h1>
+        <h1><span className="uppercase font-semibold">Full Address:</span> {order?.address}</h1>
+        <h1><span className="uppercase font-semibold">Total Price:</span> {order?.price} Dh</h1>
+        <button className="mt-4 px-6 py-2 rounded-md flex items-center justify-center gap-2 text-[#f5fdf8] bg-[#25D366] font-semibold shadow-lg transition-all duration-150 hover:scale-[1.07]">
+          <a className="flex items-center justify-center" href={`http://wa.me/?phone=${phoneFormater(order?.number)}&text=${WhatsappMessageConfirmation(`${order?.name} ${order?.lastName}`, order?.price)}`} title={WhatsappMessageConfirmation(`${order?.name} ${order?.lastName}`, order?.price)} target="_blank" rel="noreferrer">
+              <WhatsApp className="text-[#f5fdf8] "/>
+              <span className="pl-2">WhatsApp Confirmation</span>
+          </a>
+        </button>
       </div>
       <div className="flex-1 p-8">
         <h1 className="text-3xl text-gray-700 font-semibold py-8">
