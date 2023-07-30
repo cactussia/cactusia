@@ -127,6 +127,19 @@ export function dateFormater(date){
 }
 
 /**
+ * Formate phone number to a whatsapp link format like: 212669231618
+ */
+export function phoneFormater(phone){
+  return phone.slice(1).padStart(12,"212");
+}
+
+export const WhatsappMessageConfirmation = (name, total, date) => `
+Bonjour *${name}*, votre commande de *${total}* Dhs. le ${date} a été bien reçu,
+nous vous contacterons dans les plus brefs délais pour confirmer votre commande.
+Merci pour votre confiance.
+`;
+
+/**
  * `Dynamic Copyright` function to display the current year and the current hostname
  */
 export function dynamicCopyright(){

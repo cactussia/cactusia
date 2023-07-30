@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import ArrowBackIcon from '@mui/icons-material/ArrowForward';
+import { WhatsApp } from "@mui/icons-material";
 
 import {
 	doc,deleteDoc, onSnapshot, orderBy, query, where 
@@ -23,7 +24,7 @@ import StateBtn from './StateBtn.jsx';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import { utils, writeFileXLSX, writeXLSX } from 'xlsx';
-import { dateFormater } from '../utils/index.js';
+import { WhatsappMessageConfirmation, dateFormater, phoneFormater } from '../utils/index.js';
 
 
 
@@ -117,6 +118,7 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
             <StyledTableCell >Price</StyledTableCell>
             <StyledTableCell >Date</StyledTableCell>
             <StyledTableCell >state</StyledTableCell>
+            <StyledTableCell >WhatsApp</StyledTableCell>
             <StyledTableCell >action</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -131,13 +133,20 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
               <StyledTableCell ><button className='p-2  flex justify-center items-center w-6 h-6' onClick={()=>setRows(p=>p.map(o=>o.id==row.id? {...o,checked:!o.checked}:o))}>{row.checked?<CheckBoxIcon/>:<CheckBoxOutlineBlankIcon/>}</button></StyledTableCell>
               <StyledTableCell component="th" scope="row">{row.name}</StyledTableCell>
               <StyledTableCell >{row.lastName}</StyledTableCell>
-              <StyledTableCell ><a href={`http://wa.me/${row.number.slice(1).padStart(12,"212")}`} target="_blank" rel="noopener noreferrer">{row.number}</a></StyledTableCell>
+              <StyledTableCell ><a href={`tel:${row.number}`} target="_blank" rel="noopener noreferrer">{row.number}</a></StyledTableCell>
               <StyledTableCell >{row.city}</StyledTableCell>
               <StyledTableCell >{row.address}</StyledTableCell>
               <StyledTableCell >{row.items?.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)} pots</StyledTableCell>
               <StyledTableCell >{row.price} Dh</StyledTableCell>
               <StyledTableCell >{dateFormater(row.date)}</StyledTableCell>
               <StyledTableCell ><StateBtn setUpdate={setUpdate} state={row.state} id={row.id} cats={cats}/></StyledTableCell>
+              <StyledTableCell >
+                <button className="h-10 w-10 p-1 rounded-full flex items-center justify-center bg-[#25D366] shadow-lg transition-all duration-150 hover:scale-[1.07]">
+                  <a className="flex items-center justify-center" href={`http://wa.me/?phone=${phoneFormater(row.number)}&text="${WhatsappMessageConfirmation(`${row.name} ${row.lastName}`, row.price, dateFormater(row.date))}"`} title={WhatsappMessageConfirmation(`${row.name} ${row.lastName}`, row.price, dateFormater(row.date))} target="_blank" rel="noreferrer">
+                      <WhatsApp className="text-[#f5fdf8] scale-[1.2]"/>
+                  </a>
+                </button>
+              </StyledTableCell>
               <StyledTableCell ><button onClick={()=>setOrder(row)} className='p-1 px-4 bg-gray-300 rounded-full'><ArrowBackIcon/></button></StyledTableCell>
             </StyledTableRow>
           ))}
