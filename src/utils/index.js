@@ -133,11 +133,12 @@ export function phoneFormater(phone){
   return phone.slice(1).padStart(12,"212");
 }
 
-export const WhatsappMessageConfirmation = (name, total, date) => `
-Bonjour *${name}*, votre commande de *${total}* Dhs. le ${date} a été bien reçu,
-nous vous contacterons dans les plus brefs délais pour confirmer votre commande.
-Merci pour votre confiance.
-`;
+export const WhatsappMessageConfirmation = (name, total) => encodeURI(`
+Bonjour *${name}*, J'espère que vous allez bien. Vous avez passé commande chez cactusia \n
+- 1 Coffret d'un montant total de *${total} DH*. \n
+Merci bien de me confirmer votre commande afin de vous envoyer le colis dans les plus brefs délais. \n
+Hiba de cactusia
+`);
 
 /**
  * `Dynamic Copyright` function to display the current year and the current hostname

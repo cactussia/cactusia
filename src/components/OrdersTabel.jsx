@@ -142,7 +142,7 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
               <StyledTableCell ><StateBtn setUpdate={setUpdate} state={row.state} id={row.id} cats={cats}/></StyledTableCell>
               <StyledTableCell >
                 <button className="h-10 w-10 p-1 rounded-full flex items-center justify-center bg-[#25D366] shadow-lg transition-all duration-150 hover:scale-[1.07]">
-                  <a className="flex items-center justify-center" href={`http://wa.me/?phone=${phoneFormater(row.number)}&text="${WhatsappMessageConfirmation(`${row.name} ${row.lastName}`, row.price, dateFormater(row.date))}"`} title={WhatsappMessageConfirmation(`${row.name} ${row.lastName}`, row.price, dateFormater(row.date))} target="_blank" rel="noreferrer">
+                  <a className="flex items-center justify-center" href={`http://wa.me/?phone=${phoneFormater(row.number)}&text=${WhatsappMessageConfirmation(`${row.name} ${row.lastName}`, row.price)}`} title={WhatsappMessageConfirmation(`${row.name} ${row.lastName}`, row.price, dateFormater(row.date))} target="_blank" rel="noreferrer">
                       <WhatsApp className="text-[#f5fdf8] scale-[1.2]"/>
                   </a>
                 </button>
