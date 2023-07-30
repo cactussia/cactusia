@@ -77,7 +77,7 @@ function OrdersAdmin({ order ,cat ,search,cats,setCat ,setOrder}) {
         <h1><span className="uppercase font-semibold">City:</span> {order?.city}</h1>
         <h1><span className="uppercase font-semibold">Full Address:</span> {order?.address}</h1>
         <h1><span className="uppercase font-semibold">Total Price:</span> {order?.price} Dh</h1>
-        <button className="mt-4 px-6 py-2 rounded-md flex items-center justify-center gap-2 text-[#f5fdf8] bg-[#25D366] font-semibold shadow-lg transition-all duration-150 hover:scale-[1.07]">
+        <button className="mt-4 px-6 py-2 rounded-md flex items-center justify-center gap-2 text-[#f5fdf8] bg-[#25D366] font-semibold shadow-lg transition-all duration-150 hover:scale-[1.02] active:scale-[0.94]">
           <a className="flex items-center justify-center" href={`http://wa.me/?phone=${phoneFormater(order?.number)}&text=${WhatsappMessageConfirmation(`${order?.name} ${order?.lastName}`, order?.price)}`} title={WhatsappMessageConfirmation(`${order?.name} ${order?.lastName}`, order?.price)} target="_blank" rel="noreferrer">
               <WhatsApp className="text-[#f5fdf8] "/>
               <span className="pl-2">WhatsApp Confirmation</span>
