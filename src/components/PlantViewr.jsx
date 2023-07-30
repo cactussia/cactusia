@@ -144,7 +144,7 @@ function PlantViewr({ clickable = true }) {
           onContextMenu={e => e.preventDefault()}
           draggable={false}
           className={
-            "h-[200px] md:h-[300px] absolute duration-150 ease-in  pointer-events-none select-none" +
+            "h-[200px] md:h-[300px] absolute top-2 duration-150 ease-in  pointer-events-none select-none" +
             (animation ? " scale-95 translate-y-2 " : " scale-100 ")
           }
           src={clickable ? currentPot : finalPots.at(homePotCactus.pot)?.img}
