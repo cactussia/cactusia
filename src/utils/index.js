@@ -50,6 +50,7 @@ export const OrderFields = [
     type: "text",
     name: "firstname",
     label: "First Name",
+    // first name regex format : only letters min 3 max 16 characters allow trailing spaces
     regex: /^[a-zA-Z]{3,16}$/,
     empty: "First Name is required",
     error: "First Name must be between 3 and 16 characters long and must contain only letters",
@@ -59,7 +60,7 @@ export const OrderFields = [
     name: "lastname",
     label: "Last Name",
     // last name regex format : only letters and 1 space between name,name ex: (John Doe) or (alex the great) min 3 max 16 characters, and the name max 3 words
-    regex: /^[a-zA-Z]{3,16}(?: [a-zA-Z]{3,16}){0,2}$/, 
+    regex: /^[a-zA-Z]{3,16}(?: [a-zA-Z]{1,16}){0,2}$/, 
     empty: "Last Name is required",
     error: "Last Name must be between 3 and 16 characters long and must contain only letters, max 3 words",
   },
