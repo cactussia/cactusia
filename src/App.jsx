@@ -18,6 +18,7 @@ import { getDocs, onSnapshot, query, where } from 'firebase/firestore';
 import pots from "./assets/potsImages/import";
 import cactuses from "./assets/cactusImages/import";
 import useLang from './store/useLang';
+import ErrorBoundary from './pages/Error';
 
 
 
@@ -25,27 +26,33 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home/>,
+    errorElement: <ErrorBoundary/>
   },
   {
     path: "/complete-order",
     element: <ComplateOrder/>,
+    errorElement: <ErrorBoundary/>
   },
-
+  
   {
     path: "/market",
     element: <Market/>,
+    errorElement: <ErrorBoundary/>
   },
   {
     path: "/contact",
     element: <Contact/>,
+    errorElement: <ErrorBoundary/>
   },
   {
     path: "/about",
     element: <About/>,
+    errorElement: <ErrorBoundary/>
   },
   {
     path: "/admin",
     element: <Admin/>,
+    errorElement: <ErrorBoundary/>
   },
 ]);
 
