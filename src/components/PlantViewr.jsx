@@ -149,12 +149,12 @@ function PlantViewr({ clickable = true }) {
           }
           src={clickable ? currentPot : finalPots.at(homePotCactus.pot)?.img}
         />
-        {/* <img 
+        <img 
         className={
-          "duration-150 absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] scale-[.12] sm:scale-[.3]" 
+          "duration-150 absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] scale-[.12] sm:scale-[.21] object-cover object-center aspect-square" 
           +(animation ? " scale-[.10] sm:scale-[.19] opacity-80 " : " scale-[.15] sm:scale-[.2] opacity-100")
         }
-        src={sticker}/> */}
+        src={sticker}/>
         <img
           onContextMenu={e => e.preventDefault()}
           draggable={false}
@@ -170,18 +170,6 @@ function PlantViewr({ clickable = true }) {
             "  rounded-[140px] ease-in duration-150 w-[180px] md:w-[300px] absolute top-[-95px] md:top-[-162px] overflow-hidden "
           }
         >
-       {/*
-
-       yassin 
-       => 
-       
-       sat ha 3ar lah maba9ich tkbr lcactus rah fih bzaaaaf tlmachakil mli kaykbr  
-       
-       samadi
-       =>
-
-       yoo bro there is an old say goes like this: BIG ASS BIG CACTUS
-       */}
           <img
             onContextMenu={e => e.preventDefault()}
             draggable={false}
