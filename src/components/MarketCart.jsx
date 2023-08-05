@@ -48,10 +48,10 @@ function MarketCart() {
    }, [currentItem])
    
   return (
-    <motion.div initial={{x:-200}} animate={{x:0}}  className={`mb-2 py-8 flex flex-col items-center justify-center gap-4 overflow-y-visible`}>
+    <motion.div initial={{x:-200}} animate={{x:0}}  className={`mb-2 py-6 flex flex-col items-center justify-center gap-4 overflow-y-visible`}>
       <div 
       // alwayes show the last item
-      className={`xl:pt-12 pl-4 md:pt-10 pt-8 max-w-full rounded-lg flex gap-2 overflow-x-auto overflow-y-visible transform transition-all ${cart.length>1?"translate-x-0":"scr"}`}
+      className={`xl:pt-8 md:pt-8 pt-8 max-w-full min-w-[450px]  rounded-lg flex justify-center items-center gap-2 overflow-x-auto overflow-y-visible transform transition-all ${cart.length>1?"translate-x-0":"scr"}`}
       // className={`xl:pt-12 pl-4 md:pt-10 pt-8 max-w-full rounded-lg flex gap-2 overflow-x-auto overflow-y-visible`}
       >
         {

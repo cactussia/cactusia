@@ -48,7 +48,7 @@ function OrderNow() {
         <h1 className="text-7xl text-green font-bold">{getPrice()} <span className="text-3xl">Dh</span></h1>
         <hr className=" my-3" />
         {
-        <p className={(!(getPotNum()<3) ? " h-0 py-0 my-0 scale-y-0 absolute " :" h-full py-2 my-3 scale-y-100 ")+" text-sm uppercase py-2 text-yellow-500 font-semibold bg-[#9b542b]] bg-yellow-200 bg-opacity-20 before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-yellow-200 before:bg-opacity-50 before:-z-10 before:animate-ping before:duration-300 px-2 overflow-hidden rounded-md my-3"}>
+        <p className={(!(getPotNum()<3) ? " h-0 py-0 my-0 scale-y-0 absolute " :" h-full py-3 px-2 my-3 scale-y-100 ")+" text-sm uppercase py-2 text-yellow-500 font-semibold bg-[#9b542b]] bg-yellow-200 bg-opacity-20 before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-yellow-200 before:bg-opacity-50 before:-z-10 before:animate-ping before:duration-300 px-2 overflow-hidden rounded-md my-3"}>
           
             {lang?.length>0 && lang.filter(f=>f.id_phrase=="3offer")[0][langs[langSelected]]}
         </p>
