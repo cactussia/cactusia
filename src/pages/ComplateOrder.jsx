@@ -1,4 +1,3 @@
-import { ArrowBack } from '@mui/icons-material'
 import {useContext, useEffect, useState}  from 'react'
 import { useNavigate } from 'react-router-dom'
 import {motion} from "framer-motion"
@@ -30,7 +29,7 @@ function ComplateOrder() {
       const { name, value } = e.target;
       const regex = new RegExp(field.regex);
 
-      setOrder({ ...order, [name]: value });
+      setOrder({ ...order, [name]: value.trim() });
       value ? setErrors({...errors, [name]: regex.test(value.trim()) ? "" : field.error}) : setErrors({...errors, [name]: field.empty});
     };
 
@@ -56,7 +55,7 @@ function ComplateOrder() {
         lastName:lastname.trim(),
         number:phonenumber,
         city,
-        address,
+        address: address.trim(),
         state:"new",
         createdAt:serverTimestamp(),
         date: serverTimestamp(),
@@ -85,20 +84,20 @@ function ComplateOrder() {
 
 
 
-    // set a timeout of 18s to return to the market after the Thank page was displayed
+    // set a timeout of 2min to return to the market after the Thank page was displayed
     useEffect(()=>{
       if (!showThankPage) return;
       
       const timeout = setTimeout(()=>{
         setShowThankPage(false);
         navigate("/market");
-      }, 18000)
+      }, 120000);
 
       return () => clearTimeout(timeout)
     }, [showThankPage])
 
   
-  if (showThankPage) return <Thank name={order.firstname + " " + order.lastname} onReturn={()=>navigate("/market")}/>;
+  if (showThankPage) return <Thank name={order.firstname + " " + order.lastname} city={order.city} onReturn={()=>navigate("/market")}/>;
 
 
   return (
@@ -120,13 +119,11 @@ function ComplateOrder() {
           }
           {
             OrderFields.map((field,i)=>(
-              <div className='md:w-[400px] w-full flex items-start justify-center gap-1 flex-col'>
+              <div key={i} className='md:w-[400px] w-full flex items-start justify-center gap-1 flex-col'>
                 {
                   field.type === "textarea" ?
                   <textarea
-                  key={i}
                   onChange={(e)=>storeOrder(field, e)}
-                  value={order[field.name]}
                   className={`shadow-lg p-4 rounded-xl w-full font-semibold text-base border ${(errors[field.name]) ? 'text-red-700 outline-red-700 placeholder:text-[#d67f7f]' : 'text-[#728b67] outline-[#728b67]'} resize-y`}
                   name={field.name}
                   placeholder={field.label}
@@ -135,9 +132,7 @@ function ComplateOrder() {
                   ></textarea>
                   :
                   <input
-                  key={i}
                   onChange={(e)=>storeOrder(field, e)}
-                  value={order[field.name]}
                   className={`shadow-lg p-4 rounded-xl w-full font-semibold text-base border ${(errors[field.name]) ? 'text-red-700 outline-red-700 placeholder:text-[#d67f7f]' : 'text-[#728b67] outline-[#728b67]'} `}
                   type={field.type}
                   name={field.name} 
