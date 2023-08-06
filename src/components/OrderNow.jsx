@@ -53,7 +53,7 @@ function OrderNow() {
             {lang?.length>0 && lang.filter(f=>f.id_phrase=="3offer")[0][langs[langSelected]]}
         </p>
         }
-        <button onClick={()=>navigate("/complete-order")} className="rounded-lg w-full lg:w-fit hover:bg-green-dark duration-200 hover:scale-105 px-6 py-3 bg-green flex justify-center items-center gap-2 text-white font-semibold text-lg uppercase tracking-wider">
+        <button onClick={()=>navigate("/ordernow")} className="rounded-lg w-full lg:w-fit hover:bg-green-dark duration-200 hover:scale-105 px-6 py-3 bg-green flex justify-center items-center gap-2 text-white font-semibold text-lg uppercase tracking-wider">
             {lang?.length>0 && lang.filter(f=>f.id_phrase=="ordernow")[0][langs[langSelected]]}
           {/* <EastRoundedIcon/> */}
           <ArrowIcon width={30} height={30} target={"button"}/>

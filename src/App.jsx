@@ -1,61 +1,14 @@
 import { useState , useEffect, useMemo } from 'react'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Market from './pages/Market';
-import Home from './pages/Home';
 import { ControlersContext } from './Context/ControlersContext';
 import { CartContext } from './Context/CartContext';
-import Contact from './pages/Contact';
-import About from './pages/About';
-import ComplateOrder from './pages/ComplateOrder';
-import Admin from './pages/Admin';
+
 import { colRefCactus, colRefLang, colRefPots } from './firebase';
 import { getDocs, onSnapshot, query, where } from 'firebase/firestore';
-
 
 import pots from "./assets/potsImages/import";
 import cactuses from "./assets/cactusImages/import";
 import useLang from './store/useLang';
-import ErrorBoundary from './pages/Error';
-
-
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home/>,
-    errorElement: <ErrorBoundary/>
-  },
-  {
-    path: "/complete-order",
-    element: <ComplateOrder/>,
-    errorElement: <ErrorBoundary/>
-  },
-  
-  {
-    path: "/market",
-    element: <Market/>,
-    errorElement: <ErrorBoundary/>
-  },
-  {
-    path: "/contact",
-    element: <Contact/>,
-    errorElement: <ErrorBoundary/>
-  },
-  {
-    path: "/about",
-    element: <About/>,
-    errorElement: <ErrorBoundary/>
-  },
-  {
-    path: "/admin",
-    element: <Admin/>,
-    errorElement: <ErrorBoundary/>
-  },
-]);
-
+import Router from './router';
 
 
 function App() {
@@ -74,7 +27,6 @@ function App() {
           s.push({...doc.data(),id:doc.id})
         })
         setLang(s)
-        console.log(s)
     })
   },[])
 
@@ -119,21 +71,6 @@ function App() {
 
 
 
-
-    useEffect(()=>{
-      console.log(finalCactus)
-    },[finalPots])
-
-
-
-
-
-
-
-
-
-
-
   // for cart Context
   const [cart , setCart ]= useState([
     {
@@ -167,10 +104,11 @@ function App() {
     lang.length>0 && 
     <CartContext.Provider value={{cart,setCart,currentItem,setCurrentItem,upCart,setUpCart}}>
       <ControlersContext.Provider value={{pot,setPot,cactus,setCactus,quantity,setQuantity,finalCactus,finalPots}}>
-        <RouterProvider router={router} />
+        {/* <RouterProvider router={router} /> */}
+        <Router/>
       </ControlersContext.Provider>
     </CartContext.Provider>
   )
 }
 
-export default App
+export default App;

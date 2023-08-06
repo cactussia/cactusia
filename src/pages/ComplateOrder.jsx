@@ -146,7 +146,7 @@ function ComplateOrder() {
             ))
           }
 
-          <button type='submit' className='shadow-xl rounded-lg md:w-[400px] w-full hover:bg-green-dark duration-200 active:scale-90 px-6 py-3 bg-green flex justify-center items-center text-white font-semibold text-lg uppercase tracking-wider outline-[#728b67]'>complete</button>
+          <button type='submit' className='shadow-xl rounded-lg md:w-[400px] w-full hover:bg-green-dark duration-200 active:scale-90 px-6 py-3 bg-green flex justify-center items-center text-white font-semibold text-lg uppercase tracking-wider outline-[#728b67]'>Submit</button>
         </form>
     </motion.div>
   )
