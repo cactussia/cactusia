@@ -6,7 +6,7 @@ import ComplateOrder from './pages/ComplateOrder';
 import Admin from './pages/Admin';
 import ErrorBoundary from './pages/Error';
 import NotFound from './pages/404'
-import { BrowserRouter, Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 const router = [
     // 404 - NotFound Error
@@ -49,18 +49,6 @@ const router = [
 
 export default function Router() {
   return (
-    // <BrowserRouter>
-    //     <Routes>
-    //         {router.map((route, i) => (
-    //             <Route
-    //                 key={i}
-    //                 path={route.path}
-    //                 element={route.element}
-    //                 errorElement={route.errorElement}
-    //             />
-    //         ))}
-    //     </Routes>
-    // </BrowserRouter>
     <RouterProvider router={createBrowserRouter(router)} />
   )
 }

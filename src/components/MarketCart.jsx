@@ -23,7 +23,7 @@ function MarketCart() {
           let key = cart.length
           let newCart = cart
           newCart.push({pot:0,cactus:0,quantity:1})
-          setCart(newCart.reverse())
+          setCart(newCart)
           setPot(cart[key].pot)
           setCactus(cart[key].cactus)
           setQuantity(cart[key].quantity)
@@ -48,17 +48,19 @@ function MarketCart() {
    }, [currentItem])
    
   return (
-    <motion.div initial={{x:-200}} animate={{x:0}}  className={`mb-2 py-6 flex flex-col items-center justify-center gap-4 overflow-y-visible`}>
+    <motion.div initial={{x:-200}} animate={{x:0}}  className={`mb-2 py-6 flex sm:flex-col flex-col-reverse items-center justify-center gap-4 overflow-y-visible`}>
       <div 
       // alwayes show the last item
-      className={`xl:pt-8 md:pt-8 pt-8 max-w-full min-w-[450px]  rounded-lg flex justify-center items-center gap-2 overflow-x-auto overflow-y-visible transform transition-all ${cart.length>1?"translate-x-0":"scr"}`}
+      data-current={currentItem}
+      dir="rtl"
+      className={`bg-bleach-fade xl:pt-8 md:pt-8 pt-8 max-w-full min-w-[450px]  rounded-lg flex justify-center items-center gap-2 overflow-x-auto overflow-y-visible transform transition-all`}
       // className={`xl:pt-12 pl-4 md:pt-10 pt-8 max-w-full rounded-lg flex gap-2 overflow-x-auto overflow-y-visible`}
       >
         {
           cart.map((item,key)=>{
             return(
               <div key={key}  className={'flex relative flex-col items-center gap-1 drop-shadow-lg'}>
-              <button onClick={()=>handelSelect(key)} className={' w-20 h-20 bg-dark-white duration-100 rounded-lg   flex justify-center items-center flex-col border-2  '+(key==currentItem?" border-green " :"border-[#0001] ")}>
+              <button onClick={()=>handelSelect(key)} className={' w-20 h-20 bg-dark-white duration-100 rounded-lg   flex justify-center items-center flex-col border-2 overflow-y-visible  '+(key==currentItem?" border-green " :"border-[#0001] ")}>
                 <div className={(key==currentItem?"scale-[1.25]":"scale-[1.20]")+' duration-150 relative -translate-y-5 w-[50px] flex flex-row justify-center items-center drop-shadow-md'}>
                     <img onContextMenu={e => e.preventDefault()} draggable={false} className={'h-[50px] absolute top-[10px] duration-150  pointer-events-none select-none'} src={key==currentItem?finalPots[pot]?.img:finalPots[item?.pot]?.img}></img>
                     <img onContextMenu={e => e.preventDefault()} draggable={false} className='h-[50px] opacity-0 pointer-events-none select-none' src={key==currentItem?finalPots[pot]?.img:finalPots[item?.pot]?.img}></img>

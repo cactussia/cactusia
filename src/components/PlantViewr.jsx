@@ -122,7 +122,7 @@ function PlantViewr({ clickable = true }) {
       initial={{ y: 300 }}
       animate={{ y: 0 }}
       className={
-        "flex-1 h-full flex flex-col justify-center items-center pt-16 md:pt-20 " +
+        " flex-1 flex flex-col justify-center items-center pt-10 md:pt-16 " +
         (!clickable && "potcactusanimation")
       }
     >
