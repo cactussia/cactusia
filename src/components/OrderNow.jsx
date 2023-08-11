@@ -67,7 +67,7 @@ function OrderNow() {
         <h1 className="text-7xl text-green font-bold">{getPrice()} <span className="text-3xl">Dh</span></h1>
         <hr className=" my-3" />
         {
-        <p className={(!(getPotNum()<3) ? " h-0 py-0 my-0 scale-y-0 absolute " :" h-full py-3 px-2 my-3 scale-y-100 ")+" text-sm uppercase py-2 text-orange-950 font-semibold bg-[#e0d5d0] before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-orange-200 before:bg-opacity-80 before:-z-10 before:animate-ping before:duration-300 px-2 overflow-hidden rounded-md my-3"}>
+        <p className={(!(getPotNum()<3) ? " h-0 py-0 my-0 scale-y-0 absolute " :" h-full py-3 px-3 my-3 scale-y-100 ")+" text-sm uppercase py-2 text-orange-950 font-semibold bg-[#e0d5d0] before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-orange-200 before:bg-opacity-80 before:-z-10 before:animate-ping before:duration-300 px-2 overflow-hidden rounded-md my-3"}>
           
             {lang?.length>0 && lang.filter(f=>f.id_phrase=="3offer")[0][langs[langSelected]]}
             {/* <LordIcon 
@@ -76,7 +76,7 @@ function OrderNow() {
               trigger={"loop"}
               state={"loop"}
             /> */}
-            <img src={DIF[dif]} className='ml-1 inline-block relative h-[36px] w-[36px] object-cover object-center aspect-square mix-blend-multiply hue-rotate-[-140deg] before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-orange-950 before:z-20' alt=""/>
+            <img src={DIF[dif]} className='ml-1 inline relative h-[36px] w-[36px] object-cover object-center aspect-square mix-blend-multiply hue-rotate-[-140deg] before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-orange-950 before:z-20' alt=""/>
 
         </p>
         }

@@ -13,6 +13,7 @@ import CartIcon from './svg/CartIcon';
 function MarketCart() {
    const {pot,setPot,cactus,setCactus ,quantity,setQuantity,finalCactus,finalPots}=useContext(ControlersContext);
    const {cart ,currentItem ,setCurrentItem ,setCart}= useContext(CartContext);
+
    const handelSelect = (key)=>{
       setPot(cart[key].pot)
       setCactus(cart[key].cactus)
@@ -48,27 +49,24 @@ function MarketCart() {
    }, [currentItem])
    
   return (
-    <motion.div initial={{x:-200}} animate={{x:0}}  className={`mb-2 py-6 flex sm:flex-col flex-col-reverse items-center justify-center gap-4 overflow-y-visible`}>
+    <motion.div initial={{x:-200}} animate={{x:0}}  className={` mb-2 py-6 flex sm:flex-col flex-col-reverse items-center justify-center gap-4 overflow-y-visible`}>
       <div 
-      // alwayes show the last item
-      data-current={currentItem}
-      dir="rtl"
-      className={`bg-bleach-fade xl:pt-8 md:pt-8 pt-8 max-w-full min-w-[450px]  rounded-lg flex justify-center items-center gap-2 overflow-x-auto overflow-y-visible transform transition-all`}
+      className={`bg-bleach-light lg:bg-transparent xl:pt-8 md:pt-8 pt-8 pb-4 w-screen min-w-[450px] border-2 border-[#0001] lg:border-none rounded-lg flex justify-center items-center gap-2 overflow-x-auto overflow-y-visible transform transition-all`}
       // className={`xl:pt-12 pl-4 md:pt-10 pt-8 max-w-full rounded-lg flex gap-2 overflow-x-auto overflow-y-visible`}
       >
         {
           cart.map((item,key)=>{
             return(
-              <div key={key}  className={'flex relative flex-col items-center gap-1 drop-shadow-lg'}>
+              <div key={key} title={`${finalPots[item?.pot]?.name} Pot and ${finalCactus[item?.cactus]?.name} Cactus`} className={'flex relative flex-col items-center gap-1 drop-shadow-lg'}>
               <button onClick={()=>handelSelect(key)} className={' w-20 h-20 bg-dark-white duration-100 rounded-lg   flex justify-center items-center flex-col border-2 overflow-y-visible  '+(key==currentItem?" border-green " :"border-[#0001] ")}>
-                <div className={(key==currentItem?"scale-[1.25]":"scale-[1.20]")+' duration-150 relative -translate-y-5 w-[50px] flex flex-row justify-center items-center drop-shadow-md'}>
+                <div className={(key==currentItem ?"scale-[1.25]":"scale-[1.20]")+' duration-150 relative -translate-y-5 w-[50px] flex flex-row justify-center items-center drop-shadow-md'}>
                     <img onContextMenu={e => e.preventDefault()} draggable={false} className={'h-[50px] absolute top-[10px] duration-150  pointer-events-none select-none'} src={key==currentItem?finalPots[pot]?.img:finalPots[item?.pot]?.img}></img>
                     <img onContextMenu={e => e.preventDefault()} draggable={false} className='h-[50px] opacity-0 pointer-events-none select-none' src={key==currentItem?finalPots[pot]?.img:finalPots[item?.pot]?.img}></img>
                     <img onContextMenu={e => e.preventDefault()} draggable={false} className={'w-[50px] absolute top-[-18px] duration-150  pointer-events-none select-none'} src={key==currentItem? finalCactus[cactus]?.img: finalCactus[item?.cactus]?.img}></img>
                 </div>
-                <p className='px-4 rounded-md font-medium text-gray-700 border-green bg-[#0001] '>
+                {/* <p className='px-4 rounded-md font-medium text-gray-700 border-green bg-[#0001] '>
                   {key==currentItem?quantity:item.quantity}
-                </p>
+                </p> */}
               </button>
               {
                   key==currentItem && cart.length>1 &&

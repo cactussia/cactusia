@@ -19,9 +19,9 @@ function MarketBody() {
   return (
     <div className='flex flex-col flex-1 container mx-auto'>
         <div className='py-8 flex justify-center items-center flex-col lg:flex-row '>
-            <div className='hidden flex-1 lg:block'><MarketBodyControlers /></div>
+            <div className='hidden flex-1 lg:flex'><MarketBodyControlers /></div>
             <PlantViewr/>
-            <div className='block flex-1 lg:hidden'><MarketBodyControlers/><MarketCart/></div>
+            <div className='flex flex-1 flex-col justify-center items-center lg:hidden'><MarketBodyControlers/><MarketCart/></div>
              <OrderNow/>
         </div>
             <div className='hidden  lg:block'><MarketCart/></div>

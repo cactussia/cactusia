@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800;900&display=swap');
+@import url('https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css');
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +17,10 @@
     .text-bleach-dark { @apply text-[#9e9e86]; }
     .text-bleach-darker { @apply text-[#616152]; }
     .bg-bleach { @apply bg-[#CFCFB5]; }
+    .bg-bleach-brown { @apply bg-[#cfcbb5]; }
+    .bg-bleach-brown-light { @apply bg-[#ebe7d3]; }
     .bg-bleach-fade { @apply bg-[#f0f0e5]; }
+    .bg-bleach-light { @apply bg-[#eeeee4]; }
   
     .bg-green-dark { @apply bg-[#586d49]; }
     .bg-green { @apply bg-[#768F6A]; }

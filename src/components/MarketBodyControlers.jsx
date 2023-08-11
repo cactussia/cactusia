@@ -62,9 +62,9 @@ function MarketBodyControlers() {
     <motion.div
       initial={{ x: -200 }}
       animate={{ x: 0 }}
-      className=" flex-1 flex flex-col md:gap-2 justify-center items-center lg:items-center px-3 md:px-0"
+      className="flex-1 flex max-w-md w-full flex-col gap-4 justify-between items-center"
     >
-      <div className="flex flex-row lg:flex-col gap-2 justify-around w-full md:w-fit mt-5 lg:mt-0">
+      <div className="px-4 flex flex-row lg:flex-col sm:gap-14 justify-around items-center w-full md:w-fit mt-5 lg:mt-0">
         <div className=" flex flex-col justify-center items-start  ">
           <div className=" w-fit p-1 rounded-lg border-2 border-[#0001]  relative drop-shadow-md flex bg-dark-white gap-2 mt-4">
             <button
