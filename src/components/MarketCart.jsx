@@ -51,7 +51,7 @@ function MarketCart() {
   return (
     <motion.div initial={{x:-200}} animate={{x:0}}  className={` mb-2 py-6 flex sm:flex-col flex-col-reverse items-center justify-center gap-4 overflow-y-visible`}>
       <div 
-      className={`bg-bleach-light lg:bg-transparent xl:pt-8 md:pt-8 pt-8 pb-4 w-screen min-w-[450px] border-2 border-[#0001] lg:border-none rounded-lg flex justify-center items-center gap-2 overflow-x-auto overflow-y-visible transform transition-all`}
+      className={`bg-bleach-light lg:bg-transparent xl:pt-8 md:pt-8 pt-8 pb-4 px-14 w-screen min-w-[450px] border-2 border-[#0001] lg:border-none rounded-lg flex ${ cart.length <= 4 && "justify-center" } items-center gap-2 overflow-x-auto overflow-y-visible transform transition-all`}
       // className={`xl:pt-12 pl-4 md:pt-10 pt-8 max-w-full rounded-lg flex gap-2 overflow-x-auto overflow-y-visible`}
       >
         {
@@ -79,8 +79,8 @@ function MarketCart() {
           })
         }
       </div>
-      <div className={`w-full px-4 max-w-sm flex justify-center items-center transition-all`}>
-        <button onClick={handelAddNew} className='drop-shadow-lg w-full py-1 bg-green flex justify-center items-center gap-4 text-white font-semibold text-lg tracking-wider uppercase rounded-lg hover:bg-green-dark active:scale-90 transition-all'>
+      <div className={`w-screen flex justify-center items-center transition-all`}>
+        <button onClick={handelAddNew} className='drop-shadow-lg w-full lg:max-w-screen-sm py-1 mx-4 bg-green flex justify-center items-center gap-4 text-white font-semibold text-lg tracking-wider uppercase rounded-lg hover:bg-green-dark active:scale-90 transition-all'>
           {/* <AddShoppingCartIcon className="text-green scale-[150%]" /> */}
           <CartIcon width={45} height={45} target="button"/>
           <span>Add to Cart</span>
