@@ -8,9 +8,10 @@ import { db } from '../firebase';
 
 
 const colors = {
-    new:"rgb(180 194 13)",
-    confirmed:"rgb(34 34 216)",
-    delivered:"rgb(40 171 40)"
+  new:"rgb(180 194 13)",
+  confirmed:"rgb(34 34 216)",
+  delivered:"rgb(40 171 40)",
+  canceled: "rgb(216 34 34)"
 }
 export default function StateBtn({state,id,cats,setUpdate}) {
   const [anchorEl, setAnchorEl] = React.useState(null);

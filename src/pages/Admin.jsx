@@ -15,7 +15,7 @@ import { Language as Lng } from "@mui/icons-material";
 import LangEdit from "../components/LangEdit";
 import Language from "../components/Language";
 
-const cats = ["All","New","Confirmed","Delivered"]
+const cats = ["All","New","Confirmed","Delivered", "Canceled"]
 
 
 
