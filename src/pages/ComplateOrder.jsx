@@ -227,7 +227,7 @@ function ComplateOrder() {
               +
               <span title='Delivery Price' className='flex justify-center items-center gap-2 text-green bg-dark-white2 py-1 px-2 rounded-md w-fit drop-shadow-sm'>{DeliveryPrice} <i className="fi fi-ss-truck-side md:text-3xl text-xl flex justify-center items-center"></i></span>
               =
-              <span title={`the final total price = ${TotalPrice}`} className='flex justify-center items-end gap-2 text-green font-semibold'>{TotalPrice} {cartCount > 3 && <span className='text-base line-through'>{cartCount * 65 + DeliveryPrice}</span>} DH</span>
+              <span id="cartTotalPrice" title={`the final total price = ${TotalPrice}`} className='finalPrice flex justify-center items-end gap-2 text-green font-semibold'>{TotalPrice} {cartCount > 3 && <span className='text-base line-through'>{cartCount * 65 + DeliveryPrice}</span>} DH</span>
             </h2>
           </div>
         </section>
