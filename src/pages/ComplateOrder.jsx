@@ -19,7 +19,7 @@ function ComplateOrder() {
     const [errors, setErrors] = useState({});
 
     const {cart,setCart}=useContext(CartContext);
-    const [formatedCart, setFormatedCart] = useState([...cart]);
+    // const [formatedCart, setFormatedCart] = useState([...cart]);
     const {finalPots,finalCactus,setPot,setCactus,setQuantity}=useContext(ControlersContext)
 
     // count how many elemnts in the cart
@@ -91,9 +91,11 @@ function ComplateOrder() {
         setCactus(0)
         setQuantity(1)
         setShowThankPage(true);
+        setIsFormSubmitted(false);
       })
       .catch(err=>{
         console.error(err)
+        setIsFormSubmitted(false);
         setErrors({...errors, error: "Something went wrong, please try again later 👷🏻‍♂️"});
       });
     }
@@ -180,8 +182,9 @@ function ComplateOrder() {
             ))
           }
 
-          <button type='submit' className='shadow-xl rounded-lg md:w-[400px] w-full hover:bg-green-dark duration-200 active:scale-90 px-6 py-3 bg-green flex justify-center items-center text-white font-semibold text-lg uppercase tracking-wider outline-[#728b67]'>Submit</button>
+          <button type='submit' disabled={isFormSubmitted} className='shadow-xl rounded-lg md:w-[400px] w-full hover:bg-green-dark duration-200 active:scale-90 px-6 py-3 bg-green flex justify-center items-center text-white font-semibold text-lg uppercase tracking-wider outline-[#728b67] disabled:bg-gray-600 disabled:cursor-not-allowed'>Submit</button>
         </form>
+
         <section className={`absolute top-0 ${isCartOpen ? "right-0" : "right-[100%]"} lg:right-0 lg:relative w-screen lg:w-1/2 h-screen py-6 flex  items-center flex-col gap-6 bg-bleach-brown-light transition-all`}>
           <div className='flex justify-between lg:justify-center items-center w-[90%] px-4 py-4 border-b-4 border-[#0001]'>
             <h1 className='text-4xl text-green font-bold uppercase'>My Cart</h1>
