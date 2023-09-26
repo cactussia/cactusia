@@ -14,8 +14,9 @@ import Products from "../components/Products";
 import { Language as Lng } from "@mui/icons-material";
 import LangEdit from "../components/LangEdit";
 import Language from "../components/Language";
+import { orderTrackingStatus } from "../utils";
 
-const cats = ["All","New","Confirmed","Delivered", "Canceled"]
+// const cats = ["All","New","Confirmed","Delivered", "Canceled"]
 
 
 
@@ -55,13 +56,13 @@ function Admin() {
           <div className="flex flex-col">
             {
               Pages.map((Page,key)=>{
-                  return(
-                    <button key={key} onClick={()=>setPage(key)} style={{background:key==page?"#eee":"#fff"}} className="bg-white px-6 py-4 flex gap-2 items-center text-left border-green-700">
-                      {Page.Icon}
-                      {Page.name}
-                    </button>
-                  )
-                })
+                return(
+                  <button key={key} onClick={()=>setPage(key)} style={{background:key==page?"#eee":"#fff"}} className="bg-white px-6 py-4 flex gap-2 items-center text-left border-green-700">
+                    {Page.Icon}
+                    {Page.name}
+                  </button>
+                )
+              })
             }
           </div>
         </div>
@@ -70,7 +71,7 @@ function Admin() {
 
 
 {
-    page==0&&<OrdersAdmin setCat={setCat} order={order} cats={cats} cat={cat} search={search} setOrder={setOrder}></OrdersAdmin>
+    page==0&&<OrdersAdmin setCat={setCat} order={order} cats={Object.keys(orderTrackingStatus)} cat={cat} search={search} setOrder={setOrder}></OrdersAdmin>
 }
 {
     page==1&&<Products/>

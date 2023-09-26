@@ -71,7 +71,7 @@ export default function CustomizedTables({cat,cats,search,setOrder}) {
                 ordersList.push({...doc.data(),id:doc.id,checked:false})
             })
             setRows(ordersList)
-            console.log(ordersList)
+            console.log({ordersList})
         })
     },[cat,update])
 
