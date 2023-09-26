@@ -1,4 +1,4 @@
-import { useState , useEffect, useMemo } from 'react'
+import { useState , useEffect, useMemo, useCallback } from 'react'
 import { ControlersContext } from './Context/ControlersContext';
 import { CartContext } from './Context/CartContext';
 
@@ -81,13 +81,20 @@ function App() {
 ])
   const [upCart,setUpCart]=useState(0)
   const [currentItem,setCurrentItem]=useState(0)
-  const updateCart= ()=>{
-    let newCart = cart
-    newCart[currentItem].pot=pot
-    newCart[currentItem].cactus=cactus
-    newCart[currentItem].quantity=quantity
-    setCart(newCart)
-  }
+  
+  const updateCart = useCallback(() => {
+    setCart(prevCart => {
+      const newCart = [...prevCart];
+      newCart[currentItem] = {
+        ...newCart[currentItem],
+        pot,
+        cactus,
+        quantity,
+      };
+      return newCart;
+    });
+  }, [currentItem, pot, cactus, quantity]);
+
   useEffect(() => {
     updateCart()
     setUpCart(p=>p+1)
@@ -98,7 +105,6 @@ function App() {
     updateCart()
   },[upCart])
 
-  
 
   return (
     lang.length>0 && 
