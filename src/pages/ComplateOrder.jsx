@@ -56,6 +56,9 @@ function ComplateOrder() {
       value ? setErrors({...errors, [name]: regex.test(value.trim()) ? "" : field.error}) : setErrors({...errors, [name]: field.empty});
     };
 
+     //
+    console.log("Total Price: ", cartCount * 65 + DeliveryPrice)
+
     const orderNow = e =>{
       console.log("Order Errors", errors)
       console.log({order});
@@ -71,7 +74,6 @@ function ComplateOrder() {
 
       if (Object.values(errors).every(error => error)) alert("there is still errors")
 
-
       // let date=new Date(); don't use the user local time to avoid non-accurate time
       addDoc(colRef,{
         name:firstname.trim(),
@@ -83,7 +85,7 @@ function ComplateOrder() {
         createdAt:serverTimestamp(),
         date: serverTimestamp(),
         items:cart.map(m=>({...m,pot:finalPots[m.pot].number,cactus:finalCactus[m.cactus].number})),
-        price:getPriceByQte(cart.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)),
+        price: cartCount * 65 + DeliveryPrice,
       })
       .then(()=>{
         setCart([{pot:0,cactus:0,quantity:1}])

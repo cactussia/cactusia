@@ -47,7 +47,7 @@ function OrderNow() {
   const getPotNum = ()=>{
     let potNum = 0;
     cart.forEach(element => {
-      potNum+=element.quantity 
+      potNum+=element.quantity
     });
     return potNum
   }
