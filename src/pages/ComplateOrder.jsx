@@ -120,7 +120,6 @@ function ComplateOrder() {
         navigate("/market");
       }, 120000);
 
-      return () => clearTimeout(timeout)
     }, [showThankPage])
 
   
