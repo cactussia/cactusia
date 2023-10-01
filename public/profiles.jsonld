@@ -1,0 +1,11 @@
+{
+	"@context" : "http://schema.org",
+	"@type" : "Organization",
+	"name" : "Vanhoutte Inc.",
+	"url" : "http://vanhoutte.be",
+	"sameAs" : [
+		"https://instagram.com/cactusia.ma",
+		"https://www.facebook.com/cactusia.ma",
+		"https://wa.me/212669231618"
+	]
+}

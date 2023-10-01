@@ -71,7 +71,7 @@ function Admin() {
 
 
 {
-    page==0&&<OrdersAdmin setCat={setCat} order={order} cats={Object.keys(orderTrackingStatus)} cat={cat} search={search} setOrder={setOrder}></OrdersAdmin>
+    page==0&&<OrdersAdmin setCat={setCat} order={order} cats={["All", ...Object.keys(orderTrackingStatus)]} cat={cat} search={search} setOrder={setOrder}></OrdersAdmin>
 }
 {
     page==1&&<Products/>

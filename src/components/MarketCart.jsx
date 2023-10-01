@@ -9,11 +9,13 @@ import {motion} from "framer-motion"
 import { CardTravel, Shop } from '@mui/icons-material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CartIcon from './svg/CartIcon';
+import useLang from '../store/useLang';
 
 function MarketCart() {
   const {pot,setPot,cactus,setCactus ,quantity,setQuantity,finalCactus,finalPots}=useContext(ControlersContext);
   const {cart ,currentItem ,setCurrentItem ,setCart}= useContext(CartContext);
 
+  const {langs,lang,langSelected,setLangSelected}=useLang()
   const cartContainerRef = useRef(null);
 
   // Scroll to the end of the cart container when a new item is added
@@ -98,7 +100,7 @@ function MarketCart() {
         <button id="addtocart" onClick={handelAddNew} className='relative py-3
          drop-shadow-lg w-full lg:max-w-screen-sm  mx-4 bg-green flex justify-center items-center gap-4 text-white font-semibold text-md tracking-wider uppercase rounded-lg hover:bg-green-dark active:scale-90 transition-all'>
           {/* <AddShoppingCartIcon className="text-green scale-[150%]" /> */}
-          <span>Add to Cart</span>
+          <span>{lang.filter(f=>f.id_phrase=="addtocart")[0][langs[langSelected]]}</span>
         </button>
       </div>
     </motion.div>

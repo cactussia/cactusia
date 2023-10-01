@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Home page -->
+    <url>
+        <loc>https://cactusia.ma/</loc>
+    </url>
+
+    <!-- Contact page -->
+    <url>
+        <loc>https://cactusia.ma/contact</loc>
+    </url>
+
+    <!-- About page -->
+    <url>
+        <loc>https://cactusia.ma/about</loc>
+    </url>
+
+    <!-- Market Page -->
+    <url>
+        <loc>https://cactusia.ma/market</loc>
+    </url>
+
+    <!-- Order Now Page -->
+    <url>
+        <loc>https://cactusia.ma/ordernow</loc>
+    </url>
+
+</urlset>

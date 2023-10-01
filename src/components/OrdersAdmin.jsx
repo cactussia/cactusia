@@ -35,8 +35,8 @@ function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
           <h1 className="text-4xl  py-8">Orders List</h1>
         </div>
         <div className="flex-[2] flex justify-center">
-          <div className="flex rounded-full bg-white shadow-lg p-2 max-h-14 max-w-3xl overflow-x-auto">
-            {["All",...cats].map((c, key) =>
+          <div className="flex items-center rounded-full bg-white shadow-lg px-2 py-4 max-h-14 max-w-4xl overflow-x-auto overflow-y-hidden">
+            {cats.map((c, key) =>
               key == cat ? (
                 <button
                   key={key}
