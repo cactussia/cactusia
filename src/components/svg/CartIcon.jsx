@@ -8,7 +8,7 @@ export default function CartIcon(props) {
     src="https://cdn.lordicon.com/cllunfud.json"
     trigger="hover"
     delay="1000"
-    colors="outline:#ffffff,primary:#ffffff,secondary:#ffffff"
+    colors="outline:#3f4f35,primary:#3f4f35,secondary:#3f4f35"
     style={{width, height}}>
     </lord-icon>
   )

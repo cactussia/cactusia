@@ -47,9 +47,9 @@ function MarketCart() {
   }
 
   useEffect(() => {
-    setPot(cart[currentItem].pot)
-    setCactus(cart[currentItem].cactus)
-    setQuantity(cart[currentItem].quantity)
+    setPot(cart[currentItem]?.pot)
+    setCactus(cart[currentItem]?.cactus)
+    setQuantity(cart[currentItem]?.quantity)
   }, [cart])
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function MarketCart() {
     <motion.div initial={{x:-200}} animate={{x:0}}  className={`mb-2 py-4 flex flex-col-reverse items-center justify-center gap-2 overflow-y-visible`}>
       <ul
       ref={cartContainerRef}
-      className={`bg-bleach-light lg:bg-transparent xl:pt-6 md:pt-6 pt-6 pb-4 px-14 w-screen min-w-[450px] border-2 border-[#0001] lg:border-none rounded-lg flex ${ cart.length <= 4 && "justify-center" } lg:justify-center items-center gap-2 overflow-x-auto overflow-y-visible transform transition-all`}
+      className={`bg-[#0001] max-w-[1200px]  xl:pt-6 md:pt-6 pt-6 pb-4 px-14 w-screen min-w-[450px] border-2 border-[#0001] rounded-lg flex ${ cart.length <= 4 && "justify-center" } lg:justify-center items-center gap-2 overflow-x-auto overflow-y-visible transform transition-all`}
       // className={`xl:pt-12 pl-4 md:pt-10 pt-8 max-w-full rounded-lg flex gap-2 overflow-x-auto overflow-y-visible`}
       >
         {
@@ -91,9 +91,13 @@ function MarketCart() {
         }
       </ul>
       <div className={`w-screen flex justify-center items-center transition-all`}>
-        <button onClick={handelAddNew} className='drop-shadow-lg w-full lg:max-w-screen-sm py-1 mx-4 bg-green flex justify-center items-center gap-4 text-white font-semibold text-lg tracking-wider uppercase rounded-lg hover:bg-green-dark active:scale-90 transition-all'>
+        <div className='relative mx-3'>
+            <CartIcon width={35} height={35} target="#addtocart"/>
+            <span className='rounded-2xl absolute -top-1 -right-1 text-white text-sm bg-[#3f4f35] border border-white w-5 h-5 flex justify-center items-center aspect-square'>{cart.length} </span>
+        </div>
+        <button id="addtocart" onClick={handelAddNew} className='relative py-3
+         drop-shadow-lg w-full lg:max-w-screen-sm  mx-4 bg-green flex justify-center items-center gap-4 text-white font-semibold text-md tracking-wider uppercase rounded-lg hover:bg-green-dark active:scale-90 transition-all'>
           {/* <AddShoppingCartIcon className="text-green scale-[150%]" /> */}
-          <CartIcon width={45} height={45} target="button"/>
           <span>Add to Cart</span>
         </button>
       </div>
