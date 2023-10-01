@@ -4,14 +4,16 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import { orderTrackingStatus } from "../utils/index";
 
 
 
-const colors = {
-    new:"rgb(180 194 13)",
-    confirmed:"rgb(34 34 216)",
-    delivered:"rgb(40 171 40)"
-}
+// const colors = {
+//   new:"rgb(180 194 13)",
+//   confirmed:"rgb(34 34 216)",
+//   delivered:"rgb(40 171 40)",
+//   canceled: "rgb(216 34 34)"
+// }
 export default function StateBtn({state,id,cats,setUpdate}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -25,7 +27,7 @@ export default function StateBtn({state,id,cats,setUpdate}) {
   const changeStateTo = (key)=>{
     const docRef = doc(db,"Orders",id);
     updateDoc(docRef,{
-        state:cats[key].toLowerCase()
+      state:cats[key].toLowerCase()
     })
     setUpdate(p=>p+1)
   }
@@ -38,7 +40,7 @@ export default function StateBtn({state,id,cats,setUpdate}) {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        style={{background:colors[state]}}
+        style={{background:orderTrackingStatus[state]}}
         >{state}</button>
       <Menu
         id="basic-menu"
@@ -50,13 +52,13 @@ export default function StateBtn({state,id,cats,setUpdate}) {
         }}
       >
         {
-            cats.map((c,key)=>{
-                if(key!=0){
-                    return(
-                        <MenuItem key={key} onClick={()=>{handleClose();changeStateTo(key)}}>{c}</MenuItem>
-                    )
-                }
-            })
+          cats.map((c,key)=>{
+            if(key!=0){
+              return(
+                <MenuItem key={key} onClick={()=>{handleClose();changeStateTo(key)}}>{c}</MenuItem>
+              )
+            }
+          })
         }
       </Menu>
     </div>

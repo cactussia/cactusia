@@ -116,6 +116,17 @@ export function getPriceByQte(qte){
   }
 }
 
+export const orderTrackingStatus = {
+  new:"rgb(180 194 13)",
+  confirmed:"rgb(193 83 205)",
+  ready: "rgb(216, 153, 34)",
+  postponed: "rgb(94, 94, 94)",
+  indelivery:"rgb(17, 142, 217)",
+  delivered:"rgb(40 171 40)",
+  canceled: "rgb(216 34 34)",
+  fake:"rgb(216 34 34)",
+}
+
 
 /**
  * Formate date from firestore timestamp to a readable date like: 12 Jan 2021, 12:00:00 (24 hours format)

@@ -1,26 +1,46 @@
-import React, { useContext } from "react";
+import React, { useCallback, useState } from "react";
 import CustomizedTables from "./OrdersTabel";
 
 import cactuses from "../assets/cactusImages/import"
 import pots from "../assets/potsImages/import"
 import { WhatsappMessageConfirmation, dateFormater, phoneFormater } from "../utils";
 import { WhatsApp } from "@mui/icons-material";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
-function OrdersAdmin({ order ,cat ,search,cats,setCat ,setOrder}) {
+function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
+  const [comment, setComment] = useState("");
+  const [sendingComment, setSendingComment] = useState(false);
 
-   return !order ? (
+  console.log("Order Preview:", order);
+
+  const addOrderComment = async e => {
+    e.preventDefault();
+    setSendingComment(true);
+    try{
+      const docRef = doc(db, "Orders", order.id);
+      await updateDoc(docRef, {comment});
+      setComment("");
+      setSendingComment(false);
+    }catch(err){
+      console.error(err);
+      setSendingComment(false);
+    }
+  }
+
+  return !order ? (
     <div className="p-8 px-10 flex-1">
       <div className="flex justify-between items-center">
         <div className="flex-1">
           <h1 className="text-4xl  py-8">Orders List</h1>
         </div>
         <div className="flex-[2] flex justify-center">
-          <div className="rounded-full bg-white shadow-lg overflow-hidden p-1">
-            {cats.map((c, key) =>
+          <div className="flex rounded-full bg-white shadow-lg p-2 max-h-14 max-w-3xl overflow-x-auto">
+            {["All",...cats].map((c, key) =>
               key == cat ? (
                 <button
                   key={key}
-                  className="px-4 py-2 bg-black text-white rounded-full"
+                  className="px-4 py-2 bg-black text-white rounded-full capitalize"
                 >
                   {c}
                 </button>
@@ -28,7 +48,7 @@ function OrdersAdmin({ order ,cat ,search,cats,setCat ,setOrder}) {
                 <button
                   key={key}
                   onClick={() => setCat(key)}
-                  className="px-4 py-2 rounded-full"
+                  className="px-4 py-2 rounded-full capitalize"
                 >
                   {c}
                 </button>
@@ -79,10 +99,18 @@ function OrdersAdmin({ order ,cat ,search,cats,setCat ,setOrder}) {
         <h1><span className="uppercase font-semibold">Total Price:</span> {order?.price} Dh</h1>
         <button className="mt-4 px-6 py-2 rounded-md flex items-center justify-center gap-2 text-[#f5fdf8] bg-[#25D366] font-semibold shadow-lg transition-all duration-150 hover:scale-[1.02] active:scale-[0.94]">
           <a className="flex items-center justify-center" href={`http://wa.me/${phoneFormater(order?.number)}/?text=${WhatsappMessageConfirmation(`${order?.name} ${order?.lastName}`, order?.price)}`} title={WhatsappMessageConfirmation(`${order?.name} ${order?.lastName}`, order?.price)} target="_blank" rel="noreferrer">
-              <WhatsApp className="text-[#f5fdf8] "/>
-              <span className="pl-2">WhatsApp Confirmation</span>
+            <WhatsApp className="text-[#f5fdf8] "/>
+            <span className="pl-2">WhatsApp Confirmation</span>
           </a>
         </button>
+
+        {/* Order Comment */}
+        <form action="" onSubmit={addOrderComment} className="w-full flex flex-col gap-3 mt-4">
+          <label htmlFor="orderComment" className="text-lg uppercase font-semibold">Add Your Comment</label>
+          <textarea onChange={e => setComment(e.target.value)} defaultValue={order?.comment} id="orderComment" className="w-full min-h-32 p-2 rounded-md shadow-lg border-2 border-green" placeholder="Order Comment"></textarea>
+          <button type="submit" disabled={sendingComment} className="w-fit bg-green text-white py-2 px-6 rounded-md font-semibold shadow-lg transition-all duration-150 hover:scale-[1.02] active:scale-[0.94] disabled:bg-gray-800 disabled:cursor-not-allowed">Submit</button>
+        </form>
+        
       </div>
       <div className="flex-1 p-8">
         <h1 className="text-3xl text-gray-700 font-semibold py-8">
