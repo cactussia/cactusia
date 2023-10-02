@@ -85,7 +85,7 @@ function ComplateOrder() {
         createdAt:serverTimestamp(),
         date: serverTimestamp(),
         items:cart.map(m=>({...m,pot:finalPots[m.pot].number,cactus:finalCactus[m.cactus].number})),
-        price: cartCount * 65 + DeliveryPrice,
+        price: TotalPrice,
       })
       .then(()=>{
         setCart([{pot:0,cactus:0,quantity:1}])
@@ -105,7 +105,11 @@ function ComplateOrder() {
     // set a timeout of 5s to clear the errors
     useEffect(()=>{
       // if (Object.values(errors).length === 0) return;
-      const timeout = setTimeout(()=>setErrors({...errors, error: "", empty: ""}), 5000);
+      const timeout = setTimeout(() => {
+        setErrors({...errors, error: "", empty: ""})
+        setIsFormSubmitted(false);
+      }, 5000);
+      
       return () => clearTimeout(timeout)
     }, [errors]);
 
@@ -120,6 +124,7 @@ function ComplateOrder() {
         navigate("/market");
       }, 120000);
 
+      return () => clearTimeout(timeout);
     }, [showThankPage])
 
   
