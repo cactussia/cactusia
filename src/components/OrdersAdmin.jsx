@@ -29,12 +29,12 @@ function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
   }
 
   return !order ? (
-    <div className="p-8 px-10 flex-1">
-      <div className="flex justify-between items-center">
+    <div className="px-10 flex-1">
+      <div className="flex p-8 justify-between items-center">
         <div className="flex-1">
-          <h1 className="text-4xl  py-8">Orders List</h1>
+          <h1 className="text-4xl font-semibold">Orders List</h1>
         </div>
-        <div className="flex-[2] flex justify-center">
+        {/* <div className="flex-[2] flex justify-center">
           <div className="flex items-center rounded-full bg-white shadow-lg px-2 py-4 max-h-14 max-w-4xl overflow-x-auto overflow-y-hidden">
             {cats.map((c, key) =>
               key == cat ? (
@@ -55,8 +55,8 @@ function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
               )
             )}
           </div>
-        </div>
-        <div className="flex-1 flex justify-end">
+        </div> */}
+        {/* <div className="flex-1 flex justify-end">
           <div className="bg-white rounded-full overflow-hidden pr-1 shadow-lg">
             <input
               value={search}
@@ -65,16 +65,17 @@ function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
               className="p-2 px-4 outline-none w-36 "
               placeholder="search .."
             />
-            <button className="px-4 bg-black rounded-full py-1 text-white">
+            <button className="px-4 bg-black rounded-full py-1 text-white" onClick>
               search
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
       <CustomizedTables
         setOrder={setOrder}
         order={order}
         cats={cats}
+        setCat={setCat}
         search={search}
         cat={cat}
       />
