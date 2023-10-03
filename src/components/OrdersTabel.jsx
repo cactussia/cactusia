@@ -111,6 +111,7 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
         headerClassName: "bg-white invert",
         renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Date</h1>,
         type: 'date',
+        valueGetter: ({ value }) => new Date(value),
         renderCell: ({ row }) => <span title={row.formatedDate} className="font-semibold">{row.formatedDate}</span>
       },
       { field: 'state', headerName: 'State', width: 130,
