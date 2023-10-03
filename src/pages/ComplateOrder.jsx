@@ -9,8 +9,11 @@ import { ControlersContext } from '../Context/ControlersContext'
 import Thank from './Thank'
 import ArrowIcon from '../components/svg/ArrowIcon'
 import LordIcon from '../components/svg/LordIcon'
+import useLang from '../store/useLang'
 
 function ComplateOrder() {
+    const { langs , lang , langSelected } = useLang()
+    console.log({langs , lang , langSelected})
     const navigate = useNavigate();
     const[isFormSubmitted, setIsFormSubmitted] = useState(false)
     // order state tracker
@@ -53,7 +56,7 @@ function ComplateOrder() {
       const regex = new RegExp(field.regex);
 
       setOrder({ ...order, [name]: value.trim() });
-      value ? setErrors({...errors, [name]: regex.test(value.trim()) ? "" : field.error}) : setErrors({...errors, [name]: field.empty});
+      value ? setErrors({...errors, [name]: regex.test(value.trim()) ? "" : field.translateErrors[langSelected]}) : setErrors({...errors, [name]: field.translateEmpty[langSelected]});
     };
 
      //
@@ -142,10 +145,10 @@ function ComplateOrder() {
                 <div className='rotate-180 flex justify-center items-center'>
                   <ArrowIcon width={30} height={30} target={"button#goback"}/>
                 </div>
-                Go back
+                {lang?.length>0 && lang.filter(f=>f.id_phrase=="goback")[0][langs[langSelected]]}
             </button>
             <button type="button" id="cart" onClick={()=>setIsCartOpen(true)} className='h-full flex lg:hidden items-center justify-center text-center gap-2 shadow-xl p-2 px-6 rounded-md w-fit font-semibold text-md uppercase active:scale-90 tracking-wider text-white bg-[#728b67] outline-[#728b67] transition-all'>
-              my cart
+              {lang?.length>0 && lang.filter(f=>f.id_phrase=="mycart")[0][langs[langSelected]]}
               <LordIcon 
                 width={30}
                 height={30} 
@@ -168,7 +171,7 @@ function ComplateOrder() {
                   onChange={(e)=>storeOrder(field, e)}
                   className={`shadow-lg p-4 rounded-lg w-full font-semibold text-base border ${(errors[field.name]) ? 'text-red-700 outline-red-700 placeholder:text-[#d67f7f]' : 'text-[#728b67] outline-[#728b67]'} resize-y`}
                   name={field.name}
-                  placeholder={field.label}
+                  placeholder={field.translateLabels[langSelected]}
                   // the textarea expand when the user type new lines
                   rows={order[field.name].split("\n").length}
                   ></textarea>
@@ -178,7 +181,7 @@ function ComplateOrder() {
                   className={`shadow-lg p-4 rounded-lg w-full font-semibold text-base border ${(errors[field.name]) ? 'text-red-700 outline-red-700 placeholder:text-[#d67f7f]' : 'text-[#728b67] outline-[#728b67]'} `}
                   type={field.type}
                   name={field.name} 
-                  placeholder={field.label}
+                  placeholder={field.translateLabels[langSelected]}
                   />
                 }
                 {
@@ -188,17 +191,17 @@ function ComplateOrder() {
             ))
           }
 
-          <button type='submit' disabled={isFormSubmitted} className='shadow-xl rounded-lg md:w-[400px] w-full hover:bg-green-dark duration-200 active:scale-90 px-6 py-3 bg-green flex justify-center items-center text-white font-semibold text-lg uppercase tracking-wider outline-[#728b67] disabled:bg-gray-600 disabled:cursor-not-allowed'>Submit</button>
+          <button type='submit' disabled={isFormSubmitted} className='shadow-xl rounded-lg md:w-[400px] w-full hover:bg-green-dark duration-200 active:scale-90 px-6 py-3 bg-green flex justify-center items-center text-white font-semibold text-lg uppercase tracking-wider outline-[#728b67] disabled:active:scale-100 disabled:bg-gray-600 disabled:cursor-not-allowed'>{lang?.length>0 && lang.filter(f=>f.id_phrase=="ordernow")[0][langs[langSelected]]}</button>
         </form>
 
         <section className={`absolute top-0 ${isCartOpen ? "right-0" : "right-[100%]"} lg:right-0 lg:relative w-screen lg:w-1/2 h-screen py-6 flex  items-center flex-col gap-6 bg-bleach-brown-light transition-all`}>
           <div className='flex justify-between lg:justify-center items-center w-[90%] px-4 py-4 border-b-4 border-[#0001]'>
-            <h1 className='text-4xl text-green font-bold uppercase'>My Cart</h1>
+            <h1 className='text-4xl text-green font-bold uppercase'>{lang?.length>0 && lang.filter(f=>f.id_phrase=="mycart")[0][langs[langSelected]]}</h1>
             <button id="closecart" type='reset' onClick={()=>setIsCartOpen(false)} className='h-full flex lg:hidden items-center justify-center text-center gap-2 shadow-xl p-2 px-6 rounded-md w-fit font-semibold text-md uppercase active:scale-90 tracking-wider text-white bg-[#728b67] outline-[#728b67] transition-all'>
                 <div className='rotate-180 flex justify-center items-center'>
                   <ArrowIcon width={30} height={30} target={"button#closecart"}/>
                 </div>
-                back
+                {lang?.length>0 && lang.filter(f=>f.id_phrase=="back")[0][langs[langSelected]]}
             </button>
           </div>
           <ul className='max-w-sm max-h-[80vh] w-full py-4 px-4 flex items-center flex-col gap-3 overflow-y-scroll'>
