@@ -49,15 +49,15 @@ function Admin() {
     setPassword("")
   }
   return admin ? (
-    <div className="flex min-h-screen">
-      <div className="relative w-44 bg-[#fff]">
+    <div className="flex h-screen w-screen">
+      <div className="relative h-full w-52 bg-[#fff]">
         <div className=" sticky top-0 h-fit">
           <img src={logo} className="w-12 py-3 mb-2 mx-auto"></img>
           <div className="flex flex-col">
             {
               Pages.map((Page,key)=>{
                 return(
-                  <button key={key} onClick={()=>setPage(key)} style={{background:key==page?"#eee":"#fff"}} className="bg-white px-6 py-4 flex gap-2 items-center text-left border-green-700">
+                  <button key={key} onClick={()=>setPage(key)} style={{background:key==page?"#eee":"#fff"}} className="bg-white px-10 py-4 flex gap-2 items-center text-left border-green-700">
                     {Page.Icon}
                     {Page.name}
                   </button>

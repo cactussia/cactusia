@@ -16,10 +16,8 @@ export default function ErrorBoundary() {
         <NavBar/>
         <div className='py-8 flex flex-1 flex-col items-center justify-center gap-4'>
             <img src={Icon} className='relative h-[140px] w-[140px] object-cover object-center aspect-square mix-blend-darken hue-rotate-[-90deg] saturate-[.5] grayscale-[10%] before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-green-700 before:z-20' alt=""/>
-            <h1 className='sm:text-6xl text-4xl uppercase font-semibold text-green text-center'>
-                {/* {error?.message || "Something went wrong"} */}
-                Something went wrong please try again
-            </h1>
+            <h1 className='sm:text-6xl text-4xl uppercase font-semibold text-green text-center'>Something went wrong please try again</h1>
+            <p className="text-center text-lg">{error?.message}</p>
             <button onClick={refresh} className="bg-green text-white py-4 px-8 rounded-lg my-6 text-xl font-medium uppercase">try agin</button>
         </div>
     </section>

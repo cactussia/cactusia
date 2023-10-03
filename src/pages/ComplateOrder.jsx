@@ -13,7 +13,6 @@ import useLang from '../store/useLang'
 
 function ComplateOrder() {
     const { langs , lang , langSelected } = useLang()
-    console.log({langs , lang , langSelected})
     const navigate = useNavigate();
     const[isFormSubmitted, setIsFormSubmitted] = useState(false)
     // order state tracker
