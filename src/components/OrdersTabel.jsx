@@ -1,13 +1,4 @@
 import { useState, useMemo, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
 import ArrowBackIcon from '@mui/icons-material/ArrowForward';
 import { WhatsApp } from "@mui/icons-material";
 
@@ -17,42 +8,10 @@ import {
 import { colRef, db } from '../firebase.js';
 import StateBtn from './StateBtn.jsx';
 
-
-
-
-
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import { utils, writeFileXLSX, writeXLSX } from 'xlsx';
 import { WhatsappMessageConfirmation, dateFormater, orderTrackingStatus, phoneFormater } from '../utils/index.js';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-
-
-
-
-
-
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
 
 
 export default function CustomizedTables({cat,cats,setCat,setOrder}) {
@@ -69,7 +28,13 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
         try {       
           const qry = cat === 0 ? query(colRef,orderBy("createdAt","desc")) : query(colRef,where("state","==",cats[cat].toLowerCase()),orderBy("createdAt","desc"));
           onSnapshot(qry, (snapshot)=>{
-            setRows(snapshot.docs.map(doc=>({...doc.data(), id:doc.id, checked:false})))
+            setRows(snapshot.docs.map(doc=>({
+              ...doc.data(),
+              id:doc.id,
+              date: new Date(doc.data().date?.seconds * 1000).toLocaleDateString(),
+              formatedDate: dateFormater(doc.data().date),
+              itemsCount:doc.data().items?.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)
+            })))
             console.table(rows);
           })
         } catch (error) {
@@ -104,51 +69,61 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
 
     const columns = useMemo(() => [
       { field: 'id', headerName: 'Order ID', width: 190,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Order ID</h1>,
+        editable: false,
         sortable: false,
-        filterable: false,
       },
       { field: 'name', headerName: 'First Name', width: 130,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>First Name</h1>,
       },
       { field: 'lastName', headerName: 'Last Name', width: 130,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Last Name</h1>,
       },
       { field: 'number', headerName: 'Number', width: 130,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Number</h1>,
       },
       { field: 'city', headerName: 'City', width: 130,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>City</h1>,
       },
       { field: 'address', headerName: 'Address', width: 200,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Address</h1>,
       },
-      { field: 'items', headerName: 'Items', width: 60,
-        headerClassName: 'bg-white font-semibold invert',
+      { field: 'itemsCount', headerName: 'Items', width: 60,
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Items</h1>,
         type: 'number',
-        valueFormatter: ({ value }) => value?.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0),
-        renderCell: ({ value }) => value?.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0) + " pots"
+        valueFormatter: ({ value }) => value + " pots",
       },
       { field: 'price', headerName: 'Price', width: 60,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Price</h1>,
         type: 'number',
         valueFormatter: ({ value }) => value + "Dh",
         renderCell: ({ value }) => <span className="font-semibold">{value} Dh</span>
       },
       { field: 'date', headerName: 'Date', width: 240,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Date</h1>,
         type: 'date',
-        valueFormatter: ({ value }) => dateFormater(value)
+        renderCell: ({ row }) => <span title={row.formatedDate} className="font-semibold">{row.formatedDate}</span>
       },
       { field: 'state', headerName: 'State', width: 130,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>State</h1>,
         type: 'singleSelect',
         valueOptions: Object.keys(orderTrackingStatus),
         valueFormatter: ({ value }) => value.toUpperCase(),
         renderCell: ({ row }) => <StateBtn setUpdate={setUpdate} state={row.state} id={row.id} cats={cats}/>
       },
       { field: 'whatsapp', headerName: 'WhatsApp', width: 80,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>WhatsApp</h1>,
         sortable: false,
         filterable: false,
         renderCell: ({ row }) => (
@@ -160,7 +135,8 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
         )
       },
       { field: 'action', headerName: 'Order Preview', width: 120,
-        headerClassName: 'bg-white font-semibold invert',
+        headerClassName: "bg-white invert",
+        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Order Preview</h1>,
         sortable: false,
         filterable: false,
         renderCell: ({ row }) => <button onClick={()=>setOrder(row)} className='p-1 px-4 bg-gray-300 rounded-full'><ArrowBackIcon/></button>
