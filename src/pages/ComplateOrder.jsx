@@ -4,7 +4,8 @@ import {motion} from "framer-motion"
 import { addDoc, serverTimestamp } from 'firebase/firestore'
 import { colRef } from '../firebase'
 import { CartContext } from '../Context/CartContext'
-import { OrderFields, getPriceByQte } from '../utils'
+import { getPriceByQte } from '../utils'
+import { OrderFields } from '../utils/form'
 import { ControlersContext } from '../Context/ControlersContext'
 import Thank from './Thank'
 import ArrowIcon from '../components/svg/ArrowIcon'
@@ -32,19 +33,6 @@ function ComplateOrder() {
     // the cart flag for opening and closing the cart
     const [isCartOpen, setIsCartOpen] = useState(false);
 
-    // format the cart items to be stored in the database to avoid diplucation
-    // like [{pot:0,cactus:0,quantity:1},{pot:0,cactus:0,quantity:1}, {pot:2,cactus:4,quantity:1}] => [{pot:0,cactus:0,quantity:2}, {pot:2,cactus:4,quantity:1}]
-    // const formatCart = useMemo(()=>{
-    //   let newCart = [...cart];
-    //   newCart.forEach((item, index) => {
-    //     const foundIndex = newCart.findIndex(i => i.pot === item.pot && i.cactus === item.cactus);
-    //     if (foundIndex !== index) {
-    //       newCart[foundIndex].quantity += item.quantity;
-    //       newCart.splice(index, 1);
-    //     }
-    //   });
-    //   return newCart;
-    // }, [cart]);
 
     // thank page state tracker
     const [showThankPage, setShowThankPage] = useState(false);

@@ -1,16 +1,17 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import CustomizedTables from "./OrdersTabel";
 
 import cactuses from "../assets/cactusImages/import"
 import pots from "../assets/potsImages/import"
-import { WhatsappMessageConfirmation, dateFormater, phoneFormater } from "../utils";
+import { WhatsappMessageConfirmation, dateFormater, orderTrackingStatus, phoneFormater } from "../utils";
 import { WhatsApp } from "@mui/icons-material";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState({author: order?.comment?.author, message: ''});
   const [sendingComment, setSendingComment] = useState(false);
+  const [isEditingComment, setIsEditingComment] = useState(false);
 
   console.log("Order Preview:", order);
 
@@ -19,13 +20,21 @@ function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
     setSendingComment(true);
     try{
       const docRef = doc(db, "Orders", order.id);
-      await updateDoc(docRef, {comment});
-      setComment("");
+      await updateDoc(docRef, {comment: {...comment, author: comment.author || "Admin", date: serverTimestamp()}});
+      setOrder({...order, comment: {...comment, author: comment.author || "Admin", date: new Date()}});
+      setComment({author: '', message: ''});
       setSendingComment(false);
+      setIsEditingComment(false);
     }catch(err){
       console.error(err);
       setSendingComment(false);
+      setIsEditingComment(false);
     }
+  }
+
+  const resetComment = () => {
+    setComment({author: '', message: ''});
+    setIsEditingComment(false);
   }
 
   return !order ? (
@@ -34,42 +43,6 @@ function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
         <div className="flex-1">
           <h1 className="text-4xl font-semibold">Orders List</h1>
         </div>
-        {/* <div className="flex-[2] flex justify-center">
-          <div className="flex items-center rounded-full bg-white shadow-lg px-2 py-4 max-h-14 max-w-4xl overflow-x-auto overflow-y-hidden">
-            {cats.map((c, key) =>
-              key == cat ? (
-                <button
-                  key={key}
-                  className="px-4 py-2 bg-black text-white rounded-full capitalize"
-                >
-                  {c}
-                </button>
-              ) : (
-                <button
-                  key={key}
-                  onClick={() => setCat(key)}
-                  className="px-4 py-2 rounded-full capitalize"
-                >
-                  {c}
-                </button>
-              )
-            )}
-          </div>
-        </div> */}
-        {/* <div className="flex-1 flex justify-end">
-          <div className="bg-white rounded-full overflow-hidden pr-1 shadow-lg">
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              type="text"
-              className="p-2 px-4 outline-none w-36 "
-              placeholder="search .."
-            />
-            <button className="px-4 bg-black rounded-full py-1 text-white" onClick>
-              search
-            </button>
-          </div>
-        </div> */}
       </div>
       <CustomizedTables
         setOrder={setOrder}
@@ -89,67 +62,64 @@ function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
         >
           Go back
         </button>
-        <h1 className="text-xl font-semibold">information's</h1>
-        <h1 className="uppercase font-semibold">state: {order?.state}</h1>
+        <h1 className="text-xl font-bold uppercase text-green">Informations</h1>
+        <h1 className="font-semibold">#ID: <span className="underline">{order?.id}</span></h1>
+        <h1 className="font-semibold">DATE: <span className="">{order?.formatedDate}</span></h1>
+        <h1 className="uppercase font-semibold">State:
+          <span className={`ml-2 px-4 py-1 rounded-full text-white font-semibold`} style={{backgroundColor: orderTrackingStatus[order?.state]}}>
+            {order?.state}
+          </span>
+        </h1>
         <br></br>
-        <h1><span className="uppercase font-semibold">First Name:</span> {order?.name}</h1>
-        <h1><span className="uppercase font-semibold">Last Name:</span> {order?.lastName}</h1>
-        <h1><span className="uppercase font-semibold">Phone Number:</span> <a href={`tel:${order?.number}`} target="_blank" rel="noopener noreferrer">{order?.number}</a></h1>
-        <h1><span className="uppercase font-semibold">City:</span> {order?.city}</h1>
-        <h1><span className="uppercase font-semibold">Full Address:</span> {order?.address}</h1>
-        <h1><span className="uppercase font-semibold">Total Price:</span> {order?.price} Dh</h1>
+        <h1><span className="uppercase font-semibold text-green">First Name:</span> {order?.name}</h1>
+        <h1><span className="uppercase font-semibold text-green">Last Name:</span> {order?.lastName}</h1>
+        <h1><span className="uppercase font-semibold text-green">Phone Number:</span> <a href={`tel:${order?.number}`} target="_blank" rel="noopener noreferrer">{order?.number}</a></h1>
+        <h1><span className="uppercase font-semibold text-green">City:</span> {order?.city}</h1>
+        <h1><span className="uppercase font-semibold text-green">Full Address:</span> {order?.address}</h1>
+        <h1><span className="uppercase font-semibold text-green">Total Price:</span> {order?.price} Dh</h1>
         <button className="mt-4 px-6 py-2 rounded-md flex items-center justify-center gap-2 text-[#f5fdf8] bg-[#25D366] font-semibold shadow-lg transition-all duration-150 hover:scale-[1.02] active:scale-[0.94]">
-          <a className="flex items-center justify-center" href={`http://wa.me/${phoneFormater(order?.number)}/?text=${WhatsappMessageConfirmation(`${order?.name} ${order?.lastName}`, order?.price)}`} title={WhatsappMessageConfirmation(`${order?.name} ${order?.lastName}`, order?.price)} target="_blank" rel="noreferrer">
+          <a className="flex items-center justify-center" href={`https://wa.me/${phoneFormater(order?.number)}/?text=${WhatsappMessageConfirmation(`${order?.name} ${order?.lastName}`, order?.price)}`} title={WhatsappMessageConfirmation(`${order?.name} ${order?.lastName}`, order?.price)} target="_blank" rel="noreferrer">
             <WhatsApp className="text-[#f5fdf8] "/>
             <span className="pl-2">WhatsApp Confirmation</span>
           </a>
         </button>
 
+        <div className="h-1 w-full bg-green rounded-lg opacity-30 my-4"></div>
+
+        <h1 className="text-xl font-semibold"># Order Comment</h1>
+        {/* <p className="font-medium text-gray-500">Last Update: {dateFormater(order?.comment?.date)}</p> */}
         {/* Order Comment */}
-        <form action="" onSubmit={addOrderComment} className="w-full flex flex-col gap-3 mt-4">
-          <label htmlFor="orderComment" className="text-lg uppercase font-semibold">Add Your Comment</label>
-          <textarea onChange={e => setComment(e.target.value)} defaultValue={order?.comment} id="orderComment" className="w-full min-h-32 p-2 rounded-md shadow-lg border-2 border-green" placeholder="Order Comment"></textarea>
-          <button type="submit" disabled={sendingComment} className="w-fit bg-green text-white py-2 px-6 rounded-md font-semibold shadow-lg transition-all duration-150 hover:scale-[1.02] active:scale-[0.94] disabled:bg-gray-800 disabled:cursor-not-allowed">Submit</button>
-        </form>
+        { (!order?.comment?.message || isEditingComment) ?
+          <form action="" onSubmit={addOrderComment} className="w-full flex flex-col gap-3">
+            <input type="text" onChange={e => setComment({...comment, author: e.target.value})} defaultValue={order?.comment?.author} className="w-full h-12 p-2 rounded-md shadow-lg border-2 border-green" placeholder="Order Author EX: Othman" />
+            <textarea onChange={e => setComment({...comment, message: e.target.value})} defaultValue={order?.comment?.message} className="w-full min-h-32 p-2 rounded-md shadow-lg border-2 border-green" placeholder="Order Comment"></textarea>
+            <div className="flex items-center gap-4">
+              <button type="submit" disabled={sendingComment} className="w-fit flex justify-center items-center bg-green drop-shadow-md text-white py-2 px-6 rounded-md font-semibold shadow-lg transition-all duration-150 hover:scale-[1.02] active:scale-[0.94] disabled:bg-gray-800 disabled:pointer-events-none disabled:cursor-not-allowed"><i className="fi fi-sr-paper-plane-top flex justify-center items-center text-white mr-2"></i>{!order?.comment?.message ? "Send" : "Update"}</button>
+              {order?.comment?.message && <button type="reset" disabled={sendingComment} onClick={resetComment} className="w-fit flex justify-center items-center bg-white border-2 border-green drop-shadow-md text-green py-2 px-6 rounded-md font-semibold shadow-lg transition-all duration-150 hover:scale-[1.02] active:scale-[0.94] disabled:bg-gray-800 disabled:text-white disabled:pointer-events-none disabled:cursor-not-allowed group"><i className="fi fi-sr-cross flex justify-center items-center text-green group-disabled:text-white mr-2"></i> Cancel</button>}
+            </div>
+          </form>
+          :
+          <figure className="w-full flex flex-col gap-3">
+            <figcaption className="text-lg uppercase font-semibold text-green ">{comment.author || order?.comment?.author}: <span className="font-medium text-sm text-center text-gray-500">{dateFormater(order?.comment?.date)}</span></figcaption>
+            <blockquote className="w-full ">{comment.message || (order?.comment?.message ?? "Nothing Mentioned...")}</blockquote>
+            <button onClick={() => setIsEditingComment(true)} className="w-fit flex justify-center items-center bg-green drop-shadow-md text-white py-2 px-6 rounded-md font-semibold shadow-lg transition-all duration-150 hover:scale-[1.02] active:scale-[0.94]"><i className="fi fi-sr-comment-alt-edit flex justify-center items-center text-white mr-2"></i> Edit</button>
+          </figure>
+        }
         
       </div>
-      <div className="flex-1 p-8">
-        <h1 className="text-3xl text-gray-700 font-semibold py-8">
-          Order Items
+      <div className="flex p-8 max-h-screen flex-col overflow-y-auto">
+        <h1 className="text-3xl text-gray-800 font-semibold py-8 uppercase">
+          Order Items For: <span className=" font-bold text-green">{order?.name + ' ' + order?.lastName}</span>
         </h1>
-        <div className="grid grid-cols-4  gap-4">
+        <section className="w-full max-h-screen flex flex-wrap gap-4">
           {order?.items.map((item, key) => (
-            <div
-              key={key}
-              className={
-                "flex relative flex-col items-center gap-1 drop-shadow-lg "
-              }
-            >
+            <div key={key} className={"w-32 h-40 flex relative flex-col items-center gap-1 bg-white rounded-lg drop-shadow-lg "}>
               <button
-                className={
-                  " w-32 h-40 bg-dark-white duration-100  pb-4 rounded-lg bg-white  flex justify-center items-center flex-col "
-                }
-              >
-                <div
-                  className={
-                    "scale-[1.60] duration-150 relative  w-[50px] flex flex-row justify-center items-center drop-shadow-md"
-                  }
-                >
-                  <img
-                    draggable={false}
-                    className={"h-[50px] absolute top-[10px] duration-150 "}
-                    src={pots[item.pot]}
-                  ></img>
-                  <img
-                    draggable={false}
-                    className="h-[50px] opacity-0"
-                    src={pots[item.pot]}
-                  ></img>
-                  <img
-                    draggable={false}
-                    className={"w-[50px] absolute top-[-18px] duration-150 "}
-                    src={cactuses[item.cactus]}
-                  ></img>
+                className={"h-full w-full duration-100 pb-4 flex justify-center items-center flex-col "}>
+                <div className={"scale-[1.60] duration-150 relative  w-[50px] flex flex-row justify-center items-center drop-shadow-md"}>
+                  <img draggable={false} className={"h-[50px] absolute top-[10px] duration-150 "} src={pots[item.pot]}/>
+                  <img draggable={false} className="h-[50px] opacity-0" src={pots[item.pot]}/>
+                  <img draggable={false}className={"w-[50px] absolute top-[-18px] duration-150 "} src={cactuses[item.cactus]}/>
                 </div>
                 <p className="px-4 rounded-md font-bold text-gray-700 translate-y-10 border-green text-xl">
                   {item.quantity}
@@ -157,7 +127,7 @@ function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
               </button>
             </div>
           ))}
-        </div>
+        </section>
       </div>
     </div>
   );
