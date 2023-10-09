@@ -21,7 +21,7 @@ function ComplateOrder() {
     // track form fields errors
     const [errors, setErrors] = useState({});
 
-    const {cart,setCart}=useContext(CartContext);
+    const {cart, setCurrentItem, setCart}=useContext(CartContext);
     // const [formatedCart, setFormatedCart] = useState([...cart]);
     const {finalPots,finalCactus,setPot,setCactus,setQuantity}=useContext(ControlersContext)
 
@@ -46,8 +46,13 @@ function ComplateOrder() {
       value ? setErrors({...errors, [name]: regex.test(value.trim()) ? "" : field.translateErrors[langSelected]}) : setErrors({...errors, [name]: field.translateEmpty[langSelected]});
     };
 
-     //
-    console.log("Total Price: ", cartCount * 65 + DeliveryPrice)
+    const resetMarketCart = () => {
+      setCart([{pot:0,cactus:0,quantity:1}])
+      setPot(0)
+      setCactus(0)
+      setCurrentItem(0)
+      setQuantity(1)
+    }
 
     const orderNow = e =>{
       console.log("Order Errors", errors)
@@ -62,7 +67,7 @@ function ComplateOrder() {
         return;
       }
 
-      if (Object.values(errors).every(error => error)) alert("there is still errors")
+      // if (Object.values(errors).every(error => error)) alert("there is still errors")
 
       // let date=new Date(); don't use the user local time to avoid non-accurate time
       addDoc(colRef,{
@@ -78,10 +83,7 @@ function ComplateOrder() {
         price: TotalPrice,
       })
       .then(()=>{
-        setCart([{pot:0,cactus:0,quantity:1}])
-        setPot(0)
-        setCactus(0)
-        setQuantity(1)
+        resetMarketCart();
         setShowThankPage(true);
         setIsFormSubmitted(false);
       })
@@ -111,14 +113,16 @@ function ComplateOrder() {
       
       const timeout = setTimeout(()=>{
         setShowThankPage(false);
+        resetMarketCart();
         navigate("/market");
       }, 120000);
 
       return () => clearTimeout(timeout);
     }, [showThankPage])
 
+
   
-  if (showThankPage) return <Thank name={order.firstname + " " + order.lastname} city={order.city} onReturn={()=>navigate("/market")}/>;
+  if (showThankPage) return <Thank name={order.firstname + " " + order.lastname} city={order.city} onReturn={()=>{navigate("/market"); resetMarketCart()}}/>;
 
 
   return (

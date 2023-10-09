@@ -49,16 +49,14 @@ function MarketCart() {
   }
 
   useEffect(() => {
-    setPot(cart[currentItem]?.pot)
-    setCactus(cart[currentItem]?.cactus)
-    setQuantity(cart[currentItem]?.quantity)
-  }, [cart])
-
-  useEffect(() => {
+    // if (cart.length == 0) {
+    //   setCart([{pot:0,cactus:0,quantity:1}])
+    // }
+    if (!cart[currentItem]) return;
     setPot(cart[currentItem].pot)
     setCactus(cart[currentItem].cactus)
     setQuantity(cart[currentItem].quantity)
-  }, [currentItem])
+  }, [cart, currentItem])
    
   return (
     <motion.div initial={{x:-200}} animate={{x:0}}  className={`mb-2 py-4 flex flex-col-reverse items-center justify-center gap-2 overflow-y-visible`}>
