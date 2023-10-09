@@ -16,136 +16,159 @@ import { DataGrid } from '@mui/x-data-grid';
 
 export default function CustomizedTables({cat,cats,setCat,setOrder}) {
 
-  const [rows, setRows] = useState([])
+  const [orders, setOrders] = useState([])
   const [loadingOrders, setLoadingOrders] = useState(true)
+  const [ordersUpdated, setOrdersUpdated] = useState(false);
   const [update, setUpdate] = useState(0)
 
   const [pageSize, setPageSize] = useState(10);
   const [selection, setSelection] = useState([]);
 
-    useEffect(()=>{
-      (async()=>{
-        try {       
-          const qry = cat === 0 ? query(colRef,orderBy("createdAt","desc")) : query(colRef,where("state","==",cats[cat].toLowerCase()),orderBy("createdAt","desc"));
-          onSnapshot(qry, (snapshot)=>{
-            setRows(snapshot.docs.map(doc=>({
-              ...doc.data(),
-              id:doc.id,
-              date: new Date(doc.data().date?.seconds * 1000).toLocaleDateString(),
-              formatedDate: dateFormater(doc.data().date),
-              itemsCount:doc.data().items?.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)
-            })))
-            console.table(rows);
-          })
-        } catch (error) {
-          console.error("ERROR LOADING ODERS:", error);
-          setLoadingOrders(false);
-        } finally {
-          setLoadingOrders(false);
-        }
-      })()
-    },[cats, cat])
+  const [totalRevenue, setTotalRevenue] = useState(0);
 
-    const exportExcel = ()=>{
-      var wb = utils.book_new(),
-      ws = utils.json_to_sheet(rows.filter(o=>o.checked).map(o=>{return({name:o.name,Lastname:o.lastName,address:o.address,city:o.city,number:o.number,price:o.price,comment:"thanks....",size:"small"})}));
-      utils.book_append_sheet(wb,ws,"myfile")
-      writeFileXLSX(wb,"myfileName.xlsx")
-    }
+  useEffect(()=>{
+    (async()=>{
+      try {       
+        const qry = cat === 0 ? query(colRef,orderBy("createdAt","desc")) : query(colRef,where("state","==",cats[cat].toLowerCase()),orderBy("createdAt","desc"));
+        onSnapshot(qry, (snapshot)=>{
+          setOrders(snapshot.docs.map(doc=>({
+            ...doc.data(),
+            id:doc.id,
+            date: new Date(doc.data().date?.seconds * 1000).toLocaleDateString(),
+            formatedDate: dateFormater(doc.data().date),
+            itemsCount:doc.data().items?.map(p=>p.quantity).reduce((partialSum, a) => partialSum + a, 0)
+          })))
+          setTotalRevenue(snapshot.docs.map(doc=>doc.data().price).reduce((partialSum, a) => partialSum + a, 0))
+          setOrdersUpdated(true);
+          console.table(orders);
 
-    const deleteOrders = () => {
-      if(confirm(`Are You Sure You Want To Delete These Orders?: ${selection.join(",\n")}`)){
-        setRows(rows.filter(order => {
-          const isOrderSelected = selection.find(selectedOrder => selectedOrder === order.id);
-          if (isOrderSelected) {
-            const docRR = doc(db,"Orders",order.id)
-            deleteDoc(docRR)
-          }
-          return !isOrderSelected;
-        }))
-        alert(`Order Deleted Successfully`)
+        })
+      } catch (error) {
+        console.error("ERROR LOADING ODERS:", error);
+        setLoadingOrders(false);
+      } finally {
+        setLoadingOrders(false);
       }
-    }
+    })()
+  },[cats, cat])
 
-    const columns = useMemo(() => [
-      { field: 'id', headerName: 'Order ID', width: 190,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Order ID</h1>,
-        editable: false,
-        sortable: false,
-      },
-      { field: 'name', headerName: 'First Name', width: 130,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>First Name</h1>,
-      },
-      { field: 'lastName', headerName: 'Last Name', width: 130,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Last Name</h1>,
-      },
-      { field: 'number', headerName: 'Number', width: 130,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Number</h1>,
-      },
-      { field: 'city', headerName: 'City', width: 130,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>City</h1>,
-      },
-      { field: 'address', headerName: 'Address', width: 200,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Address</h1>,
-      },
-      { field: 'itemsCount', headerName: 'Items', width: 60,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Items</h1>,
-        type: 'number',
-        valueFormatter: ({ value }) => value + " pots",
-      },
-      { field: 'price', headerName: 'Price', width: 60,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Price</h1>,
-        type: 'number',
-        valueFormatter: ({ value }) => value + "Dh",
-        renderCell: ({ value }) => <span className="font-semibold">{value} Dh</span>
-      },
-      { field: 'date', headerName: 'Date', width: 240,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Date</h1>,
-        type: 'date',
-        valueGetter: ({ value }) => new Date(value),
-        renderCell: ({ row }) => <span title={row.formatedDate} className="font-semibold">{row.formatedDate}</span>
-      },
-      { field: 'state', headerName: 'State', width: 130,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>State</h1>,
-        type: 'singleSelect',
-        valueOptions: Object.keys(orderTrackingStatus),
-        valueFormatter: ({ value }) => value.toUpperCase(),
-        renderCell: ({ row }) => <StateBtn setUpdate={setUpdate} state={row.state} id={row.id} cats={cats}/>
-      },
-      { field: 'whatsapp', headerName: 'WhatsApp', width: 80,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>WhatsApp</h1>,
-        sortable: false,
-        filterable: false,
-        renderCell: ({ row }) => (
-          <button className="h-10 w-10 p-1 rounded-full flex items-center justify-center bg-[#25D366] shadow-lg transition-all duration-150 hover:scale-[1.07]">
-            <a className="flex items-center justify-center" href={`http://wa.me/${phoneFormater(row.number)}/?text=${WhatsappMessageConfirmation(`${row.name} ${row.lastName}`, row.price)}`} title={WhatsappMessageConfirmation(`${row.name} ${row.lastName}`, row.price, dateFormater(row.date))} target="_blank" rel="noreferrer">
-              <WhatsApp className="text-[#f5fdf8] scale-[1.2]"/>
-            </a>
-          </button>
-        )
-      },
-      { field: 'action', headerName: 'Order Preview', width: 120,
-        headerClassName: "bg-white invert",
-        renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Order Preview</h1>,
-        sortable: false,
-        filterable: false,
-        renderCell: ({ row }) => <button onClick={()=>setOrder(row)} className='p-1 px-4 bg-gray-300 rounded-full'><ArrowBackIcon/></button>
-      },
-    ], [rows, selection, update, setUpdate, cats]);
+  useEffect(() => {
+    if (!ordersUpdated) return;
+    const timeout = setTimeout(() => {
+      setOrdersUpdated(false);
+    }, 1000)
+    return () => clearTimeout(timeout);
+  }, [ordersUpdated])
+
+  const exportExcel = ()=>{
+    var wb = utils.book_new(),
+    ws = utils.json_to_sheet(orders.filter(o=>o.checked).map(o=>{return({name:o.name,Lastname:o.lastName,address:o.address,city:o.city,number:o.number,price:o.price,comment:"thanks....",size:"small"})}));
+    utils.book_append_sheet(wb,ws,"myfile")
+    writeFileXLSX(wb,"myfileName.xlsx")
+  }
+
+  const deleteOrders = () => {
+    if(confirm(`Are You Sure You Want To Delete These Orders?: ${selection.join(",\n")}`)){
+      setOrders(orders.filter(order => {
+        const isOrderSelected = selection.find(selectedOrder => selectedOrder === order.id);
+        if (isOrderSelected) {
+          const docRR = doc(db,"Orders",order.id)
+          deleteDoc(docRR)
+        }
+        return !isOrderSelected;
+      }))
+      alert(`Order Deleted Successfully`)
+    }
+  }
+
+  const columns = useMemo(() => [
+    { field: 'id', headerName: 'Order ID', width: 190,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Order ID</h1>,
+      editable: false,
+      sortable: false,
+    },
+    { field: 'name', headerName: 'First Name', width: 130,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>First Name</h1>,
+    },
+    { field: 'lastName', headerName: 'Last Name', width: 130,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Last Name</h1>,
+    },
+    { field: 'number', headerName: 'Number', width: 130,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Number</h1>,
+    },
+    { field: 'city', headerName: 'City', width: 130,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>City</h1>,
+    },
+    { field: 'address', headerName: 'Address', width: 200,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Address</h1>,
+    },
+    { field: 'itemsCount', headerName: 'Items', width: 60,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Items</h1>,
+      type: 'number',
+      valueFormatter: ({ value }) => value + " pots",
+    },
+    { field: 'price', headerName: 'Price', width: 60,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Price</h1>,
+      type: 'number',
+      valueFormatter: ({ value }) => value + "Dh",
+      renderCell: ({ value }) => <span className="font-semibold">{value} Dh</span>
+    },
+    { field: 'date', headerName: 'Date', width: 240,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Date</h1>,
+      type: 'date',
+      valueGetter: ({ value }) => new Date(value),
+      renderCell: ({ row }) => <span title={row.formatedDate} className="font-semibold">{row.formatedDate}</span>
+    },
+    { field: 'state', headerName: 'State', width: 130,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>State</h1>,
+      type: 'singleSelect',
+      valueOptions: Object.keys(orderTrackingStatus),
+      valueFormatter: ({ value }) => value.toUpperCase(),
+      renderCell: ({ row }) => <StateBtn setUpdate={setUpdate} state={row.state} id={row.id} cats={cats}/>
+    },
+    { field: 'whatsapp', headerName: 'WhatsApp', width: 80,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>WhatsApp</h1>,
+      sortable: false,
+      filterable: false,
+      renderCell: ({ row }) => (
+        <button className="h-10 w-10 p-1 rounded-full flex items-center justify-center bg-[#25D366] shadow-lg transition-all duration-150 hover:scale-[1.07]">
+          <a className="flex items-center justify-center" href={`http://wa.me/${phoneFormater(row.number)}/?text=${WhatsappMessageConfirmation(`${row.name} ${row.lastName}`, row.price)}`} title={WhatsappMessageConfirmation(`${row.name} ${row.lastName}`, row.price, dateFormater(row.date))} target="_blank" rel="noreferrer">
+            <WhatsApp className="text-[#f5fdf8] scale-[1.2]"/>
+          </a>
+        </button>
+      )
+    },
+    { field: 'action', headerName: 'Order Preview', width: 120,
+      headerClassName: "bg-white invert",
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Order Preview</h1>,
+      sortable: false,
+      filterable: false,
+      renderCell: ({ row }) => <button onClick={()=>setOrder(row)} className='p-1 px-4 bg-gray-300 rounded-full'><ArrowBackIcon/></button>
+    },
+  ], [orders, selection, update, setUpdate, cats]);
     
   return (
     <>
+    <header className="flex p-8 justify-between items-center">
+      <h1 className="text-4xl uppercase font-semibold">Orders List</h1>
+      <div className={`${ordersUpdated ? "scale-105 before:scale-110 before:h-[140%] before:animate-pulse" : "scale-100 before:scale-100 before:opacity-0"} relative z-[100] before:rounded-lg before:bg-green before:bg-opacity-25 bg-white rounded-md drop-shadow-md before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:h-full before:w-full before:-z-[90] before:transition-all transition-all`}>
+        <div className='z-40 h-full w-full py-3 px-4 flex justify-center items-center text-4xl text-center font-semibold rounded-md bg-white'>
+          <span className="h-full">Total Revenue: </span>
+          <span className="text-green h-ful ml-2">{totalRevenue} DH</span>
+        </div>
+      </div>
+    </header>
     <Box className="h-full w-fit max-w-full min-h-[250px] max-h-screen bg-slate-100 font-semibold p-4 flex flex-col gap-4 print:hidden overflow-x-auto">
       <div className='flex justify-center items-center gap-5'>
         <div className='flex gap-2'>
@@ -177,7 +200,7 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
 
       <DataGrid
         className="h-fit bg-white text-lg"
-        rows={rows}
+        rows={orders}
         columns={columns}
         loading={loadingOrders}
         getRowId={(row) => row.id}

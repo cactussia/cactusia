@@ -39,11 +39,6 @@ function OrdersAdmin({ order ,cat ,search, cats, setCat ,setOrder}) {
 
   return !order ? (
     <div className="px-10 flex-1">
-      <div className="flex p-8 justify-between items-center">
-        <div className="flex-1">
-          <h1 className="text-4xl font-semibold">Orders List</h1>
-        </div>
-      </div>
       <CustomizedTables
         setOrder={setOrder}
         order={order}
