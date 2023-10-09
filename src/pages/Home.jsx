@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import Main from '../components/Main'
 import NavBar from '../components/NavBar'
 import WhatsappBtn from '../components/WhatsappBtn'
+import Reviews from './Reviews'
 
 function Home() {
   return (
@@ -23,6 +24,7 @@ function Home() {
       `}
       />
     </section>
+    {/* <Reviews/> */}
     <WhatsappBtn/>
     <Footer/>
     </>
