@@ -6,6 +6,14 @@ const Cursor = memo(({debug=false}) => {
   const cursorRef = useRef(null);
 
   useEffect(() => {
+    // disable the custom cursor in the /admin page
+    // change the css variable: --cursor-flag to "auto"
+    if (window.location.pathname.includes("/admin")) {
+      document.documentElement.style.setProperty("--cursor-flag", "auto");
+      return;
+    }
+
+
     const moveCursor = e => {
       const windowHeight = window.innerHeight;
       const windowWidth = window.innerWidth;

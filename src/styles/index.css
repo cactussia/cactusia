@@ -6,9 +6,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+  --cursor-flag: none;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
-  cursor: none !important;
+  cursor: var(--cursor-flag) !important;
 }
 
 
