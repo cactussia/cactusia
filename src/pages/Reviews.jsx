@@ -102,7 +102,7 @@ export default function Reviews() {
 
   
   return (
-    <section id="reviews" className="w-screen min-h-[400px] relative py-10 flex flex-1 justify-center items-center flex-col gap-10 shadow-inner overflow-hidden " style={{backgroundImage: `url(${BG})`}}>
+    <section id="reviews" className="w-full max-h-[700px] relative py-10 flex flex-1 justify-center items-center flex-col gap-10 shadow-inner overflow-hidden " style={{backgroundImage: `url(${BG})`}}>
       <div className='w-full flex justify-center items-center flex-col gap-4'>
         <div className={`h-14 w-24 flex items-center justify-between bg-[#ffb4b6]] transition-all select-none z-20`}>
           <Icon
@@ -171,7 +171,7 @@ export default function Reviews() {
           
     }
     </section> :
-    <section className='w-full flex flex-1 justify-center items-center flex-col gap-12'>
+    <section className='w-full flex flex-1 justify-center items-center flex-col gap-12 overflow-hidden'>
       <Swiper
         className="w-full h-full"
         modules={[Autoplay, A11y]}
@@ -204,7 +204,7 @@ export default function Reviews() {
       {
         reviews.map((review, index) => {
           return (
-            <SwiperSlide key={index} tag='li'>
+            <SwiperSlide key={index} tag='li' className="h-full">
               <Review {...review}/>
             </SwiperSlide>
           )
