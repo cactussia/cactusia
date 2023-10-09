@@ -9,6 +9,7 @@ import pots from "./assets/potsImages/import";
 import cactuses from "./assets/cactusImages/import";
 import useLang from './store/useLang';
 import Router from './router';
+import Cursor from './components/Cursor';
 
 
 function App() {
@@ -111,6 +112,7 @@ function App() {
     <CartContext.Provider value={{cart,setCart,currentItem,setCurrentItem,upCart,setUpCart}}>
       <ControlersContext.Provider value={{pot,setPot,cactus,setCactus,quantity,setQuantity,finalCactus,finalPots}}>
         {/* <RouterProvider router={router} /> */}
+        <Cursor/>
         <Router/>
       </ControlersContext.Provider>
     </CartContext.Provider>

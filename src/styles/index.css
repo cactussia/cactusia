@@ -6,6 +6,11 @@
 @tailwind components;
 @tailwind utilities;
 
+*, *::before, *::after {
+  box-sizing: border-box;
+  cursor: none !important;
+}
+
 
 @layer components {
     .text-green-dark { @apply text-[#586d49]; }
@@ -15,8 +20,10 @@
     
     
     .text-bleach { @apply text-[#CFCFB5]; }
+    .text-bleach-light { @apply text-[#ddddcb]; }
     .text-bleach-dark { @apply text-[#9e9e86]; }
     .text-bleach-darker { @apply text-[#616152]; }
+
     .bg-bleach { @apply bg-[#CFCFB5]; }
     .bg-bleach-brown { @apply bg-[#cfcbb5]; }
     .bg-bleach-brown-light { @apply bg-[#ebe7d3]; }
@@ -31,6 +38,8 @@
     .bg-dark-white { @apply bg-[#e2e2da]; }
     .text-dark-white { @apply text-[#e2e2da]; }
     .bg-dark-white2 { @apply bg-[#d7d7cd]; }
+
+    /* Apply cursor effect for every elemtn that have hover: class */
 
   }
 .background-market{
@@ -85,3 +94,21 @@
     transform: translateX(3px);
   }
 }
+
+.cursor{
+  transition: transform 0.2s ease-in-out;
+}
+.cursor-hover{
+  transform: scale(2);
+}
+.cursor-click{
+  transform: scale(.9);
+}
+
+
+/* making the cursor bigger when hover over any hoverable element */
+/* eny elemt with the tailwind class start with "hover:*" */
+
+/* .hover\:cursor-hover:hover{
+  transform: scale(2);
+} */

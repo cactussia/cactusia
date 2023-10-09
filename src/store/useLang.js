@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 const langs=["en","fr"]
 const useLang = create((set) => ({
