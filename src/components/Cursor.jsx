@@ -72,13 +72,15 @@ const Cursor = memo(({debug=false}) => {
     };
   }, []);
 
-  return (
-    <div
-      ref={cursorRef}
-      className="fixed cursor h-10 w-10 bg-contain bg-center z-[10000] pointer-events-none"
-      style={{ backgroundImage: `url(${cursor})` }}
-    ></div>
-  );
+  if(!window.location.pathname.includes("/admin")){
+    return (
+      <div
+        ref={cursorRef}
+        className="fixed cursor h-10 w-10 bg-contain bg-center z-[10000] pointer-events-none"
+        style={{ backgroundImage: `url(${cursor})` }}
+      ></div>
+    );
+  }
 });
 
 Cursor.displayName = "Cursor";
