@@ -30,6 +30,11 @@ const Cursor = memo(({debug=false}) => {
         // cursorRef.current.style.left = e.clientX + "px";
       }
 
+      // hide the cursor in touch devices: mobile, tablet, etc.
+      if ("ontouchstart" in document.documentElement) {
+        cursorRef.current.style.display = "none";
+      }
+
       // making the cursor bigger when hover over any hoverable element
       // eny elemt with the tailwind class start with "hover:*"
       // const hoverableElements = document.querySelectorAll(
@@ -76,7 +81,8 @@ const Cursor = memo(({debug=false}) => {
     return (
       <div
         ref={cursorRef}
-        className="fixed cursor h-10 w-10 bg-contain bg-center z-[10000] pointer-events-none"
+        id="cursor"
+        className="fixed cursor h-10 w-10 bg-contain bg-center z-[10000] pointer-events-none hidden"
         style={{ backgroundImage: `url(${cursor})` }}
       ></div>
     );

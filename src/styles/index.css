@@ -17,35 +17,35 @@
 
 
 @layer components {
-    .text-green-dark { @apply text-[#586d49]; }
-    .text-dark-green { @apply text-[#4b5c3f]; }
-    .text-darker-green { @apply text-[#404e36]; }
-    .text-green { @apply text-[#768F6A]; }
-    
-    
-    .text-bleach { @apply text-[#CFCFB5]; }
-    .text-bleach-light { @apply text-[#ddddcb]; }
-    .text-bleach-dark { @apply text-[#9e9e86]; }
-    .text-bleach-darker { @apply text-[#616152]; }
-
-    .bg-bleach { @apply bg-[#CFCFB5]; }
-    .bg-bleach-brown { @apply bg-[#cfcbb5]; }
-    .bg-bleach-brown-light { @apply bg-[#ebe7d3]; }
-    .bg-bleach-fade { @apply bg-[#f0f0e5]; }
-    .bg-bleach-light { @apply bg-[#eeeee4]; }
+  .text-green-dark { @apply text-[#586d49]; }
+  .text-dark-green { @apply text-[#4b5c3f]; }
+  .text-darker-green { @apply text-[#404e36]; }
+  .text-green { @apply text-[#768F6A]; }
   
-    .bg-green-dark { @apply bg-[#586d49]; }
-    .bg-green { @apply bg-[#768F6A]; }
-    .bg-green-light { @apply bg-[#c1ccbb]; }
+  
+  .text-bleach { @apply text-[#CFCFB5]; }
+  .text-bleach-light { @apply text-[#ddddcb]; }
+  .text-bleach-dark { @apply text-[#9e9e86]; }
+  .text-bleach-darker { @apply text-[#616152]; }
 
-    .border-green { @apply border-[#8a9c81]; }
-    .bg-dark-white { @apply bg-[#e2e2da]; }
-    .text-dark-white { @apply text-[#e2e2da]; }
-    .bg-dark-white2 { @apply bg-[#d7d7cd]; }
+  .bg-bleach { @apply bg-[#CFCFB5]; }
+  .bg-bleach-brown { @apply bg-[#cfcbb5]; }
+  .bg-bleach-brown-light { @apply bg-[#ebe7d3]; }
+  .bg-bleach-fade { @apply bg-[#f0f0e5]; }
+  .bg-bleach-light { @apply bg-[#eeeee4]; }
 
-    /* Apply cursor effect for every elemtn that have hover: class */
+  .bg-green-dark { @apply bg-[#586d49]; }
+  .bg-green { @apply bg-[#768F6A]; }
+  .bg-green-light { @apply bg-[#c1ccbb]; }
 
-  }
+  .border-green { @apply border-[#8a9c81]; }
+  .bg-dark-white { @apply bg-[#e2e2da]; }
+  .text-dark-white { @apply text-[#e2e2da]; }
+  .bg-dark-white2 { @apply bg-[#d7d7cd]; }
+
+  /* Apply cursor effect for every elemtn that have hover: class */
+}
+
 .background-market{
     background: linear-gradient(180deg, #e3e3da 40%, #f2f2ef 55%);
 }
