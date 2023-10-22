@@ -162,16 +162,17 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
         "Items": order.itemsCount,
         "Price": order.price + " Dh",
         "State": order.state,
-        "Order Date": Intl.DateTimeFormat().format(new Date(order.createdAt?.seconds * 1000)),
+        // "Order Date": Intl.DateTimeFormat().format(new Date(order.createdAt?.seconds * 1000)),
+        "Order Date": order.date,
         "Order Time": new Date(order.createdAt?.seconds * 1000).toLocaleTimeString("en-US",{hour12: false}),
-        "Readable Date": dateFormater(order.createdAt),
+        "Readable Date": order.formatedDate,
       }
     });
 
     // exporting the data to xlsx
-    return toXlsx(data, "catusia-orders");
+    return toXlsx(data, `${cats[cat]}-catusia-orders`);
 
-  }, [orders, selection]);
+  }, [orders, selection, cat, cats]);
     
   return (
     <>
