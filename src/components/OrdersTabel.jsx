@@ -162,9 +162,10 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
         "Items": order.itemsCount,
         "Price": order.price + " Dh",
         "State": order.state,
-        // "Order Date": Intl.DateTimeFormat().format(new Date(order.createdAt?.seconds * 1000)),
         "Order Date": order.date,
+        // "Order Date": `=Date(${order.date.split("/")[2]},${order.date.split("/")[0]},${order.date.split("/")[1]})`,
         "Order Time": new Date(order.createdAt?.seconds * 1000).toLocaleTimeString("en-US",{hour12: false}),
+        // "Order Time": `=Time(${new Date(order.createdAt?.seconds * 1000).toLocaleTimeString("en-US",{hour12: false}).split(":").join(",")})`,
         "Readable Date": order.formatedDate,
       }
     });
