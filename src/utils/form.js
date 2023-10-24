@@ -68,6 +68,9 @@ export const ReviewsFields = [
   {
     type: "textarea",
     name: "review",
+    required: true,
+    max: 600,
     translateLabels: ["Message", "Message"],
+    translateEmpty: ["Message is required", "Le message est requis"],
   },
 ]
