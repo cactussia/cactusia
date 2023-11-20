@@ -26,6 +26,7 @@ import pot25 from "./25.png"
 import pot26 from "./26.png"
 import pot27 from "./27.png"
 import pot28 from "./28.png"
+import pot29 from "./29.png"
 export default [
   pot1,
   pot2,
@@ -55,4 +56,5 @@ export default [
   pot26,
   pot27,
   pot28,
+  pot29,
 ];

@@ -32,7 +32,9 @@
   .bg-bleach-brown { @apply bg-[#cfcbb5]; }
   .bg-bleach-brown-light { @apply bg-[#ebe7d3]; }
   .bg-bleach-fade { @apply bg-[#f0f0e5]; }
+  /* .bg-bleach-light { @apply bg-[#ddddcb]; } */
   .bg-bleach-light { @apply bg-[#eeeee4]; }
+  .bg-bleach-lighter { @apply bg-[#eeeee4]; }
 
   .bg-green-dark { @apply bg-[#586d49]; }
   .bg-green { @apply bg-[#768F6A]; }

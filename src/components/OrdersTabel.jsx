@@ -1,15 +1,12 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowForward';
 import { WhatsApp } from "@mui/icons-material";
 
-import {
-	doc,deleteDoc, onSnapshot, orderBy, query, where 
-} from "firebase/firestore"
+import { doc,deleteDoc, onSnapshot, orderBy, query, where } from "firebase/firestore"
 import { colRef, db } from '../firebase.js';
 import StateBtn from './StateBtn.jsx';
 
-import { utils, writeFileXLSX, writeXLSX } from 'xlsx';
-import { WhatsappMessageConfirmation, dateFormater, orderTrackingStatus, phoneFormater } from '../utils/index.js';
+import { WhatsappMessageConfirmation, dateFormater, orderTrackingStatus, phoneFormater, toXlsx } from '../utils/index.js';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -60,13 +57,6 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
     return () => clearTimeout(timeout);
   }, [ordersUpdated])
 
-  const exportExcel = ()=>{
-    var wb = utils.book_new(),
-    ws = utils.json_to_sheet(orders.filter(o=>o.checked).map(o=>{return({name:o.name,Lastname:o.lastName,address:o.address,city:o.city,number:o.number,price:o.price,comment:"thanks....",size:"small"})}));
-    utils.book_append_sheet(wb,ws,"myfile")
-    writeFileXLSX(wb,"myfileName.xlsx")
-  }
-
   const deleteOrders = () => {
     if(confirm(`Are You Sure You Want To Delete These Orders?: ${selection.join(",\n")}`)){
       setOrders(orders.filter(order => {
@@ -96,9 +86,9 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
       headerClassName: "bg-white invert",
       renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Last Name</h1>,
     },
-    { field: 'number', headerName: 'Number', width: 130,
+    { field: 'number', headerName: 'Phone Number', width: 130,
       headerClassName: "bg-white invert",
-      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Number</h1>,
+      renderHeader:(params) => <h1 className='w-full bg-white text-black font-bold '>Phone Number</h1>,
     },
     { field: 'city', headerName: 'City', width: 130,
       headerClassName: "bg-white invert",
@@ -157,6 +147,33 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
       renderCell: ({ row }) => <button onClick={()=>setOrder(row)} className='p-1 px-4 bg-gray-300 rounded-full'><ArrowBackIcon/></button>
     },
   ], [orders, selection, update, setUpdate, cats]);
+
+  const exportToXLSX = useCallback(() => {
+    // check if there is a selected rows export the selected rows else export all rows
+    const data = (selection.length > 0 ? selection : orders).map((order) => {
+    // formating the data to be readable
+    return {
+        "Order ID": order.id,
+        "First Name": order.name,
+        "Last Name": order.lastName,
+        "Phone Number": order.number,
+        "City": order.city,
+        "Full Address": order.address,
+        "Items": order.itemsCount,
+        "Price": order.price + " Dh",
+        "State": order.state,
+        "Order Date": order.date,
+        // "Order Date": `=Date(${order.date.split("/")[2]},${order.date.split("/")[0]},${order.date.split("/")[1]})`,
+        "Order Time": new Date(order.createdAt?.seconds * 1000).toLocaleTimeString("en-US",{hour12: false}),
+        // "Order Time": `=Time(${new Date(order.createdAt?.seconds * 1000).toLocaleTimeString("en-US",{hour12: false}).split(":").join(",")})`,
+        "Readable Date": order.formatedDate,
+      }
+    });
+
+    // exporting the data to xlsx
+    return toXlsx(data, `${cats[cat]}-catusia-orders`);
+
+  }, [orders, selection, cat, cats]);
     
   return (
     <>
@@ -172,7 +189,7 @@ export default function CustomizedTables({cat,cats,setCat,setOrder}) {
     <Box className="h-full w-fit max-w-full min-h-[250px] max-h-screen bg-slate-100 font-semibold p-4 flex flex-col gap-4 print:hidden overflow-x-auto">
       <div className='flex justify-center items-center gap-5'>
         <div className='flex gap-2'>
-          <button onClick={exportExcel} className='bg-black rounded-full px-8 py-2 text-white my-2 drop-shadow-lg transition-all'>Export Excel</button>
+          <button onClick={exportToXLSX} className='flex justify-center items-center bg-black rounded-full px-8 py-2 text-white my-2 drop-shadow-lg transition-all cursor-pointer'><i className="fi fi-sr-file-excel flex justify-center items-center mr-2"></i> Export {selection.length > 0 ? "Selected" : "All"}</button>
           <button onClick={deleteOrders} className={`${selection.length > 0 ? "scale-100 opacity-100" : "scale-0 opacity-0"} bg-red-700 rounded-full px-8 py-2 drop-shadow-lg text-white my-2 transition-all`}>Delete</button>
         </div>
 

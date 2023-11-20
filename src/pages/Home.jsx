@@ -24,7 +24,7 @@ function Home() {
       `}
       />
     </section>
-    {/* <Reviews/> */}
+    <Reviews/>
     <WhatsappBtn/>
     <Footer/>
     </>

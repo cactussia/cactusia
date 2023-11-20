@@ -1,3 +1,5 @@
+import * as XLSX from "xlsx";
+
 /**
  * `NavBarLinks` is an array of objects that contains the links to be displayed in the navbar
  */
@@ -105,6 +107,37 @@ Bonjour *${name}*, J'espère que vous allez bien. Vous avez passé commande chez
 Merci bien de me confirmer votre commande afin de vous envoyer le colis dans les plus brefs délais. \n
 Hiba de cactusia
 `);
+
+export function toXlsx(data, filename) {
+	const wb = XLSX.utils.book_new();
+	wb.Props = {
+		Title: filename,
+		Subject: "Exported Data",
+	};
+	wb.SheetNames.push("Data");
+	const ws = XLSX.utils.json_to_sheet(data);
+	wb.Sheets["Data"] = ws;
+	const wbout = XLSX.write(wb, { bookType: "xlsx", type: "binary" });
+
+	function s2ab(s) {
+		const buf = new ArrayBuffer(s.length);
+		const view = new Uint8Array(buf);
+		for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
+		return buf;
+	}
+
+	function saveAs(blob, filename) {
+		const a = document.createElement("a");
+		a.href = window.URL.createObjectURL(blob);
+		a.download = filename;
+		a.click();
+	}
+
+	saveAs(
+		new Blob([s2ab(wbout)], { type: "application/octet-stream" }),
+		`${filename}.xlsx`
+	);
+}
 
 /**
  * `Dynamic Copyright` function to display the current year and the current hostname
