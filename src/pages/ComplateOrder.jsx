@@ -1,7 +1,7 @@
 import {useContext, useEffect, useMemo, useState}  from 'react'
 import { useNavigate } from 'react-router-dom'
 import {motion} from "framer-motion"
-import { addDoc, serverTimestamp } from 'firebase/firestore'
+import { addDoc, getDoc, serverTimestamp } from 'firebase/firestore'
 import { colRef } from '../firebase'
 import { CartContext } from '../Context/CartContext'
 import { getPriceByQte } from '../utils'
@@ -11,6 +11,11 @@ import Thank from './Thank'
 import ArrowIcon from '../components/svg/ArrowIcon'
 import LordIcon from '../components/svg/LordIcon'
 import useLang from '../store/useLang'
+
+import fbApi from '../api/convertion.fb';
+import SHA256 from "crypto-js/sha256";
+
+import "handyscript";
 
 function ComplateOrder() {
     const { langs , lang , langSelected } = useLang()
@@ -82,10 +87,34 @@ function ComplateOrder() {
         items:cart.map(m=>({...m,pot:finalPots[m.pot].number,cactus:finalCactus[m.cactus].number})),
         price: TotalPrice,
       })
-      .then(()=>{
+      .then((docRef)=>{
         resetMarketCart();
         setShowThankPage(true);
         setIsFormSubmitted(false);
+        // get the updatedAt field from the server
+        getDoc(docRef).then(doc=> console.log("Order Submitted", doc));
+        
+        // the current time minus 1 hour to avoid the time difference between the user and the server
+        const time = Date.now() - 3600000;
+        fbApi.post("/events", JSON.stringify({
+          data: [
+            {
+              event_name: "Purchase",
+              event_time: time,
+              action_source: "website",
+              user_data: {
+                em: [null],
+                ph: [ SHA256(order.phonenumber).toString() ],
+                fn: SHA256(order.firstname).toString(),
+                ln: SHA256(order.lastname).toString(),
+              },
+              custom_data: {
+                currency: "MAD",
+                value: TotalPrice,
+              }
+            }
+          ]
+        })).catch(err=>console.error(err))
       })
       .catch(err=>{
         console.error(err)
@@ -93,6 +122,7 @@ function ComplateOrder() {
         setErrors({...errors, error: "Something went wrong, please try again later 👷🏻‍♂️"});
       });
     }
+
 
     // set a timeout of 5s to clear the errors
     useEffect(()=>{
